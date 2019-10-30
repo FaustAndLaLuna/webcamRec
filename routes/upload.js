@@ -40,19 +40,19 @@ router.post('/', function(req, res, next){
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
-					.videoCodec('h264')
+					.videoCodec('libx264')
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
+						console.log(filename+".mp4");
 						fs.unlink(filePath, (err) => {
 							if(err){
 								console.error(err);
-								return;
 							}
 						});
 					})
 					.run();
-				res.write('Video subido exitosamente!');
-				res.end();
+			res.write("Video subido exitosamente!");
+			res.end();
 			});
 			form.parse(req);
 		});

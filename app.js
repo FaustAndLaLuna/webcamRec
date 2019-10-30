@@ -1,4 +1,3 @@
-#!/usr/bin/env nodemon
 
 const https = require('https');
 const fs = require('fs');
@@ -20,19 +19,12 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
-/*
-app.use(function(request,response){
-	if(!request.secure){
-		response.redirect("https://"+request.headers.host+request.url);
-	}
-});
-*/
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public'), {dotfiles: 'allow'}));
-app.use(express.static(path.join(__dirname, 'uploads')));
+//app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
