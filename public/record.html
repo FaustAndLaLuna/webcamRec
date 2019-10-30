@@ -1,0 +1,24 @@
+<style>
+    html, body {
+        margin: 0!important;
+        padding: 0!important;
+    }
+</style>
+<head>
+    <script src="javascripts/RecordRtc.js"></script>
+    <script src="javascripts/webcamRecord.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+</head>
+
+<body>
+    <title>WebcamRec</title>
+    <h1>Prueba</h1><br>
+    
+    <button id="btn-start-recording" onclick="startRec()">Grabar</button>
+    <button id="btn-stop-recording" disabled onclick="stopRec()">Parar Grabación</button><hr>
+    <button id="btn-upload" disabled onclick="upload()">Subir</button><hr>
+    <video controls autoplay playsinline></video>
+    <footer style="margin-top: 20px;"><small id="send-message"></small></footer>
+
+</body>

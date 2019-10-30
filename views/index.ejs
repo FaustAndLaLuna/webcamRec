@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Todos los videos en el servidor</p>
+    <% allVids.forEach((video)=>{ %>
+    <% console.log(video.videoURL) %>
+    	<hr> 
+    	<video controls>
+    		<source src="<%= video.videoURL %>" type="video/webm">
+    	</video>
+	<% });%>
+
+  </body>
+</html>
