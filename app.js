@@ -1,3 +1,6 @@
+const https = require('https');
+const fs = require('fs');
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -19,7 +22,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public'), {dotfiles: 'allow'}));
 app.use(express.static(path.join(__dirname, 'uploads')));
 
 app.use('/', indexRouter);
@@ -42,5 +45,12 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+
+https.createServer({
+	key:fs.readFileSync('/etc/letsencrypt/live/faustandlaluna.studio/privkey.pem'),
+	cert:fs.readFileSync('/etc/letsencrypt/live/faustandlaluna.studio/cert.pem'),
+	ca:fs.readFileSync('/etc/letsencrypt/live/faustandlaluna.studio/chain.pem')
+},app).listen(443);
 
 module.exports = app;
