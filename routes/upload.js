@@ -5,6 +5,8 @@ const uuidv4 = require('uuid/v4');
 var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
+var ffmpeg = require("fluent-ffmpeg");
+
 const videosRepo = require('../videosRepo')
 const AppDAO = require('../dao')
 
@@ -16,8 +18,9 @@ router.post('/', function(req, res, next){
 
 	filename = uuidv4();
 	filename = "/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
-				"/"+filename.slice(3,4)+"/"+filename.slice(4)+".webm";
-	filePath = path.resolve('./uploads'+filename);
+				"/"+filename.slice(3,4)+"/"+filename.slice(4);
+	filePath = path.resolve('./uploads'+filename+".webm");
+	convFilePath = path.resolve('./uploads'+filename+".mp4");
 	console.log(filePath);
 	
 	mkdirp(path.dirname(filePath), function (err){
@@ -30,12 +33,23 @@ router.post('/', function(req, res, next){
 				file.path = filePath;
 			});
 			form.on('file', function(field, file){
-				vidTable.create(filename, Date.now().toString());
 			});
 			form.on('error', function(err){
 				console.log('An error has occurred uploading a file:\n ' + err);
 			});
 			form.on('end', function(){
+				var command = ffmpeg(filePath)
+					.output(convFilePath)
+					.on('end', () =>{
+						vidTable.create(filename+".mp4", Date.now().toString());
+						fs.unlink(filePath, (err) => {
+							if(err){
+								console.error(err);
+								return;
+							}
+						});
+					})
+					.run();
 				res.write('Video subido exitosamente!');
 				res.end();
 			});
