@@ -21,7 +21,6 @@ router.post('/', function(req, res, next){
 				"/"+filename.slice(3,4)+"/"+filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
-	console.log(filePath);
 	
 	mkdirp(path.dirname(filePath), function (err){
 		console.log(err);
@@ -40,6 +39,8 @@ router.post('/', function(req, res, next){
 			form.on('end', function(){
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
+					.format('mp4')
+					.videoCodec('h264')
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
 						fs.unlink(filePath, (err) => {
