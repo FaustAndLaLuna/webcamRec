@@ -10,8 +10,7 @@
     <% allVids.forEach((video)=>{ %>
     <% console.log(video.videoURL) %>
     	<hr> 
-    	<video controls="true" playsinline>
-    		<source src="<%= "uploads"+ video.videoURL %>" type="video/mp4">
+    	<video controls="true" type="video/mp4" src="<%= "uploads"+ video.videoURL %>" playsinline>
     	</video>
 	<% });%>
 
