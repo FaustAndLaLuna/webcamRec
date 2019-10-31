@@ -6,8 +6,6 @@ var router = express.Router();
 router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 	filename = "/" + req.params.first + "/" + req.params.second + "/" + req.params.third + "/" + req.params.fourth + "/" + req.params.filename;
 	filepath = path.resolve('./uploads' + filename);
-	console.log("filepath = " + filepath);
-	console.log("filename = " + filename);
 	fs.stat(filepath, function(err, stats){
 		if(err){
 			if(err.code === 'ENOENT'){
@@ -27,7 +25,7 @@ router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 
 		res.writeHead(206, {
 			"Content-Range": "bytes" + start + "-" + end + "/" + total,
-			"Accept=ranges": "bytes",
+			"Accept-Ranges": "bytes",
 			"Content-Length": chunksize,
 			"Content-Type": "video/mp4"
 		});
