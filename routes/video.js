@@ -1,7 +1,9 @@
 var fs = require('fs');
 var path = require('path');
+var express = require('');
+var router = express.Router();
 
-apt.get('/', function(req, res){
+router.get('/', function(req, res){
 	filepath = request.url;
 	filepath = path.resolve('.'+filepath);
 	fs.stat(filepath, function(err, stats){
