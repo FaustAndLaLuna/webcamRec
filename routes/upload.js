@@ -43,7 +43,7 @@ router.post('/', function(req, res, next){
 					.videoCodec('libx264')
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
-						console.log("uploaded and converted to: "filename+".mp4");
+						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
 							if(err){
 								console.error(err);
