@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.get("*", function(req, res){
 	filename = request.url;
-	filepath = path.resolve('./uploads'+filename);
+	filepath = path.resolve('./uploads',filename);
 	console.log(filepath);
 	console.log(filename);
 	fs.stat(filepath, function(err, stats){
