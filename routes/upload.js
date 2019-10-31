@@ -40,7 +40,7 @@ router.post('/', function(req, res, next){
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
-					.videoCodec('mpeg4')
+					.videoCodec('libx264')
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
 						console.log("uploaded and converted to: " + filename+".mp4");
