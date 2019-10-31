@@ -6,8 +6,8 @@ var router = express.Router();
 router.get("*", function(req, res){
 	filename = request.url;
 	filepath = path.resolve('./uploads',filename);
-	console.log(filepath);
-	console.log(filename);
+	console.log("filepath = " + filepath);
+	console.log("filename = " + filename);
 	fs.stat(filepath, function(err, stats){
 		if(err){
 			if(err.code === 'ENOENT'){
