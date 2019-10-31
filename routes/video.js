@@ -26,7 +26,7 @@ router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 		var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
 		var chunksize = (end - start) + 1;
 		headobj = {
-			"Content-Range": "bytes=" + start + "-" + end + "/" + total,
+			"Content-Range": "bytes " + start + "-" + end + "/" + total,
 			"Accept-Ranges": "bytes",
 			"Content-Length": chunksize,
 			"Content-Type": "video/mp4"
