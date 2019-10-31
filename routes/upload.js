@@ -21,9 +21,9 @@ router.post('/', function(req, res, next){
 				"/"+filename.slice(3,4)+"/"+filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
-	console.log(filePath);
 	mkdirp(path.dirname(filePath), function (err){
-		console.log(err);
+		if(err)
+			console.log(err);
 		fs.writeFile(filePath, '', function (err){
 			if(err) throw err;
 			var form = new formidable.IncomingForm();
@@ -57,7 +57,6 @@ router.post('/', function(req, res, next){
 			form.parse(req);
 		});
 	});
-	console.log("pathmade");
 });
 
 module.exports = router;
