@@ -7,7 +7,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var vidStreamer = require('vid-streamer');
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
@@ -30,11 +29,8 @@ app.use(express.static(path.join(__dirname, 'public'), {dotfiles: 'allow'}));
 app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/record', recordRouter);
-//app.use('/uploads', videoRouter);
-obj = {"rootFolder" : "./uploads/",
-        "rootPath" : "uploads/"}
+app.use('/uploads', videoRouter);
 
-app.use('/uploads/', vidStreamer.settings(obj));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
