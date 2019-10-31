@@ -7,7 +7,6 @@ router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 	filename = "/" + req.params.first + "/" + req.params.second + "/" + req.params.third + "/" + req.params.fourth + "/" + req.params.filename;
 	filepath = path.resolve('./uploads' + filename);
 	src = fs.createReadStream(filepath);
-	res.writeHead(206, {"Content-Type":"video/mp4"});
 	src.pipe(res);
 	//res.sendFile(filepath);
 	/*fs.stat(filepath, function(err, stats){
