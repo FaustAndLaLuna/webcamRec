@@ -6,9 +6,9 @@ var router = express.Router();
 router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 	filename = "/" + req.params.first + "/" + req.params.second + "/" + req.params.third + "/" + req.params.fourth + "/" + req.params.filename;
 	filepath = path.resolve('./uploads' + filename);
-	//src = fs.createReadStream(filepath);
-	//src.pipe(res);
-	res.sendFile(filepath);
+	src = fs.createReadStream(filepath);
+	src.pipe(res);
+	//res.sendFile(filepath);
 	/*fs.stat(filepath, function(err, stats){
 		if(err){
 			if(err.code === 'ENOENT'){
