@@ -31,7 +31,9 @@ app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/record', recordRouter);
 //app.use('/uploads', videoRouter);
-app.use('/uploads', vidStreamer);
+obj = {"rootPath" = "./uploads/"}
+
+app.use('/uploads/', vidStreamer.settings(obj));
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
