@@ -12,7 +12,7 @@ var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
 var recordRouter = require('./routes/record');
 var videoRouter = require('./routes/video')
-var iOSrouter = require('./routes/uploadiOS');
+var iOSRouter = require('./routes/uploadiOS');
 
 var app = express();
 
