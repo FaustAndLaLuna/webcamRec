@@ -6,6 +6,7 @@ var router = express.Router();
 router.get('/', function(req, res){
 	filepath = request.url;
 	filepath = path.resolve('.'+filepath);
+	console.log(filepath);
 	fs.stat(filepath, function(err, stats){
 		if(err){
 			if(err.code === 'ENOENT'){
