@@ -3,7 +3,7 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 
-router.get("*", function(req, res){
+router.get("/*", function(req, res){
 	filename = request.url;
 	filepath = path.resolve('./uploads',filename);
 	console.log("filepath = " + filepath);
