@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
 var recordRouter = require('./routes/record');
 var videoRouter = require('./routes/video')
+var iOSrouter = require('./routes/uploadiOS');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public'), {dotfiles: 'allow'}));
 
 app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
+app.use('/uploadiOS', iOSRouter);
 app.use('/record', recordRouter);
 app.use('/uploads', videoRouter);
 
