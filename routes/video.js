@@ -41,7 +41,7 @@ router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 		.on("error", function(err){
 			res.end(err);
 		});
-	});*/
+	});
 });
 
 module.exports = router;
