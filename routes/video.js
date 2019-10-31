@@ -31,7 +31,7 @@ router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
 		console.log(headobj["Content-Range"]);
 		res.writeHead(206, headobj);
 
-		var stream = fs.createReadStream(filepath, {autoClose: true, start: start, end: end});
+		var stream = fs.createReadStream(filepath, {autoClose: true, start: start, end: end})
 		.on("open", function(){
 			stream.pipe(res);
 		})
