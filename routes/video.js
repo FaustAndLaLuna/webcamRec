@@ -3,9 +3,10 @@ var path = require('path');
 var express = require('express');
 var router = express.Router();
 
-router.get("/*", function(req, res){
-	filename = request.url;
-	filepath = path.resolve('./uploads',filename);
+router.get("/:first/:second/:third/:fourth/:filename", function(req, res){
+	console.log("NANI");
+	filename = "/" + first + "/" + second + "/" + third + "/" + fourth + "/" + filename;
+	filepath = path.resolve('./uploads' + filename);
 	console.log("filepath = " + filepath);
 	console.log("filename = " + filename);
 	fs.stat(filepath, function(err, stats){

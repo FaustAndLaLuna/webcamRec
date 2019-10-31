@@ -13,14 +13,9 @@ router.get('/', function(req, res, next) {
 	resObj = {};
 	resObj.title = "Todos los videos";
 	vidTable.getAll().then((allVids) => {
-		/*obj = allVids[0];
-		console.log(obj.videoURL);
-		*/
 		resObj.allVids = allVids;
 		res.render('index', resObj);
 	});
-
-
 	
 	//res.sendFile(path.resolve('./public/record.html'));
 });
