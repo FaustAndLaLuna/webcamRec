@@ -46,6 +46,8 @@ router.post('/', function(req, res, next){
 							console.log(err);
 						}
 					});
+					res.end();
+					return;
 				}
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
