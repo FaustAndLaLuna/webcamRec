@@ -37,6 +37,14 @@ router.post('/', function(req, res, next){
 				console.log('An error has occurred uploading a file:\n ' + err);
 			});
 			form.on('end', function(){
+				if(! file.name.match("\.(mp4|m4v|mov|avi|3gp|webm|avchd|mkv|wmv)$")){
+					fs.unlink(filePath, (err) =>{
+						if(err){
+							console.error(err);
+						}
+					});
+					return;	
+				}
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
