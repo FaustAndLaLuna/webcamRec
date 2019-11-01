@@ -27,11 +27,13 @@ router.post('/', function(req, res, next){
 		fs.writeFile(filePath, '', function (err){
 			if(err) throw err;
 			fNameCheck = "";
+			fTypeCheck = "";
 			var form = new formidable.IncomingForm();
 			//form.enconding = 'binary';
 			form.on('fileBegin', (name, file) => {
 				fNameCheck = file.name;
 				file.path = filePath;
+				fTypeCheck = file.type;
 			});
 			form.on('file', function(field, file){
 			});
@@ -40,6 +42,7 @@ router.post('/', function(req, res, next){
 			});
 			form.on('end', function(file){
 				console.log(fNameCheck);
+				console.log(fTypeCheck);
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
