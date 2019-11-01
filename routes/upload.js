@@ -29,6 +29,10 @@ router.post('/', function(req, res, next){
 			var form = new formidable.IncomingForm();
 			//form.enconding = 'binary';
 			form.on('fileBegin', (name, file) => {
+				if(! file.name.match("\.(mp4|m4v|mov|avi|3gp|webm|avchd|mkv|wmv)$")){
+					res.end('wrongFileFormat');
+					return;
+				}
 				file.path = filePath;
 			});
 			form.on('file', function(field, file){
@@ -36,15 +40,7 @@ router.post('/', function(req, res, next){
 			form.on('error', function(err){
 				console.log('An error has occurred uploading a file:\n ' + err);
 			});
-			form.on('end', function(){
-				if(! file.name.match("\.(mp4|m4v|mov|avi|3gp|webm|avchd|mkv|wmv)$")){
-					fs.unlink(filePath, (err) =>{
-						if(err){
-							console.error(err);
-						}
-					});
-					return;	
-				}
+			form.on('end', function(file){
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
