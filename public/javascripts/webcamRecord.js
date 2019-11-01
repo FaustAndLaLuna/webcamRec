@@ -78,7 +78,7 @@ function upload() {
 */
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
-                //window.location.replace("./success.html");
+                window.location.replace("./success.html");
         } else if (xhr.readyState == 4 && xhr.status == 400 || xhr.readyState == 4 && xhr.status == 500) {
             alert("Error while Uploading - The admins have been notified. Please try again later")
         }
