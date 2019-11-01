@@ -46,6 +46,7 @@ router.post('/', function(req, res, next){
 							console.log(err);
 						}
 					});
+					res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
 					res.end();
 					return;
 				}
