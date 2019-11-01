@@ -25,13 +25,11 @@ router.post('/', function(req, res, next){
 		if(err)
 			console.log(err);
 		fs.writeFile(filePath, '', function (err){
-			if(err) throw err;
-			fNameCheck = "";
+			if(err)  console.log(err);
 			fTypeCheck = "";
 			var form = new formidable.IncomingForm();
 			//form.enconding = 'binary';
 			form.on('fileBegin', (name, file) => {
-				fNameCheck = file.name;
 				file.path = filePath;
 				fTypeCheck = file.type;
 			});
@@ -41,8 +39,14 @@ router.post('/', function(req, res, next){
 				console.log('An error has occurred uploading a file:\n ' + err);
 			});
 			form.on('end', function(file){
-				console.log(fNameCheck);
 				console.log(fTypeCheck);
+				if(!fTypeCheck.match("^video/")){
+					fs.unlink(filePath, (err) =>{
+						if(err){
+							console.log(err);
+						}
+					});
+				}
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
