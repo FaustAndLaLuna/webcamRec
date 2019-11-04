@@ -10,7 +10,7 @@
     <% allVids.forEach((video)=>{ %>
     <% console.log(video.videoURL) %>
     	<hr> 
-    	<video controls="true" type='video/mp4' src="<%= "uploads"+ video.videoURL %>" poster="<%= "thumbs"+video.videoURL.replace('mp4','png') %>" preload="none" playsinline>
+    	<video controls="true" type='video/mp4' src="<%= "uploads"+ video.videoURL +"#t=0.5" %>"preload="metadata" playsinline>
     	</video>
 	<% });%>
 
