@@ -12,8 +12,9 @@ const AppDAO = require('../dao')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
+const genThumbnail = require('simple-thumbnail');
 
-const SIZE = '640x480';
+const SIZE = '640x?';
 
 
 vidTable.createTable();
@@ -56,12 +57,7 @@ router.post('/', function(req, res, next){
 					res.end();
 					return;
 				}
-				thumbnailOptions = {
-					size: SIZE,
-					folder: thumbFolder,
-					filename: thumbName,
-					count: 1
-				};
+				
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
@@ -70,6 +66,7 @@ router.post('/', function(req, res, next){
 					.screenshots(thumbnailOptions)
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
+						genThumbnail(convFilePath, convFilePath.replace("mp4", "png"), SIZE);
 						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
 							if(err){
