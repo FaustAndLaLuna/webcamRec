@@ -12,13 +12,19 @@ const AppDAO = require('../dao')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
+
+const SIZE = '640x480'
+
+
 vidTable.createTable();
 
 router.post('/', function(req, res, next){
 
 	filename = uuidv4();
-	filename = "/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
-				"/"+filename.slice(3,4)+"/"+filename.slice(4);
+	thumbFolder = "/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+				"/"+filename.slice(3,4)+"/";
+	thumbName = filename.slice(4) + ".png";
+	filename = thumbFolder + filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
 	mkdirp(path.dirname(filePath), function (err){
@@ -50,11 +56,18 @@ router.post('/', function(req, res, next){
 					res.end();
 					return;
 				}
+				thumbnailOptions = {
+					size=SIZE,
+					folder = thumbFolder,
+					filename = thumbName,
+					count = 1,
+				};
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
-					.size('640x480')
+					.size(SIZE)
 					.videoCodec('libx264')
+					.screenshots(thumbnailOptions)
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
 						console.log("uploaded and converted to: " + filename+".mp4");
