@@ -63,7 +63,6 @@ router.post('/', function(req, res, next){
 					.format('mp4')
 					.size(SIZE)
 					.videoCodec('libx264')
-					.screenshots(thumbnailOptions)
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
 						genThumbnail(convFilePath, convFilePath.replace("mp4", "png"), SIZE);
