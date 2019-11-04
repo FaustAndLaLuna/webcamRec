@@ -13,7 +13,7 @@ const AppDAO = require('../dao')
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
 
-const SIZE = '640x480'
+const SIZE = '640x480';
 
 
 vidTable.createTable();
@@ -57,10 +57,10 @@ router.post('/', function(req, res, next){
 					return;
 				}
 				thumbnailOptions = {
-					size=SIZE,
-					folder = thumbFolder,
-					filename = thumbName,
-					count = 1,
+					size: SIZE,
+					folder: thumbFolder,
+					filename: thumbName,
+					count: 1
 				};
 				var command = ffmpeg(filePath)
 					.output(convFilePath)
