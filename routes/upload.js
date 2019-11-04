@@ -65,7 +65,8 @@ router.post('/', function(req, res, next){
 					.videoCodec('libx264')
 					.on('end', () =>{
 						vidTable.create(filename+".mp4", Date.now().toString());
-						genThumbnail(convFilePath, convFilePath.replace("mp4", "png"), SIZE);
+						genThumbnail(convFilePath, convFilePath.replace("mp4", "png")
+							.replace("uploads", "public/thumbs"), SIZE);
 						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
 							if(err){
