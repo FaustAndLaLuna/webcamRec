@@ -12,7 +12,6 @@ const AppDAO = require('../dao')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
-const ThumbnailGenerator = require('video-thumbnail-generator').default;
 
 const SIZE = '480x?';
 
@@ -58,7 +57,7 @@ router.post('/', function(req, res, next){
 					return;
 				}
 				
-				var command = ffmpeg(filePath)
+				ffmpeg(filePath)
 					.output(convFilePath)
 					.format('mp4')
 					.size(SIZE)
@@ -68,18 +67,11 @@ router.post('/', function(req, res, next){
 						mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
 							if (err)
 								console.log(err);
-							const tg = new ThumbnailGenerator({
-								sourcePath: convFilePath,
-								thumbnailPath: "./public/thumbs/"+thumbFolder
-							});
-							tg.generateGif({
-								fps: 0.75,
-								scale: 180,
-								speedMultiple: 4,
-								deletePalette: true,
-								filename: thumbName
-								//folder: "./public/thumbs/"+thumbFolder
-							});
+							ffmpeg(filePath)
+							.output(convFilePath.replace("mp4", "gif"))
+							.format('gif')
+							.size(SIZE)
+							.fps(2)
 						});
 						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
