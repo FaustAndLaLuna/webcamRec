@@ -6,7 +6,7 @@ var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var ffmpeg = require("fluent-ffmpeg");
-cosnt genThumbnail = require('simple-thumbnail');
+const genThumbnail = require('simple-thumbnail');
 const videosRepo = require('../videosRepo');
 const AppDAO = require('../dao')
 
