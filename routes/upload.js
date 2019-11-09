@@ -68,7 +68,7 @@ router.post('/', function(req, res, next){
 							if (err)
 								console.log(err);
 							ffmpeg(convFilePath)
-							.output(convFilePath.replace("mp4", "gif"))
+							.output(convFilePath.replace("mp4", "gif").replace("uploads", "public/thumbs"))
 							.format('gif')
 							.size(SIZE)
 							.fps(2)
