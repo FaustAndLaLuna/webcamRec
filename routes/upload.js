@@ -71,7 +71,6 @@ router.post('/', function(req, res, next){
 							.output(convFilePath.replace("mp4", "gif").replace("uploads", "public/thumbs"))
 							.format('gif')
 							.size(SIZE)
-							.outputOptions('-filter:v "setpts=0.25*PTS"')
 							.duration(5)
 							.fps(4)
 							.run();
