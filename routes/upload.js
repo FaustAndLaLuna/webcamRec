@@ -72,6 +72,7 @@ router.post('/', function(req, res, next){
 							.format('gif')
 							.size(SIZE)
 							.fps(2)
+							.run();
 						});
 						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
