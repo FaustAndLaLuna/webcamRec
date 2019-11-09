@@ -23,71 +23,65 @@ router.post('/', function(req, res, next){
 	filename = uuidv4();
 	thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
-	thumbName = filename.slice(4) + ".gif";
+	thumbName = filename.slice(4) + ".png";
 	filename = thumbFolder + filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
 	mkdirp(path.dirname(filePath), function (err){
 		if(err)
 			console.log(err);
-		fs.writeFile(filePath, '', function (err){
-			if(err)  console.log(err);
-			fTypeCheck = "";
-			var form = new formidable.IncomingForm();
-			//form.enconding = 'binary';
-			form.on('fileBegin', (name, file) => {
-				file.path = filePath;
-				fTypeCheck = file.type;
-			});
-			form.on('file', function(field, file){
-			});
-			form.on('error', function(err){
-				console.log('An error has occurred uploading a file:\n ' + err);
-			});
-			form.on('end', function(file){
-				console.log(fTypeCheck);
-				if(!fTypeCheck.match("^video/")){
-					fs.unlink(filePath, (err) =>{
-						if(err){
-							console.log(err);
-						}
-					});
-					res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
-					res.end();
-					return;
-				}
-				
-				ffmpeg(filePath)
-					.output(convFilePath)
-					.format('mp4')
-					.size(SIZE)
-					.videoCodec('libx264')
-					.on('end', () =>{
-						vidTable.create(filename+".mp4", Date.now().toString());
-						mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
-							if (err)
-								console.log(err);
-							ffmpeg(convFilePath)
-							.output(convFilePath.replace("mp4", "gif").replace("uploads", "public/thumbs"))
-							.format('gif')
-							.size(SIZE)
-							.duration(5)
-							.fps(4)
-							.run();
-						});
-						console.log("uploaded and converted to: " + filename+".mp4");
-						fs.unlink(filePath, (err) => {
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
+			if (err)
+				console.log(err);
+
+			fs.writeFile(filePath, '', function (err){
+				if(err)  console.log(err);
+				fTypeCheck = "";
+
+				var form = new formidable.IncomingForm();
+				form.on('fileBegin', (name, file) => {
+					file.path = filePath;
+					fTypeCheck = file.type;
+				});
+				form.on('error', function(err){
+					console.log('An error has occurred uploading a file:\n ' + err);
+				});
+				form.on('end', function(file){
+					console.log(fTypeCheck);
+					if(!fTypeCheck.match("^video/")){
+						fs.unlink(filePath, (err) =>{
 							if(err){
-								console.error(err);
+								console.log(err);
 							}
 						});
-					})
-					.run();
-			res.write("Video subido exitosamente!");
-			res.end();
+						res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
+						res.end();
+						return;
+					}
+					
+					ffmpeg(filePath)
+						.output(convFilePath)
+						.format('mp4')
+						.size(SIZE)
+						.videoCodec('libx264')
+						.screenshots(count: 1, folder: "public/thumbs" + thumbFolder, filename: thumbName, size: SIZE)
+						.on('end', () =>{
+							vidTable.create(filename+".mp4", Date.now().toString());
+							console.log("uploaded and converted to: " + filename+".mp4");
+							fs.unlink(filePath, (err) => {
+								if(err){
+									console.error(err);
+								}
+							});
+						})
+						.run();
+				res.write("Video subido exitosamente!");
+				res.end();
+				});
+				form.parse(req);
 			});
-			form.parse(req);
 		});
+			
 	});
 });
 
