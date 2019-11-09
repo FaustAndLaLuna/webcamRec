@@ -10,15 +10,15 @@
     <% allVids.forEach((video)=>{ %>
     <% console.log(video.videoURL) %>
     	<hr> 
-      <h2>Dar click en el gif para ver el video completo:</h2>
+      <h2>Dar click en la imagen para ver el video completo:</h2>
       <a href="<%= "vid" + video.videoURL %>">
         <img src="<%= "/thumbs"+ video.videoURL.replace("mp4", "png") %>">
       </a>
-      <!--
-      <video controls="true" type='video/mp4' src="<%= "uploads"+ video.videoURL %>" preload="metadata" playsinline poster"<%= "thumbs"+ video.videoURL.replace("mp4","png") %>">
-    	</video>
-    -->
+      
 	<% });%>
-
+  <!--
+      <video controls="true" type='video/mp4' src="<%= "uploads"+ video.videoURL %>" preload="metadata" playsinline poster"<%= "thumbs"+ video.videoURL.replace("mp4","png") %>">
+      </video>
+  -->
   </body>
 </html>
