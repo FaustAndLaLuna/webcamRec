@@ -67,7 +67,7 @@ router.post('/', function(req, res, next){
 						mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
 							if (err)
 								console.log(err);
-							ffmpeg(filePath)
+							ffmpeg(convFilePath)
 							.output(convFilePath.replace("mp4", "gif"))
 							.format('gif')
 							.size(SIZE)
