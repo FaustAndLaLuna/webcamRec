@@ -74,12 +74,12 @@ router.post('/', function(req, res, next){
 								if(err){
 									console.error(err);
 								}
-								res.write("video subido exitosamente!");
-								res.end();
-								form.parse(req);
 							});
 						})
 						.run();
+					res.write("video subido exitosamente!");
+								res.end();
+								form.parse(req);
 				});
 			});
 		});
