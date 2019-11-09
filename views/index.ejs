@@ -10,6 +10,7 @@
     <% allVids.forEach((video)=>{ %>
     <% console.log(video.videoURL) %>
     	<hr> 
+      <h2>Dar click en el gif para ver el video completo:</h2>
       <a href="<%= "vid" + video.videoURL %>">
         <img src="<%= "thumbs"+ video.videoURL.replace("mp4", "gif") %>">
       </a>

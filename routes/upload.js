@@ -71,7 +71,7 @@ router.post('/', function(req, res, next){
 							.output(convFilePath.replace("mp4", "gif").replace("uploads", "public/thumbs"))
 							.format('gif')
 							.size(SIZE)
-							.fps(2)
+							.fps(4)
 							.run();
 						});
 						console.log("uploaded and converted to: " + filename+".mp4");

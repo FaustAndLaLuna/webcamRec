@@ -11,7 +11,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
 var recordRouter = require('./routes/record');
-var videoRouter = require('./routes/video')
+var videoRouter = require('./routes/video');
+var vidPlayerRouter = require('./routes/vidPlayer');
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use('/', indexRouter);
 app.use('/upload', uploadRouter);
 app.use('/record', recordRouter);
 app.use('/uploads', videoRouter);
+app.use('/vid', vidPlayerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
