@@ -77,10 +77,10 @@ router.post('/', function(req, res, next){
 							});
 						})
 						.run();
-					res.write("video subido exitosamente!");
-								res.end();
-								form.parse(req);
+				res.write("Video subido exitosamente!");
+				res.end();
 				});
+				form.parse(req);
 			});
 		});
 			
