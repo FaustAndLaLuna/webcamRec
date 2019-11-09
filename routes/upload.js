@@ -7,12 +7,12 @@ var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var ffmpeg = require("fluent-ffmpeg");
 
-const videosRepo = require('../videosRepo')
+const videosRepo = require('../videosRepo');
 const AppDAO = require('../dao')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
-const genThumbnail = require('simple-thumbnail');
+import ThumbnailGenerator from 'video-thumbnail-generator';
 
 const SIZE = '480x?';
 
@@ -22,9 +22,9 @@ vidTable.createTable();
 router.post('/', function(req, res, next){
 
 	filename = uuidv4();
-	thumbFolder = "/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+	thumbFolder = "./public/thumbs/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
-	thumbName = filename.slice(4) + ".png";
+	thumbName = filename.slice(4) + ".gif";
 	filename = thumbFolder + filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
@@ -68,7 +68,18 @@ router.post('/', function(req, res, next){
 						mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
 							if (err)
 								console.log(err);
-							genThumbnail(convFilePath, convFilePath.replace("mp4", "png").replace("uploads", "public/thumbs"), SIZE);
+							const tg = new ThumbnailGenerator({
+								sourcePath: convFilePath,
+								thumbnailPath: thumbFolder
+							});
+							tg.generateGif({
+								fps: 0.75,
+								scale: 180,
+								speedMultiple: 4,
+								deletePalette: true,
+								filename: thumbName,
+								folder: thumbFolder
+							});
 						});
 						console.log("uploaded and converted to: " + filename+".mp4");
 						fs.unlink(filePath, (err) => {
