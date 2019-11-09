@@ -22,7 +22,7 @@ vidTable.createTable();
 router.post('/', function(req, res, next){
 
 	filename = uuidv4();
-	thumbFolder = "./public/thumbs/"+filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+	thumbFolder = filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
 	thumbName = filename.slice(4) + ".gif";
 	filename = thumbFolder + filename.slice(4);
@@ -70,7 +70,7 @@ router.post('/', function(req, res, next){
 								console.log(err);
 							const tg = new ThumbnailGenerator({
 								sourcePath: convFilePath,
-								thumbnailPath: thumbFolder
+								thumbnailPath: "./public/thumbs/"+thumbFolder
 							});
 							tg.generateGif({
 								fps: 0.75,
@@ -78,7 +78,7 @@ router.post('/', function(req, res, next){
 								speedMultiple: 4,
 								deletePalette: true,
 								filename: thumbName,
-								folder: thumbFolder
+								folder: "./public/thumbs/"+thumbFolder
 							});
 						});
 						console.log("uploaded and converted to: " + filename+".mp4");
