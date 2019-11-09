@@ -22,7 +22,7 @@ vidTable.createTable();
 router.post('/', function(req, res, next){
 
 	filename = uuidv4();
-	thumbFolder = "/" filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+	thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
 	thumbName = filename.slice(4) + ".gif";
 	filename = thumbFolder + filename.slice(4);
