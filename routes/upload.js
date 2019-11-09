@@ -12,7 +12,7 @@ const AppDAO = require('../dao')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
-const ThumbnailGenerator = require('video-thumbnail-generator');
+const ThumbnailGenerator = require('video-thumbnail-generator').default;
 
 const SIZE = '480x?';
 
