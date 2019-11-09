@@ -64,7 +64,7 @@ router.post('/', function(req, res, next){
 						.format('mp4')
 						.size(SIZE)
 						.videoCodec('libx264')
-						.screenshots(count: 1, folder: "public/thumbs" + thumbFolder, filename: thumbName, size: SIZE)
+						.screenshots({count: 1, folder: "public/thumbs" + thumbFolder, filename: thumbName, size: SIZE})
 						.on('end', () =>{
 							vidTable.create(filename+".mp4", Date.now().toString());
 							console.log("uploaded and converted to: " + filename+".mp4");
