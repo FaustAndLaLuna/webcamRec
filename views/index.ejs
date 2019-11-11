@@ -9,7 +9,7 @@
     <p>Todos los videos en el servidor</p>
 	<% vidDict = [] %>
     <% allVids.forEach((video)=>{ %>
-		<% if(video.videoURL.includes(".mp4.mp4")){ console.log("Error: " + video.); return;}) %>
+		<% if(video.videoURL.includes(".mp4.mp4")){ console.log("Error: " + video.videoURL); return;}) %>
 		<% if(vidDict.includes(video.videoURL)) { console.log("Video repetido: " + video.videoURL); return; } %>
 		<% console.log("Served: "  + video.videoURL) %>
     	<hr> 
