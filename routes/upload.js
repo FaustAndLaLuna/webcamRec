@@ -13,7 +13,7 @@ const AppDAO = require('../dao')
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
 
-const SIZE = '480x?';
+const SIZE = '360x?';
 
 
 vidTable.createTable();

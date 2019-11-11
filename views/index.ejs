@@ -7,10 +7,14 @@
   <body>
     <h1><%= title %></h1>
     <p>Todos los videos en el servidor</p>
+	<% vidDict = [] %>
     <% allVids.forEach((video)=>{ %>
-    <% console.log(video.videoURL) %>
+		<% if(video.videoURL.includes(".mp4.mp4"){ console.log("Error: " + video.); return;}) %>
+		<% if(vidDict.includes(video.videoURL)) { console.log("Video repetido: " + video.videoURL); return; } %>
+		<% console.log("Served: "  + video.videoURL) %>
     	<hr> 
       <h2>Dar click en la imagen para ver el video completo:</h2>
+		<% vidDict.push(video.videoURL)  %>
       <a href="<%= "vid" + video.videoURL %>">
         <img src="<%= "/thumbs"+ video.videoURL.replace("mp4", "png") %>">
       </a>
