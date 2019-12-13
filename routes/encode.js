@@ -35,6 +35,7 @@ function encode(URLtoVid){
 		genThumbnail(convFilePath, 
 			convFilePath.replace("mp4","png").replace("uploads", "public/thumbs"), SIZE)
 		.catch(err => console.error(err))
+		filename.slice(filename.indexOf("/uploads")+"uploads".length);
 		console.log("uploaded and converted to: " + filename+".mp4");
 		fs.unlink(filePath, (err) => {
 			if(err){
