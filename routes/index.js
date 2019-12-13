@@ -12,14 +12,16 @@ const vidTable = new videosRepo(dao);
 router.get('/', function(req, res, next) {
 	resObj = {};
 	resObj.title = "Todos los videos";
+	if(!ISENCODING){
+		console.log(vidTable.getNextEncodable());
+		encodeMod.encode(vidTable.getNextEncodable());
+	}
 	vidTable.getAll().then((allVids) => {
 		resObj.allVids = allVids;
 		res.render('index', resObj);
 	});
 	
-	if(!ISENCODING){
-		encodeMod.encode(vidTable.getNextEncodable());
-	}
+	
 	//res.sendFile(path.resolve('./public/record.html'));
 });
 
