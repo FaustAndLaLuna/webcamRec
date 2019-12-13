@@ -15,8 +15,11 @@ router.get('/', function(req, res, next) {
 	
 	if(!ISENCODING){
 		vidTable.getNextEncodable().then((nextEncodableVideo) => {
-		console.log(nextEncodableVideo.tempURL);
-		encodeMod.encode(nextEncodableVideo.tempURL);});
+			if(typeof nextEncodableVideo === 'undefined'){
+				return;
+			}
+			console.log(nextEncodableVideo.tempURL);
+			encodeMod.encode(nextEncodableVideo.tempURL);});
 	}
 	
 	vidTable.getAll().then((allVids) => {

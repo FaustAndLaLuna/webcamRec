@@ -21,6 +21,10 @@ function encode(URLtoVid){
 	filePath = path.resolve(URLtoVid);
 	convFilePath = path.resolve(filename+".mp4");
 	
+	console.log(filePath);
+	console.log(convFilePath);
+	
+	
 	ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp4')
