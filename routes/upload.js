@@ -55,7 +55,6 @@ router.post('/', function(req, res, next){
 						res.end();
 						return;
 					}
-					console.log("Filepath = " + filePath);
 					vidTable.create("SIN URL", Date.now().toString(), filePath);
 					if(!ISENCODING){
 						encodeMod.encode(filePath);

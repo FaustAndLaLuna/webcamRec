@@ -11,7 +11,7 @@ const AppDAO = require('../dao')
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
 
-const SIZE = '360x?';
+const SIZE = '480x?';
 
 function encode(URLtoVid){
 	
@@ -19,7 +19,7 @@ function encode(URLtoVid){
 	
 	filename = URLtoVid.replace(".webm", "");
 	filePath = path.resolve(URLtoVid);
-	convFilePath = path.resolve('./uploads'+filename+".mp4");
+	convFilePath = path.resolve(filename+".mp4");
 	
 	ffmpeg(filePath)
 	.output(convFilePath)
