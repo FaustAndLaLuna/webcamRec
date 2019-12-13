@@ -19,7 +19,6 @@ router.get('/', function(req, res, next) {
 			if(typeof nextEncodableVideo === 'undefined'){
 				return;
 			}
-			console.log(nextEncodableVideo.tempURL);
 			encodeMod.encode(nextEncodableVideo.tempURL);});
 	}
 	

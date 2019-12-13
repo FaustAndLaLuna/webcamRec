@@ -16,6 +16,7 @@ const SIZE = '480x?';
 function encode(URLtoVid){
 	
 	ISENCODING = true;
+	console.log("Encoding started.")
 	
 	filename = URLtoVid.replace(".webm", "");
 	filePath = path.resolve(URLtoVid);
@@ -38,6 +39,7 @@ function encode(URLtoVid){
 			}
 		});
 		ISENCODING = false;
+		console.log("Encoding ended.")
 	})
 	.run();	
 }
