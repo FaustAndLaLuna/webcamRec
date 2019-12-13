@@ -1,17 +1,13 @@
 class videosRepo{
 	constructor(dao){
 		this.dao = dao;
-	}
-
-	createTable() {
-		//TODO: Add picture, uploader, contact info, what to buy, length?
-		// IF tempURL = "COMPLETADO", the file is done
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
 			id INTEGER PRIMARY KEY AUTOINCREMENT,	
 			videoURL TEXT,
 			timePublished TEXT,
 			tempURL TEXT)`
-		return this.dao.run(sql);
+		console.log(sql);
+		this.dao.run(sql);
 	}
 
 	updateToEncoded(videoURL, tempURL){

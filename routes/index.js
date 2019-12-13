@@ -7,7 +7,6 @@ const encodeMod = require('encode')
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
-vidTable.createTable();
 
 // TODO Set Index
 router.get('/', function(req, res, next) {

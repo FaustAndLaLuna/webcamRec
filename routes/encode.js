@@ -13,9 +13,6 @@ const vidTable = new videosRepo(dao);
 
 const SIZE = '360x?';
 
-
-vidTable.createTable();
-
 function encode (URLtoVid){
 	
 	ISENCODING = true;
