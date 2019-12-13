@@ -12,7 +12,7 @@ const encodeMod = require('./encode');
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
 
-const SIZE = '360x?';
+const SIZE = '480x?';
 
 
 router.post('/', function(req, res, next){
@@ -58,7 +58,7 @@ router.post('/', function(req, res, next){
 					
 					vidTable.create("SIN URL", Date.now().toString(), filePath);
 					if(!ISENCODING){
-						encoreMod.encode(filePath);
+						encodeMod.encode(filePath);
 					}
 					
 					
