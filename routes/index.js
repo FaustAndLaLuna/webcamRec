@@ -13,8 +13,9 @@ router.get('/', function(req, res, next) {
 	resObj = {};
 	resObj.title = "Todos los videos";
 	if(!ISENCODING){
-		console.log(vidTable.getNextEncodable());
-		encodeMod.encode(vidTable.getNextEncodable());
+		vidTable.getNextEncodable().then((nextEncodableVideo) => 
+		console.log(nextEncodableVideo);
+		encodeMod.encode(nextEncodableVideo););
 	}
 	vidTable.getAll().then((allVids) => {
 		resObj.allVids = allVids;
