@@ -20,7 +20,7 @@ function encode(URLtoVid){
 	filename = URLtoVid.replace(".webm", "");
 	filePath = path.resolve(URLtoVid);
 	convFilePath = path.resolve(filename+".mp4");
-	filename = filename.slice(filename.indexOf("uploads") + "uploads".length);
+	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
 	
 	ffmpeg(filePath)
 	.output(convFilePath)
