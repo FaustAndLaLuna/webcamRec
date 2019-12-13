@@ -20,6 +20,8 @@ function encode(URLtoVid){
 	filename = URLtoVid.replace(".webm", "");
 	filePath = path.resolve(URLtoVid);
 	convFilePath = path.resolve(filename+".mp4");
+	filename = filename.slice(filename.indexOf("uploads") + "uploads".length);
+	
 	
 	console.log(filePath);
 	console.log(convFilePath);
@@ -35,7 +37,6 @@ function encode(URLtoVid){
 		genThumbnail(convFilePath, 
 			convFilePath.replace("mp4","png").replace("uploads", "public/thumbs"), SIZE)
 		.catch(err => console.error(err))
-		filename = filename.slice(filename.indexOf("uploads") + "uploads".length);
 		console.log("uploaded and converted to: " + filename+".mp4");
 		fs.unlink(filePath, (err) => {
 			if(err){
