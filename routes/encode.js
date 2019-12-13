@@ -39,9 +39,8 @@ function encode (URLtoVid){
 		});
 		ISENCODING = false;
 	})
-	.run();
-	
-});
+	.run();	
+}
 
 
 
