@@ -13,16 +13,18 @@ router.get('/', function(req, res, next) {
 	resObj = {};
 	resObj.title = "Todos los videos";
 	
-	vidTable.getAll().then((allVids) => {
-		resObj.allVids = allVids;
-		res.render('index', resObj);
-	});
-	
 	if(!ISENCODING){
 		vidTable.getNextEncodable().then((nextEncodableVideo) => {
 		console.log(nextEncodableVideo.tempURL);
 		encodeMod.encode(nextEncodableVideo.tempURL);});
 	}
+	
+	vidTable.getAll().then((allVids) => {
+		resObj.allVids = allVids;
+		res.render('index', resObj);
+	});
+	
+	
 	
 	//res.sendFile(path.resolve('./public/record.html'));
 });
