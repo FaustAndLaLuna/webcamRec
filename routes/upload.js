@@ -15,8 +15,6 @@ const vidTable = new videosRepo(dao);
 const SIZE = '360x?';
 
 
-vidTable.createTable();
-
 router.post('/', function(req, res, next){
 
 	filename = uuidv4();
