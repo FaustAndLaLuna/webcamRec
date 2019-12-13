@@ -22,19 +22,13 @@ function encode(URLtoVid){
 	convFilePath = path.resolve(filename+".mp4");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length);
 	
-	
-	console.log(filePath);
-	console.log(convFilePath);
-	console.log("uploaded and converted to: " + filename+".mp4");
-	
-	
 	ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp4')
 	.size(SIZE)
 	.videoCodec('libx264')
 	.on('end', () =>{
-		vidTable.updateToEncoded(convFilePath, URLtoVid)
+		vidTable.updateToEncoded(filename, URLtoVid)
 		genThumbnail(convFilePath, 
 			convFilePath.replace("mp4","png").replace("uploads", "public/thumbs"), SIZE)
 		.catch(err => console.error(err))
