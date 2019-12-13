@@ -56,8 +56,11 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					vidTable.create("SIN URL", Date.now().toString(), filePath);
+					console.log("Am I encoding? " + ISENCODING.toString());
 					if(!ISENCODING){
 						encodeMod.encode(filePath);
+					} else {
+						console.log("Encoding. Waiting for next opportunity.");
 					}
 					
 					
