@@ -1,4 +1,3 @@
-
 const https = require('https');
 const fs = require('fs');
 
@@ -15,6 +14,8 @@ var videoRouter = require('./routes/video');
 var vidPlayerRouter = require('./routes/vidPlayer');
 
 var app = express();
+
+global.ISENCODING = false;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

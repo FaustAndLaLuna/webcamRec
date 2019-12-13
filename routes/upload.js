@@ -5,10 +5,9 @@ const uuidv4 = require('uuid/v4');
 var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-var ffmpeg = require("fluent-ffmpeg");
-const genThumbnail = require('simple-thumbnail');
 const videosRepo = require('../videosRepo');
 const AppDAO = require('../dao')
+const encodeMod = require('encode');
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
@@ -59,24 +58,12 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					
-					ffmpeg(filePath)
-						.output(convFilePath)
-						.format('mp4')
-						.size(SIZE)
-						.videoCodec('libx264')
-						.on('end', () =>{
-							vidTable.create(filename+".mp4", Date.now().toString());
-							genThumbnail(convFilePath, 
-								convFilePath.replace("mp4","png").replace("uploads", "public/thumbs"), SIZE)
-							.catch(err => console.error(err))
-							console.log("uploaded and converted to: " + filename+".mp4");
-							fs.unlink(filePath, (err) => {
-								if(err){
-									console.error(err);
-								}
-							});
-						})
-						.run();
+					vidTable.create("SIN URL", Date.now().toString(), filePath);
+					if(!ISENCODING){
+						encoreMod.encode(filePath);
+					}
+					
+					
 				res.write("Video subido exitosamente!");
 				res.end();
 				});
@@ -86,5 +73,10 @@ router.post('/', function(req, res, next){
 			
 	});
 });
+
+
+
+
+
 
 module.exports = router;
