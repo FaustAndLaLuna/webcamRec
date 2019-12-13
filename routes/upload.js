@@ -16,7 +16,6 @@ const SIZE = '480x?';
 
 
 router.post('/', function(req, res, next){
-
 	filename = uuidv4();
 	thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
@@ -56,12 +55,6 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					vidTable.create("SIN URL", Date.now().toString(), filePath);
-					console.log("Am I encoding? " + ISENCODING.toString());
-					if(!ISENCODING){
-						encodeMod.encode(filePath);
-					} else {
-						console.log("Encoding. Waiting for next opportunity.");
-					}
 					
 					
 				res.write("Video subido exitosamente!");

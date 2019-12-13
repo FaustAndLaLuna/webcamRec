@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
 	resObj = {};
 	resObj.title = "Todos los videos";
 	
+	console.log("Am I encoding? " + ISENCODING);
 	if(!ISENCODING){
 		vidTable.getNextEncodable().then((nextEncodableVideo) => {
 			if(typeof nextEncodableVideo === 'undefined'){
