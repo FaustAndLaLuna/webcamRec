@@ -6,7 +6,7 @@ class videosRepo{
 			videoURL TEXT,
 			timePublished TEXT,
 			tempURL TEXT)`
-		console.log(sql);
+		//console.log(sql);
 		this.dao.run(sql);
 	}
 
