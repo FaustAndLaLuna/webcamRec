@@ -2,7 +2,8 @@ class videosRepo{
 	constructor(dao){
 		this.dao = dao;
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
-			id INTEGER PRIMARY KEY AUTOINCREMENT,	
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			isEncoded INTEGER DEFAULT(0),
 			videoURL TEXT,
 			timePublished TEXT,
 			tempURL TEXT)`
@@ -14,7 +15,8 @@ class videosRepo{
 		return this.dao.run(
 		 `UPDATE videos 
 		 SET videoURL = ?,
-		 tempURL = ? 
+		 tempURL = ?,
+		 isEncoded = 1
 		 WHERE tempURL = ? `, [videoURL, "COMPLETADO", tempURL]
 		);
 	}
@@ -30,7 +32,7 @@ class videosRepo{
 	}
 
 	getNextEncodable(){
-		return this.dao.get('SELECT * FROM videos WHERE tempURL != "COMPLETADO"');
+		return this.dao.get('SELECT * FROM videos WHERE isEncoded = 0');
 	}
 	
 }
