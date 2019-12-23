@@ -6,7 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const encodeMod = require('./encode');
+const encodeMod = require('./serverSideModules/encode');
 var CronJob = require('cron').CronJob;
 
 new CronJob('*/30 * * * * *', encodeMod.encodeCron);
