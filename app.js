@@ -9,10 +9,11 @@ var logger = require('morgan');
 const encodeMod = require('./serverSideModules/encode');
 var CronJob = require('cron').CronJob;
 
-const job = CronJob('* * * * * *', encodeMod.encodeCron);
+//const job = CronJob('* * * * * *', encodeMod.encodeCron);
+const job = CronJob('* * * * * * ', ()=>{print("cron job started")};)
 job.start;
 
-console.log(encodeMod.encodeCron);
+
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
