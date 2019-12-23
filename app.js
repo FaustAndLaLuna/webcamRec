@@ -10,7 +10,9 @@ const encodeMod = require('./serverSideModules/encode');
 var CronJob = require('cron').CronJob;
 
 const job = CronJob('* * * * * *', encodeMod.encodeCron);
-job.start
+job.start;
+
+console.log(encodeMod.encodeCron);
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
