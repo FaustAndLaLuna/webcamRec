@@ -10,8 +10,13 @@ const encodeMod = require('./serverSideModules/encode');
 var CronJob = require('cron').CronJob;
 
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
-const job = new CronJob('* * * * * * ', function() {console.log("working");});
-job.start;
+console.log('Before job instantiation');
+const job = new CronJob('* * * * * *', function() {
+	const d = new Date();
+	console.log('Every second:', d);
+});
+console.log('After job instantiation');
+job.start();
 
 
 
