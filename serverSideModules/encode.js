@@ -55,4 +55,4 @@ function encodeCron(){
 
 
 
-exports.encode = encode;
+exports.encodeCron = encodeCron;
