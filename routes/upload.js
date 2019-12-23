@@ -7,12 +7,10 @@ var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 const videosRepo = require('../videosRepo');
 const AppDAO = require('../dao')
-const encodeMod = require('./encode');
+
 
 const dao = new AppDAO('./database.sqlite3');
 const vidTable = new videosRepo(dao);
-
-const SIZE = '480x?';
 
 
 router.post('/', function(req, res, next){

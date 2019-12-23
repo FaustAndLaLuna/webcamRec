@@ -1,8 +1,5 @@
 var path = require('path');
-const uuidv4 = require('uuid/v4');
 var fs = require('fs');
-var formidable = require('formidable');
-var mkdirp = require('mkdirp');
 var ffmpeg = require("fluent-ffmpeg");
 const genThumbnail = require('simple-thumbnail');
 const videosRepo = require('../videosRepo');
@@ -15,7 +12,7 @@ const SIZE = '480x?';
 
 function encode(URLtoVid){
 	
-	ISENCODING = true;
+	ISWORKING = true;
 	console.log("Encoding started.")
 	
 	filename = URLtoVid.replace(".webm", "");
@@ -38,14 +35,23 @@ function encode(URLtoVid){
 				console.error(err);
 			}
 		});
-		ISENCODING = false;
+		ISWORKING = false;
 		console.log("Encoding ended.")
 	})
 	.run();	
 }
 
 
-
+function encodeCron(){
+	console.log("Am I encoding? " + ISWORKING);
+	if(!ISWORKING){
+		vidTable.getNextEncodable().then((nextEncodableVideo) => {
+			if(typeof nextEncodableVideo === 'undefined'){
+				return;
+			}
+			encode(nextEncodableVideo.tempURL);});
+	}
+}
 
 
 

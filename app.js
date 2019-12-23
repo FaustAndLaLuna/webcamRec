@@ -6,6 +6,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const encodeMod = require('./encode');
+var CronJob = require('cron').CronJob;
+
+new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
@@ -15,7 +19,7 @@ var vidPlayerRouter = require('./routes/vidPlayer');
 
 var app = express();
 
-global.ISENCODING = false;
+global.ISWORKING = false;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
