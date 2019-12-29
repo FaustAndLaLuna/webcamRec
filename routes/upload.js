@@ -22,14 +22,14 @@ router.post('/', function(req, res, next){
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
 	
-	mkdirp(path.dirname(filePath), function (err){
+	mkdirp(path.dirname(filePath), function (filename, thumbFolder, filePath, convFilePath, err){
 		if(err)
 			console.log(err);
-		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (err) {
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (filename, thumbFolder, filePath, convFilePath, err) {
 			if (err)
 				console.log(err);
 
-			fs.writeFile(filePath, '', function (err){
+			fs.writeFile(filePath, '', function (filename, thumbFolder, filePath, convFilePath, err){
 				if(err)  console.log(err);
 				fTypeCheck = "";
 
