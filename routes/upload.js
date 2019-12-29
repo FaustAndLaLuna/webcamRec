@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
 	mkdirp(path.dirname(filePath), function (err){
 		if(err)
 			console.log(err);
-		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (err){
 			if (err)
 				console.log(err);
 
