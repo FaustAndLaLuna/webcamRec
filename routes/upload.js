@@ -54,7 +54,7 @@ router.post('/', function(req, res, next){
 					}
 					//vidTable.create("SIN URL", Date.now().toString(), filePath);
 					vidTable.create.bind("SIN URL", Date.now().toString(), filePath);
-					
+					vidTable.create();
 				res.write("Video subido exitosamente!");
 				res.end();
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
