@@ -60,7 +60,7 @@ router.post('/', function(req, res, next){
 					
 				res.write("Video subido exitosamente!");
 				res.end();
-				});
+				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
 				form.parse(req);
 			}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 		}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );	
