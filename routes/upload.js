@@ -21,13 +21,13 @@ router.post('/', function(req, res, next){
 	filename = thumbFolder + filename.slice(4);
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
-	
 	mkdirp(path.dirname(filePath), function (err){
 		if(err)
 			console.log(err);
-		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (err) {
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
 			if (err)
 				console.log(err);
+
 			fs.writeFile(filePath, '', function (err){
 				if(err)  console.log(err);
 				fTypeCheck = "";
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next){
 				form.on('end', function(file){
 					console.log(fTypeCheck);
 					if(!fTypeCheck.match("^video/")){
-						fs.unlink(filePath, function(err) {
+						fs.unlink(filePath, (err) =>{
 							if(err){
 								console.log(err);
 							}
@@ -63,8 +63,6 @@ router.post('/', function(req, res, next){
 		}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );	
 	}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 });
-
-
 
 
 
