@@ -60,8 +60,8 @@ router.post('/', function(req, res, next){
 				res.end();
 				});
 				form.parse(req);
-			});
-		});
+			}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
+		}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 			
 	}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 });
