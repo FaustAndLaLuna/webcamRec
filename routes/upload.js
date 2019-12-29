@@ -10,7 +10,7 @@ const AppDAO = require('../dao')
 
 
 const dao = new AppDAO('./database.sqlite3');
-const vidTable = new videosRepo(dao);
+var vidTable = new videosRepo(dao);
 
 
 router.post('/', function(req, res, next){
@@ -52,8 +52,8 @@ router.post('/', function(req, res, next){
 						res.end();
 						return;
 					}
-					(vidTable.create("SIN URL", Date.now().toString(), filePath))(filePath);
-					
+					//vidTable.create("SIN URL", Date.now().toString(), filePath);
+					vidTable.create.bind("SIN URL", Date.now().toString(), filePath);
 					
 				res.write("Video subido exitosamente!");
 				res.end();
