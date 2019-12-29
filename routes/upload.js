@@ -22,6 +22,12 @@ router.post('/', function(req, res, next){
 	filePath = path.resolve('./uploads'+filename+".webm");
 	convFilePath = path.resolve('./uploads'+filename+".mp4");
 	
+	mkdirp(path.dirname(filePath), function (filename, thumbFolder, filePath, convFilePath, err){
+		if(err)
+			console.log(err);
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (filename, thumbFolder, filePath, convFilePath, err) {
+			if (err)
+				console.log(err);
 			fs.writeFile(filePath, '', function (filename, thumbFolder, filePath, convFilePath, err){
 				if(err)  console.log(err);
 				fTypeCheck = "";
@@ -59,48 +65,7 @@ router.post('/', function(req, res, next){
 });
 
 
-function upload(filename, thumbFolder, thumbName, filePath,convFilePath){
-	mkdirp.sync(path.dirname(filePath), function (filename, thumbFolder, filePath, convFilePath, err){
-		if(err)
-			console.log(err);
-	});
-	mkdirp.sync(path.dirname(filePath.replace("uploads", "public/thumbs")), function (filename, thumbFolder, filePath, convFilePath, err) {
-			if (err)
-				console.log(err);
-	});
-	fs.writeFile(filePath, '', function (filename, thumbFolder, filePath, convFilePath, err){
-				if(err)  console.log(err);
-				fTypeCheck = "";
 
-				var form = new formidable.IncomingForm();
-				form.on('fileBegin', (name, file) => {
-					file.path = filePath;
-					fTypeCheck = file.type;
-				});
-				form.on('error', function(err){
-					console.log('An error has occurred uploading a file:\n ' + err);
-				});
-				form.on('end', function(file){
-					console.log(fTypeCheck);
-					if(!fTypeCheck.match("^video/")){
-						fs.unlink(filePath, function(err) {
-							if(err){
-								console.log(err);
-							}
-						});
-						res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
-						res.end();
-						return;
-					}
-					vidTable.create("SIN URL", Date.now().toString(), filePath);
-					
-					
-				res.write("Video subido exitosamente!");
-				res.end();
-				});
-				form.parse(req);
-			}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
-}
 
 
 
