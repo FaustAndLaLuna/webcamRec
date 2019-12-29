@@ -25,7 +25,7 @@ router.post('/', function(req, res, next){
 	mkdirp(path.dirname(filePath), function (err){
 		if(err)
 			console.log(err);
-		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), (err) => {
+		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (err) {
 			if (err)
 				console.log(err);
 
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next){
 				form.on('end', function(file){
 					console.log(fTypeCheck);
 					if(!fTypeCheck.match("^video/")){
-						fs.unlink(filePath, (err) =>{
+						fs.unlink(filePath, function(err) {
 							if(err){
 								console.log(err);
 							}
