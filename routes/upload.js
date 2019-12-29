@@ -61,9 +61,9 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req);
 			});
-		}.bind({filename:filename, thumbFolder:thumbFolder, filePath = filePath, convFilePath:convFilePath}) );
+		});
 			
-	});
+	}.bind({filename:filename, thumbFolder:thumbFolder, filePath = filePath, convFilePath:convFilePath}) );
 });
 
 
