@@ -53,7 +53,7 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					//vidTable.create("SIN URL", Date.now().toString(), filePath);
-					vidTable.create.call("SIN URL", Date.now().toString(), filePath);
+					vidTable.create("SIN URL", Date.now().toString()).bind({tempURL:filePath});
 				res.write("Video subido exitosamente!");
 				res.end();
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
