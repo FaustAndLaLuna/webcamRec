@@ -36,10 +36,10 @@ router.post('/', function(req, res, next){
 				fTypeCheck = "";
 
 				var form = new formidable.IncomingForm();
-				form.on('fileBegin', (name, file) => {
+				form.on('fileBegin', function (name, file){
 					file.path = filePath;
 					fTypeCheck = file.type;
-				});
+				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
 				form.on('error', function(err){
 					console.log('An error has occurred uploading a file:\n ' + err);
 				});
