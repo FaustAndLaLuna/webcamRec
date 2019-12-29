@@ -21,7 +21,7 @@ class videosRepo{
 		);
 	}
 	
-	create(videoURL, timePublished, tempURL){
+	async create(videoURL, timePublished, tempURL){
 		console.log(tempURL);
 		return this.dao.run('INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
 			"(?, ?, ?)", [videoURL, timePublished, tempURL]);
