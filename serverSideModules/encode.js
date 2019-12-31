@@ -2,11 +2,9 @@ var path = require('path');
 var fs = require('fs');
 var ffmpeg = require("fluent-ffmpeg");
 const genThumbnail = require('simple-thumbnail');
-const videosRepo = require('../videosRepo');
-const AppDAO = require('../dao')
+const videosRepo = require('../conn/videosRepo');
 
-const dao = new AppDAO('./database.sqlite3');
-const vidTable = new videosRepo(dao);
+const vidTable = new videosRepo();
 
 const SIZE = '480x?';
 
@@ -46,10 +44,10 @@ function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
 		vidTable.getNextEncodable().then((nextEncodableVideo) => {
-			if(typeof nextEncodableVideo === 'undefined'){
+			if(typeof nextEncodableVideo.length == 0){
 				return;
 			}
-			encode(nextEncodableVideo.tempURL);});
+			encode(nextEncodableVideo[0].tempURL);});
 	}
 }
 

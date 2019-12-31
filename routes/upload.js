@@ -1,16 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-const uuidv4 = require('uuid/v4');
+var uuidv4 = require('uuid/v4');
 var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-const videosRepo = require('../videosRepo');
-const AppDAO = require('../dao')
+var videosRepo = require('../conn/videosRepo');
 
-
-const dao = new AppDAO('./database.sqlite3');
-var vidTable = new videosRepo(dao);
+var vidTable = new videosRepo();
 
 
 router.post('/', function(req, res, next){

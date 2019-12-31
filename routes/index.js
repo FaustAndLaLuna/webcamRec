@@ -1,11 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-const videosRepo = require('../videosRepo')
-const AppDAO = require('../dao')
+const videosRepo = require('../conn/videosRepo')
 
-const dao = new AppDAO('./database.sqlite3');
-const vidTable = new videosRepo(dao);
+const vidTable = new videosRepo();
 
 // TODO Set Index
 router.get('/', function(req, res, next) {
