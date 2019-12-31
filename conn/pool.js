@@ -11,4 +11,4 @@ var POOL = mysql.createPool({
 	database: "BIOGRAFO"
 });
 
-exports.POOL = pool;
+exports.POOL = POOL;
