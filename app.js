@@ -16,7 +16,7 @@ job.start();
 var pw = fs.readFileSync('./password.p', 'utf8');
 pw = pw.slice(0,12);
 		
-global.POOL = mysql.createPool({
+var POOL = mysql.createPool({
 	host: 'localhost',
 	user: 'root',
 	password: pw,
