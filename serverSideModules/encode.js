@@ -43,11 +43,11 @@ function encode(URLtoVid){
 function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
-		vidTable.getNextEncodable().then((nextEncodableVideo) => {
-			if(typeof nextEncodableVideo.length == 0){
+		vidTable.getNextEncodable().then((result) => {
+			if(typeof result.length == 0){
 				return;
 			}
-			encode(nextEncodableVideo[0].tempURL);});
+			encode(result[0].tempURL);});
 	}
 }
 
