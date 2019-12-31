@@ -62,9 +62,10 @@ class videosRepo{
 			timePublished varchar(128),
 			tempURL varchar(100) DEFAULT NULL);`
 		//console.log(sql);
-		setTimeout(conn.query(sql, function(err, result){
+		var fun = conn.query(sql, function(err, result){
 			if (err) console.log(err);
-			console.log("table created.")}), 3000);
+			console.log("table created.")});
+		setTimeout(fun, 3000);
 	}
 	
 	updateToEncoded(videoURL, tempURL){
