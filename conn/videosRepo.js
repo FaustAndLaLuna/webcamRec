@@ -67,7 +67,7 @@ class videosRepo{
 		 tempURL = ?,
 		 isEncoded = TRUE
 		 WHERE tempURL = ? ` ;
-		conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
+		this.conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
 			if (err)	console.log(err);
 			return;
 		});
@@ -76,7 +76,7 @@ class videosRepo{
 	create(videoURL, timePublished, tempURL){
 		q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
 			"(?, ?, ?)";
-		conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
+		this.conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
 			if (err)	console.log(err);
 			return;
 		});
@@ -84,14 +84,14 @@ class videosRepo{
 
 	//TODO: Set update, delete, get(one) for sale/sold
 	getAll(){
-		conn.query("SELECT * FROM videos;", function(err,result){
+		this.conn.query("SELECT * FROM videos;", function(err,result){
 			if(err) console.log(err);
 			return result;
 		});
 	}
 
 	getNextEncodable(){
-		conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
+		this.conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 			if(err) console.log(err);
 			return result;
 		});
