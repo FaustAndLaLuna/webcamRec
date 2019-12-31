@@ -5,10 +5,8 @@ class videosRepo{
 	constructor(){
 		
 		var pw = fs.readFileSync('./password.p', 'utf8');
-		console.log(pw.slice(0,11));
-		console.log(pw.slice(0,10));
-		console.log(pw.slice(0,9));
-		pw = pw.slice(0,11);
+		console.log(pw.slice(0,12));
+		pw = pw.slice(0,12);
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
@@ -16,13 +14,6 @@ class videosRepo{
 		database: 'biografo'
 		});
 		console.log(pw);
-		console.log(pw);
-		console.log(pw);
-		console.log(pw);
-		console.log(pw);
-		console.log(pw);
-		console.log(pw);
-		
 		conn.connect(function(err){
 			if(err) console.log(err);
 			console.log("Connected to videos MySQL table!")
