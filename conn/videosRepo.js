@@ -45,12 +45,16 @@ class videosRepo{
 		conn.query(DB, function(err, result){
 			if (err) console.log(err);
 			console.log("DATABASE created.");
-		}).then(conn.query(Schema, function(err, result){
-			if (err) console.log(err);
-			console.log("Schema created.");
-		})).then(conn.query(sql, function(err, result){
-			if (err) console.log(err);
-			console.log("table created.")}));
+			conn.query(Schema, function(err, result){
+				if(err) console.log(err);
+				console.log("Schema created.")
+				conn.query(sql, function(err, result){
+					if(err)	console.log(err);
+					console.log("table created.")
+				});
+			});
+		}
+		
 		sql = `CREATE TABLE IF NOT EXISTS videos(
 			id int PRIMARY KEY  AUTO_INCREMENT,
 			isEncoded boolean DEFAULT FALSE,
@@ -58,9 +62,9 @@ class videosRepo{
 			timePublished varchar(128),
 			tempURL varchar(100) DEFAULT NULL);`
 		//console.log(sql);
-		conn.query(sql, function(err, result){
+		setTimeout(conn.query(sql, function(err, result){
 			if (err) console.log(err);
-			console.log("table created.")});
+			console.log("table created.")}), 3000);
 	}
 	
 	updateToEncoded(videoURL, tempURL){
