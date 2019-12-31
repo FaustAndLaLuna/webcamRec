@@ -3,13 +3,8 @@ var fs = require('fs');
 
 class videosRepo{
 	constructor(){
-		fs.readdirSync("../", (err, files) => {
-			files.forEach(file =>{
-				console.log(file);
-			});
-		});
-		//var pw = fs.readFileSync('../password', 'utf8');
-		var pw = "test";
+		
+		var pw = fs.readFileSync('../password.p', 'utf8');
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
