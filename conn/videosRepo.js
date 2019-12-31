@@ -14,7 +14,37 @@ class videosRepo{
 			console.log("Connected to videos MySQL table!")
 		});
 		
+		/*
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
+			id int PRIMARY KEY  AUTO_INCREMENT,
+			isEncoded boolean DEFAULT FALSE,
+			videoURL varchar(100) DEFAULT NULL,
+			timePublished varchar(128),
+			tempURL varchar(100) DEFAULT NULL);`
+		//console.log(sql);
+		conn.query(sql, function(err, result){
+			if (err) console.log(err);
+			console.log("table created.")});
+	*/
+		const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
+		const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
+		var sql = `CREATE TABLE IF NOT EXISTS users(
+			id int PRIMARY KEY  AUTO_INCREMENT,
+			username varchar(128) NOT NULL,
+			salt char(32) NOT NULL,
+			password varchar(128),
+			createdAt datetime DEFAULT NULL);`
+		
+		conn.query(DB, function(err, result){
+			if (err) console.log(err);
+			console.log("DATABASE created.");
+		}).then(conn.query(Schema, function(err, result){
+			if (err) console.log(err);
+			console.log("Schema created.");
+		})).then(conn.query(sql, function(err, result){
+			if (err) console.log(err);
+			console.log("table created.")}));
+		sql = `CREATE TABLE IF NOT EXISTS videos(
 			id int PRIMARY KEY  AUTO_INCREMENT,
 			isEncoded boolean DEFAULT FALSE,
 			videoURL varchar(100) DEFAULT NULL,
@@ -31,29 +61,35 @@ class videosRepo{
 		 SET videoURL = ?,
 		 tempURL = ?,
 		 isEncoded = TRUE
-		 WHERE tempURL = ? ` , [videoURL, "COMPLETADO", tempURL];
-		conn.query(q, function(err, result){
+		 WHERE tempURL = ? ` ;
+		conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
 			if (err)	console.log(err);
+			return;
 		});
-		return;
 	}
 	
 	create(videoURL, timePublished, tempURL){
 		q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
-			"(?, ?, ?)", [videoURL, timePublished, tempURL];
-		conn.query(q, function(err,result){
+			"(?, ?, ?)";
+		conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
 			if (err)	console.log(err);
+			return;
 		});
-		return;
 	}
 
 	//TODO: Set update, delete, get(one) for sale/sold
 	getAll(){
-		return await conn.query("SELECT * FROM videos;");
+		conn.query("SELECT * FROM videos;", function(err,result){
+			if(err) console.log(err);
+			return result;
+		});
 	}
 
 	getNextEncodable(){
-		return await conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1");
+		conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
+			if(err) console.log(err);
+			return result;
+		});
 	}
 	
 }
