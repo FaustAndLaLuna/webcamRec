@@ -9,7 +9,8 @@ class videosRepo{
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
-		password: pw
+		password: pw,
+		database: "BIOGRAFO"
 		});
 		conn.connect(function(err){
 			if(err) console.log(err);
