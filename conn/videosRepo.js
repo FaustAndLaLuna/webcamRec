@@ -5,13 +5,13 @@ class videosRepo{
 	constructor(){
 		var pw = fs.readFileSync('./password.p', 'utf8');
 		pw = pw.slice(0,12);
-		this.conn = mysql.createConnection({
+		conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
 		password: pw,
 		database: "BIOGRAFO"
 		});
-		this.conn.connect(function(err){
+		conn.connect(function(err){
 			if(err) console.log(err);
 			console.log("Connected to videos MySQL table!")
 		});
@@ -37,13 +37,13 @@ class videosRepo{
 			password varchar(128),
 			createdAt datetime DEFAULT NULL);`
 		
-		this.conn.query(DB, function(err, result){
+		conn.query(DB, function(err, result){
 			if (err) console.log(err);
 			console.log("DATABASE created.");
-			this.conn.query(Schema, function(err, result){
+			conn.query(Schema, function(err, result){
 				if(err) console.log(err);
 				console.log("Schema created.")
-				this.conn.query(sql, function(err, result){
+				conn.query(sql, function(err, result){
 					if(err)	console.log(err);
 					console.log("table created.")
 					sql = `CREATE TABLE IF NOT EXISTS videos(
@@ -53,7 +53,7 @@ class videosRepo{
 						timePublished varchar(128),
 						tempURL varchar(100) DEFAULT NULL);`
 					//console.log(sql);
-					this.conn.query(sql, function(err, result){
+					conn.query(sql, function(err, result){
 						if (err) console.log(err);
 						console.log("table created.")});
 				});
@@ -67,7 +67,7 @@ class videosRepo{
 		 tempURL = ?,
 		 isEncoded = TRUE
 		 WHERE tempURL = ? ` ;
-		this.conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
+		conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
 			if (err)	console.log(err);
 			return;
 		});
@@ -76,7 +76,7 @@ class videosRepo{
 	create(videoURL, timePublished, tempURL){
 		q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
 			"(?, ?, ?)";
-		this.conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
+		conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
 			if (err)	console.log(err);
 			return;
 		});
@@ -84,14 +84,14 @@ class videosRepo{
 
 	//TODO: Set update, delete, get(one) for sale/sold
 	getAll(){
-		this.conn.query("SELECT * FROM videos;", function(err,result){
+		conn.query("SELECT * FROM videos;", function(err,result){
 			if(err) console.log(err);
 			return result;
 		});
 	}
 
 	getNextEncodable(){
-		this.conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
+		conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 			if(err) console.log(err);
 			return result;
 		});
