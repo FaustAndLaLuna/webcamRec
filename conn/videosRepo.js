@@ -9,6 +9,7 @@ class videosRepo{
 			});
 		});
 		//var pw = fs.readFileSync('../password', 'utf8');
+		pw = "test";
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
