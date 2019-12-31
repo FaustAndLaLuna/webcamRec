@@ -33,7 +33,7 @@ class videosRepo{
 		 isEncoded = TRUE
 		 WHERE tempURL = ? ` , [videoURL, "COMPLETADO", tempURL];
 		conn.query(q, function(err, result){
-			if err console.log(err);
+			if (err)	console.log(err);
 		});
 		return;
 	}
@@ -42,7 +42,7 @@ class videosRepo{
 		q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
 			"(?, ?, ?)", [videoURL, timePublished, tempURL];
 		conn.query(q, function(err,result){
-			if err	console.log(err);
+			if (err)	console.log(err);
 		});
 		return;
 	}
