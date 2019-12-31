@@ -8,12 +8,20 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const encodeMod = require('./serverSideModules/encode');
 var CronJob = require('cron').CronJob;
-
+var mysql = require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 
-
+var pw = fs.readFileSync('./password.p', 'utf8');
+pw = pw.slice(0,12);
+		
+global.POOL = mysql.createPool({
+	host: 'localhost',
+	user: 'root',
+	password: pw,
+	database: "BIOGRAFO"
+});
 
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
