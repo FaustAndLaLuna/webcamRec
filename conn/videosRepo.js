@@ -42,7 +42,7 @@ class videosRepo{
 			password varchar(128),
 			createdAt datetime DEFAULT NULL);`
 		
-		await conn.query(DB, function(err, result){
+		conn.query(DB, function(err, result){
 			if (err) console.log(err);
 			console.log("DATABASE created.");
 			conn.query(Schema, function(err, result){
