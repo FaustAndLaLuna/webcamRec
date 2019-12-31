@@ -81,7 +81,7 @@ class videosRepo{
 	}
 
 	//TODO: Set update, delete, get(one) for sale/sold
-	getAll(){
+	async getAll(){
 		POOL.getConnection(function(err, conn){
 			conn.query("SELECT * FROM videos;", function(err,result){
 				if(err) console.log(err);
@@ -91,7 +91,7 @@ class videosRepo{
 		});
 	}
 
-	getNextEncodable(){
+	async getNextEncodable(){
 		POOL.getConnection(function(err, conn){
 			conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 				if(err) console.log(err);
