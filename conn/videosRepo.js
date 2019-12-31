@@ -1,4 +1,5 @@
 var fs = require('fs');
+var POOL = require('./pool').POOL;
 
 class videosRepo{
 	constructor(){

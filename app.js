@@ -13,16 +13,6 @@ var mysql = require('mysql');
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 
-var pw = fs.readFileSync('./password.p', 'utf8');
-pw = pw.slice(0,12);
-		
-var POOL = mysql.createPool({
-	host: 'localhost',
-	user: 'root',
-	password: pw,
-	database: "BIOGRAFO"
-});
-
 var indexRouter = require('./routes/index');
 var uploadRouter = require('./routes/upload');
 var recordRouter = require('./routes/record');
