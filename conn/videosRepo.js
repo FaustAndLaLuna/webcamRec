@@ -92,6 +92,16 @@ class videosRepo{
 	}
 
 	async getNextEncodable(){
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
+					if(err) reject(err);
+					resolve(result);
+				});
+			});
+		});
+		
 		result = await POOL.getConnection(function(err, conn){
 			conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 				if(err) console.log(err);

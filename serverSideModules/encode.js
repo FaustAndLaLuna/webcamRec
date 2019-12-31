@@ -43,11 +43,14 @@ function encode(URLtoVid){
 async function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
-		result = await vidTable.getNextEncodable();
-		if(result.length == 0){
-			return;
-		}
-		encode(result[0].tempURL);
+		vidTable.getNextEncodable().then((result) => {
+			if(result.length == 0){
+				return;
+			}
+			encode(result[0].tempURL);
+			}).catch(function(err){
+				console.log(err);
+			});
 	}
 }
 
