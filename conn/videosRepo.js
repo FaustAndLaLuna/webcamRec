@@ -95,6 +95,7 @@ class videosRepo{
 		POOL.getConnection(function(err, conn){
 			conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 				if(err) console.log(err);
+				console.log(result);
 				return result;
 			});
 		});
