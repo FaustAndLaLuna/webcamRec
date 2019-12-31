@@ -2,11 +2,10 @@ var mysql = require('mysql');
 var fs = require('fs');
 
 class videosRepo{
-	conn;
 	constructor(){
 		var pw = fs.readFileSync('./password.p', 'utf8');
 		pw = pw.slice(0,12);
-		conn = mysql.createConnection({
+		this.conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
 		password: pw,
