@@ -53,7 +53,7 @@ class videosRepo{
 					console.log("table created.")
 				});
 			});
-		}
+		});
 		
 		sql = `CREATE TABLE IF NOT EXISTS videos(
 			id int PRIMARY KEY  AUTO_INCREMENT,
