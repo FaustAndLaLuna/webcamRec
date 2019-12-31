@@ -11,6 +11,14 @@ class videosRepo{
 		password: pw,
 		database: 'biografo'
 		});
+		console.log(pw);
+		console.log(pw);
+		console.log(pw);
+		console.log(pw);
+		console.log(pw);
+		console.log(pw);
+		console.log(pw);
+		
 		conn.connect(function(err){
 			if(err) console.log(err);
 			console.log("Connected to videos MySQL table!")
