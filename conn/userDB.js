@@ -50,11 +50,11 @@ class videosRepo{
 	}
 
 	//TODO: Set update, delete, get(one) for sale/sold
-	getAll(){
+	async getAll(){
 		return this.dao.all("SELECT * FROM videos;");
 	}
 
-	getNextEncodable(){
+	async getNextEncodable(){
 		return this.dao.get('SELECT * FROM videos WHERE isEncoded = 0');
 	}
 	
