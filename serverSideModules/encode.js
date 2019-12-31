@@ -43,7 +43,7 @@ function encode(URLtoVid){
 async function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
-		result = await.getNextEncodable();
+		result = await getNextEncodable();
 		if(result.length == 0){
 			return;
 		}
