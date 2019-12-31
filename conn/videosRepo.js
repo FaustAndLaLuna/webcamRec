@@ -11,7 +11,7 @@ class videosRepo{
 		password: pw,
 		database: "BIOGRAFO"
 		});
-		conn.connect(function(err){
+		this.conn.connect(function(err){
 			if(err) console.log(err);
 			console.log("Connected to videos MySQL table!")
 		});
@@ -37,13 +37,13 @@ class videosRepo{
 			password varchar(128),
 			createdAt datetime DEFAULT NULL);`
 		
-		conn.query(DB, function(err, result){
+		this.conn.query(DB, function(err, result){
 			if (err) console.log(err);
 			console.log("DATABASE created.");
-			conn.query(Schema, function(err, result){
+			this.conn.query(Schema, function(err, result){
 				if(err) console.log(err);
 				console.log("Schema created.")
-				conn.query(sql, function(err, result){
+				this.conn.query(sql, function(err, result){
 					if(err)	console.log(err);
 					console.log("table created.")
 					sql = `CREATE TABLE IF NOT EXISTS videos(
@@ -53,7 +53,7 @@ class videosRepo{
 						timePublished varchar(128),
 						tempURL varchar(100) DEFAULT NULL);`
 					//console.log(sql);
-					conn.query(sql, function(err, result){
+					this.conn.query(sql, function(err, result){
 						if (err) console.log(err);
 						console.log("table created.")});
 				});
