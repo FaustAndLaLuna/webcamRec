@@ -54,7 +54,7 @@ class videosRepo{
 	}
 	
 	updateToEncoded(videoURL, tempURL){
-		q = `UPDATE videos 
+		let q = `UPDATE videos 
 		 SET videoURL = ?,
 		 tempURL = ?,
 		 isEncoded = TRUE
@@ -69,7 +69,7 @@ class videosRepo{
 	}
 	
 	create(videoURL, timePublished, tempURL){
-		q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
+		let q = 'INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
 			"(?, ?, ?)";
 		POOL.getConnection(function (err, conn){
 			conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
@@ -82,16 +82,18 @@ class videosRepo{
 
 	//TODO: Set update, delete, get(one) for sale/sold
 	async getAll(){
-		POOL.getConnection(function(err, conn){
-			conn.query("SELECT * FROM videos;", function(err,result){
-				if(err) console.log(err);
-				conn.release();
-				return result;
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query("SELECT * FROM videos", function(err, result){
+					if(err) reject(err);
+					resolve(result);
+				});
 			});
 		});
 	}
 
-	async getNextEncodable(){
+	getNextEncodable(){
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
@@ -101,15 +103,6 @@ class videosRepo{
 				});
 			});
 		});
-		
-		result = await POOL.getConnection(function(err, conn){
-			conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
-				if(err) console.log(err);
-				console.log(result);
-				return result;
-			});
-		});
-		return result;
 	}
 	
 }
