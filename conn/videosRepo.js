@@ -8,7 +8,7 @@ class videosRepo{
 				console.log(file);
 			});
 		});
-		var pw = fs.readFileSync('../password', 'utf8');
+		//var pw = fs.readFileSync('../password', 'utf8');
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
