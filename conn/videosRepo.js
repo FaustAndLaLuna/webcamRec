@@ -5,6 +5,7 @@ class videosRepo{
 	constructor(){
 		
 		var pw = fs.readFileSync('./password.p', 'utf8');
+		pw.replace(" ", "").replace("\t", "").replace("\n", "").replace("\r", "");
 		var conn = mysql.createConnection({
 		host: 'localhost',
 		user: 'root',
