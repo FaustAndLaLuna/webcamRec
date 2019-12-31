@@ -40,14 +40,14 @@ function encode(URLtoVid){
 }
 
 
-function encodeCron(){
+async function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
-		vidTable.getNextEncodable().then((result) => {
-			if(typeof result.length == 0){
-				return;
-			}
-			encode(result[0].tempURL);});
+		result = await.getNextEncodable();
+		if(result.length == 0){
+			return;
+		}
+		encode(result[0].tempURL);
 	}
 }
 
