@@ -1,6 +1,7 @@
 var POOL = require('./pool').POOL;
 
 module.exports = async function(){
+	console.log("ISDEV is on, restarting database.");
 	await new Promise(function(resolve, reject){
 		DELETE = "DROP SCHEMA Biografo;"
 		POOL.getConnection(function(error, conn){
