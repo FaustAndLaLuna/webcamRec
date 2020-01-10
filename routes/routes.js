@@ -1,4 +1,5 @@
 //Routes for stuff
+var path = require('path');
 var indexRouter 	= require('./index.js');
 var uploadRouter 	= require('./upload.js');
 var recordRouter 	= require('./record.js');
