@@ -17,7 +17,7 @@ module.exports = function(passport){
 		passReqToCallback: true
 	}, function(req, username, password, done){
 		console.log("Signup Check! Username: "+ username);
-		userDB.usernameExists.then(function(result){
+		userDB.usernameExists(username).then(function(result){
 			if(result){
 				return done(null, false, req.flash('signupMessage', 'Ese mail está ocupado.'));
 			}
