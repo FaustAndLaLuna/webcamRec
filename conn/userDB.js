@@ -22,15 +22,15 @@ class userDB{
 		console.log("users Table Configured!");
 	}
 	
-	getUserID(username){
-		let q = "SELECT * FROM users WHERE username = '?';"
+	getUserByID(id){
+		let q = "SELECT * FROM users WHERE userID = '?';"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query(q, username, function(err, result){
+				conn.query(q, id, function(err, result){
 					if(err)	reject(err);
 					if(result.length == 0){
-						return resolve(-1);
+						return resolve(false);
 					}
 					return resolve(result[0]);
 				});
@@ -45,15 +45,12 @@ class userDB{
 				if(err)	reject(err);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
-					console.log(result);
 					if(result.length == 0){
 						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
-						console.log("wrong password!");
 						return resolve(false)
 					}
-					console.log("validated!");
 					return resolve(result[0]);
 				});
 			});
@@ -86,7 +83,6 @@ class userDB{
 			conn.query(q, [username, salt, password, isAdmin], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
-				console.log(result);
 				return result;
 			});
 		});

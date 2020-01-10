@@ -8,8 +8,8 @@ module.exports = function(passport){
 		done(null, user.userID);
 	});
 	passport.deserializeUser(function(id, done){
-		userDB.getUserID.then(function(result){
-			done(null, user);
+		userDB.getUserByID(id).then(function(result){
+			done(err, user);
 		});
 	});
 	passport.use('local-signup', new LocalStrategy({
