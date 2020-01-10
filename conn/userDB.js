@@ -15,6 +15,7 @@ class userDB{
 			
 			conn.query(sql, function(error, result){
 				if (error) console.log(error);
+				console.log('BIOGRAFO.users created');
 				return;
 			});
 		});
