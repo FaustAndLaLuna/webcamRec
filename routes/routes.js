@@ -14,8 +14,7 @@ function isLoggedIn(req, res, next){
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res, next) {
-		res.sendFile(path.resolve('./public/index.html'));
-		//res.render('index.ejs');
+		res.render('index.ejs');
 	});
 	app.use('/upload', isLoggedIn, uploadRouter);
 	app.use('/record', isLoggedIn, recordRouter);
