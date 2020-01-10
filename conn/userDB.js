@@ -50,8 +50,10 @@ class userDB{
 						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
+						console.log("wrong password!");
 						return resolve(false)
 					}
+					console.log("validated!");
 					return resolve(result[0]);
 				});
 			});
