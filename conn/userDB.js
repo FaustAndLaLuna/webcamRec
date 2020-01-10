@@ -59,6 +59,7 @@ class userDB{
 					if(err)	reject(err);
 					console.log(result);
 					if(result == []){
+						console.log('wat');
 						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
