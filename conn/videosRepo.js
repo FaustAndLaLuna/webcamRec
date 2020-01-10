@@ -17,6 +17,7 @@ class videosRepo{
 				conn.release();
 			});
 		});
+		console.log("videos Table Configured!");
 	}
 	
 	updateToEncoded(videoURL, tempURL){

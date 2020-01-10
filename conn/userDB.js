@@ -19,6 +19,7 @@ class userDB{
 				return;
 			});
 		});
+		console.log("users Table Configured!");
 	}
 	
 	genSalt(length){
