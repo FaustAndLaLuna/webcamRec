@@ -20,11 +20,11 @@ class userDB{
 		});
 	}
 	
-	function genSalt(length){
+	genSalt(length){
 		return crypto.randomBytes(Math.ceil(length/2)).toString('hex').slice(0,length);
 	}
 	
-	function sha1(password, salt){
+	sha1(password, salt){
 		
 		var hash = crypto.createHmac('sha1', salt);
 		hash.update(password);
@@ -32,7 +32,7 @@ class userDB{
 		return value;
 	}
 	
-	async getUserID(username){
+	getUserID(username){
 		let q = "SELECT * FROM users WHERE username = '?';"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
@@ -48,7 +48,7 @@ class userDB{
 		});
 	}
 	
-	async validate(username, password){
+	validate(username, password){
 		let q = "SELECT * FROM users WHERE username = '?';"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
@@ -67,7 +67,7 @@ class userDB{
 		});
 	}
 	
-	async usernameExists(username){
+	usernameExists(username){
 	let q = "SELECT * FROM users WHERE username = '?';"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
