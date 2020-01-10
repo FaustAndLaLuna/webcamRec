@@ -1,6 +1,10 @@
 const https = require('https');
 const fs = require('fs');
 
+global.ISWORKING = false;
+global.ISDEV = false;
+ISDEV = true;
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -20,8 +24,7 @@ var bodyParser 			= require('body-parser');
 
 var app = express();
 
-global.ISWORKING = false;
-global.ISDEV = true;
+
 //ISDEV is a global variable that allows easy development. It is NOT meant to work on deployment.
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
