@@ -89,4 +89,4 @@ class videosRepo{
 
 
 
-module.exports = videosRepo
+module.exports = videosRepo;
