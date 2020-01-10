@@ -22,10 +22,6 @@ class userDB{
 		console.log("users Table Configured!");
 	}
 	
-	genSalt(length){
-		return crypto.randomBytes(Math.ceil(length/2)).toString('hex').slice(0,length);
-	}
-	
 	sha1(password, salt){
 		
 		var hash = crypto.createHmac('sha1', salt);
@@ -104,6 +100,8 @@ class userDB{
 	
 }
 
-
+function genSalt(length){
+		return crypto.randomBytes(Math.ceil(length/2)).toString('hex').slice(0,length);
+}
 
 module.exports = userDB;
