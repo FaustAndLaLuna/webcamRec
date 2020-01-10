@@ -6,6 +6,7 @@ module.exports = async function(){
 		POOL.getConnection(function(error, conn){
 			conn.query(DELETE, function(error){
 				if(error) console.log(error);
+				resolve();
 			});
 		});
 	});
@@ -23,7 +24,7 @@ module.exports = async function(){
 						console.log(error);
 						reject(error);
 					}
-					resolve(true);
+					resolve();
 				});
 			});
 		});
