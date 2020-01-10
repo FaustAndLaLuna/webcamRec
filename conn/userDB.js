@@ -42,9 +42,9 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
-						resolve(-1);
+						return resolve(-1);
 					}
-					resolve(result[0]);
+					return resolve(result[0]);
 				});
 			});
 		});
@@ -58,12 +58,12 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
-						resolve(false);
+						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
-						resolve(false)
+						return resolve(false)
 					}
-					resolve(result[0]);
+					return resolve(result[0]);
 				});
 			});
 		});
@@ -77,9 +77,9 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
-						resolve(false);
+						return resolve(false);
 					}
-					resolve(true);
+					return resolve(true);
 				});
 			});
 		});
