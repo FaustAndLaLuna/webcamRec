@@ -20,6 +20,7 @@ module.exports = function(passport){
 		console.log("Signup Check! Username: "+ username);
 		userDB.usernameExists(username).then(function(result){
 			if(result){
+				console.log("UserName Exists Error");
 				return done(null, false, req.flash('signupMessage', 'Ese mail está ocupado.'));
 			}
 			else{
@@ -36,9 +37,11 @@ module.exports = function(passport){
 			console.log("Login Check! Username: "+ username);
 			userDB.validate(username, password).then(function(result){
 				if(result){
+					console.log("User Logged In.");
 					return done(null, result);
 				}
 				else{
+					console.log("User NOT logged in, error.");
 					return done(null, false, req.flash('loginMessage', "No se encontró el usuario o la contraseña es incorrecta."));
 				}
 			});
