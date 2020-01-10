@@ -84,10 +84,10 @@ class userDB{
 			conn.query(q, [username, salt, password, isAdmin], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
-				return;
+				console.log(result);
+				return result;
 			});
 		});
-		return {username: username, password: password, salt: salt, createdAt, createdAt, isAdmin, isAdmin}
 	}
 	
 }
