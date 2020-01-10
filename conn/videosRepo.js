@@ -61,7 +61,7 @@ class videosRepo{
 	}
 
 	//TODO: Set update, delete, get(one) for sale/sold
-	async getAll(){
+	getAll(){
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);

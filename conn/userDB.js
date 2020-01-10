@@ -4,10 +4,8 @@ var crypto = require('crypto');
 const SALT_LEN = 32;
 class userDB{
 	constructor(){
-		POOL.getConnection(function (error, conn){
-			const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
-			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
-			var sql = `CREATE TABLE IF NOT EXISTS users(
+		POOL.getConnection(function(error, conn){
+			let sql = `CREATE TABLE IF NOT EXISTS users(
 				userID int PRIMARY KEY  AUTO_INCREMENT,
 				username varchar(128) NOT NULL UNIQUE,
 				salt char(32) NOT NULL,
@@ -15,18 +13,10 @@ class userDB{
 				createdAt datetime DEFAULT NULL,
 				isAdmin boolean DEFAULT FALSE);`
 			
-			conn.query(DB, function(err, result){
-				if (err) console.log(err);
-				console.log("DATABASE created.");
-				conn.query(Schema, function(err, result){
-					if(err) console.log(err);
-					console.log("Schema created.")
-					conn.query(sql, function(err, result){
-						if(err)	console.log(err);
-						console.log("table created.")
-						conn.release();
-				});
-			});	
+			conn.query(sql, function(error, result){
+				if (error) console.log(error);
+				return;
+			});
 		});
 	}
 	
