@@ -23,7 +23,7 @@ module.exports = function(passport){
 				return done(null, false, req.flash('signupMessage', 'Ese mail está ocupado.'));
 			}
 			else{
-				user = userDB.createNew(username, password, Date.now(), false);
+				user = userDB.createNew(username, password, Date(), false);
 				return done(null, user);
 			}
 		});
