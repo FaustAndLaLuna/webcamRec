@@ -15,12 +15,12 @@ module.exports = async function(){
 		const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
 			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
 		POOL.getConnection(function(error, conn){
-			conn.query(DB, function(error, conn){
+			conn.query(DB, function(error, result){
 				if(error){
 					console.log(error);
 					reject(error);
 				}
-				conn.query(Schema, function(error, conn){
+				conn.query(Schema, function(error, result){
 					if(error){
 						console.log(error);
 						reject(error);
