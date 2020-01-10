@@ -1,7 +1,7 @@
 var POOL = require('./pool').POOL;
 
 module.exports = async function(){
-	await new Promise((resolve, reject), function{
+	await new Promise((resolve, reject), function(){
 		DELETE = "DROP SCHEMA Biografo;"
 		POOL.getConnection(function(error, conn){
 			conn.query(DELETE, function(error){
@@ -9,7 +9,7 @@ module.exports = async function(){
 			});
 		});
 	});
-	await new Promise((resolve, reject), function{
+	await new Promise((resolve, reject), function(){
 		const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
 			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
 		POOL.getConnection(function(error, conn){
