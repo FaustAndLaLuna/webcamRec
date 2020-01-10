@@ -17,7 +17,7 @@ class videosRepo{
 				conn.release();
 			});
 		});
-		console.log("videos Table Configured!");
+		console.log("BIOGRAFO.videos created");
 	}
 	
 	updateToEncoded(videoURL, tempURL){
