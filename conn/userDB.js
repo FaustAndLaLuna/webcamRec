@@ -55,7 +55,7 @@ class userDB{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query(q, username, function(err, result){
+				conn.query(q, [username], function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
 						resolve(false);
@@ -74,7 +74,7 @@ class userDB{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query(q, username, function(err, result){
+				conn.query(q, [username], function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
 						resolve(false);
