@@ -1,5 +1,5 @@
 var LocalStrategy = require('passport-local').Strategy;
-const userDB = require('../conn/userDB');
+const userDB = new require('../conn/userDB');
 
 module.exports = function(passport){
 	console.log("Configuring passport:");
