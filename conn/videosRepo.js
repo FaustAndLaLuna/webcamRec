@@ -1,10 +1,8 @@
 var fs = require('fs');
 var POOL = require('./pool').POOL;
 
-class videosRepo{
+module.exports = class videosRepo{
 	constructor(){
-		
-		
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
 			videoID int PRIMARY KEY  AUTO_INCREMENT,
 			userID int DEFAULT 0,
@@ -86,7 +84,3 @@ class videosRepo{
 	}
 	
 }
-
-
-
-module.exports = videosRepo;
