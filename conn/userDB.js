@@ -57,6 +57,7 @@ class userDB{
 				if(err)	reject(err);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
+					console.log(result);
 					if(result === undefined){
 						return resolve(false);
 					}
