@@ -74,14 +74,14 @@ class userDB{
 		});
 	}
 	
-	createNew(username, password, createdAt, isAdmin){
+	createNew(username, password, isAdmin){
 		let salt = genSalt(SALT_LEN);
 		password = sha1(password, salt);
 		
 		let q = 'INSERT INTO users (username, salt, password, createdAt, isAdmin) VALUES ' +
-				"(?, ?, ?, ?, ?)"
+				"(?, ?, ?, NOW(), ?)"
 		POOL.getConnection(function (err, conn){
-			conn.query(q, [username, salt, password, createdAt, isAdmin], function(err,result){
+			conn.query(q, [username, salt, password, isAdmin], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
 				return;
