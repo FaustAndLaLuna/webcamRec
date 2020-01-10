@@ -51,11 +51,11 @@ class userDB{
 	}
 	
 	validate(username, password){
-		let q = "SELECT * FROM users WHERE username = '?';"
+		let q = "SELECT * FROM users WHERE username = ?;"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query(q, [username], function(err, result){
+				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
 						resolve(false);
@@ -70,11 +70,11 @@ class userDB{
 	}
 	
 	usernameExists(username){
-	let q = "SELECT * FROM users WHERE username = '?';"
+	let q = "SELECT * FROM users WHERE username = ?;"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query(q, [username], function(err, result){
+				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result === undefined){
 						resolve(false);
