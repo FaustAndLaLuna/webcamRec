@@ -5,51 +5,22 @@ class videosRepo{
 	constructor(){
 		
 		
-		/*
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
-			id int PRIMARY KEY  AUTO_INCREMENT,
+			videoID int PRIMARY KEY  AUTO_INCREMENT,
+			userID int DEFAULT 0,
+			objectID int DEFAULT 0,
 			isEncoded boolean DEFAULT FALSE,
 			videoURL varchar(100) DEFAULT NULL,
 			timePublished varchar(128),
 			tempURL varchar(100) DEFAULT NULL);`
-		//console.log(sql);
 		conn.query(sql, function(err, result){
 			if (err) console.log(err);
 			console.log("table created.")});
-	*/
 		POOL.getConnection(function (error, conn){
-			const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
-			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
-			var sql = `CREATE TABLE IF NOT EXISTS users(
-				id int PRIMARY KEY  AUTO_INCREMENT,
-				username varchar(128) NOT NULL,
-				salt char(32) NOT NULL,
-				password varchar(128),
-				createdAt datetime DEFAULT NULL);`
-			
-			conn.query(DB, function(err, result){
-				if (err) console.log(err);
-				console.log("DATABASE created.");
-				conn.query(Schema, function(err, result){
-					if(err) console.log(err);
-					console.log("Schema created.")
-					conn.query(sql, function(err, result){
-						if(err)	console.log(err);
-						console.log("table created.")
-						sql = `CREATE TABLE IF NOT EXISTS videos(
-							id int PRIMARY KEY  AUTO_INCREMENT,
-							isEncoded boolean DEFAULT FALSE,
-							videoURL varchar(100) DEFAULT NULL,
-							timePublished varchar(128),
-							tempURL varchar(100) DEFAULT NULL);`
-						//console.log(sql);
-						conn.query(sql, function(err, result){
-							if (err) console.log(err);
-							console.log("table created.")});
-							conn.release();
-					});
-				});
-			});	
+			conn.query(sql, function(err, result){
+				if(err)	console.log(err);
+				conn.release();
+			});
 		});
 	}
 	
@@ -61,6 +32,18 @@ class videosRepo{
 		 WHERE tempURL = ? ` ;
 		POOL.getConnection(function (err, conn){
 			conn.query(q, [videoURL, "COMPLETADO", tempURL], function(err, result){
+				if (err)	console.log(err);
+				conn.release();
+				return;
+			});
+		});
+	}
+	
+	createAssociated(videoURL, timePublished, tempURL, userID, objectID){
+		let q = 'INSERT INTO videos (videoURL, timePublished, tempURL, userID, objectID) VALUES ' +
+				"(?, ?, ?, ?, ?)"
+		POOL.getConnection(function (err, conn){
+			conn.query(q, [videoURL, timePublished, tempURL, userID, objectID], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
 				return;

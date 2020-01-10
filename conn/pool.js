@@ -11,4 +11,20 @@ var POOL = mysql.createPool({
 	database: "BIOGRAFO"
 });
 
+if(ISDEV){
+	console.log("ISDEV is on, restarting database.");
+	POOL.getConnection( function(err, conn){
+		if(err)	console.log(err);
+		conn.query("DROP TABLE users;", function(err, result){
+			if(err)	console.log(err);
+		});
+	});
+	POOL.getConnection( function(err, conn){
+		if(err)	console.log(err);
+		conn.query("DROP TABLE videos;", function(err, result){
+			if(err)	console.log(err);
+		});
+	});
+}
+
 exports.POOL = POOL;

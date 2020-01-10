@@ -6,11 +6,15 @@ var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var videosRepo = require('../conn/videosRepo');
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy
+
 
 var vidTable = new videosRepo();
 
 
 router.post('/', function(req, res, next){
+	//TODO: Add userID and objectID.
 	filename = uuidv4();
 	thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";

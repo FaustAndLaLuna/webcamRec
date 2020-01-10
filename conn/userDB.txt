@@ -1,0 +1,55 @@
+var mysql = require('mysql')
+
+class videosRepo{
+	constructor(){
+		var pw = fs.readFileSync('../password', 'utf8');
+		var conn = mysql.createConnection({
+		host: 'localhost',
+		user: 'root',
+		password: pw,
+		database: 'biografo'
+		});
+		conn.connect(function(err){
+			if(err) console.log(err);
+			console.log("Connected to Videos MySQL table!")
+		});
+		
+		const sql = `CREATE TABLE IF NOT EXISTS videos(
+			id INTEGER PRIMARY KEY AUTOINCREMENT,
+			isEncoded INTEGER DEFAULT(0),
+			videoURL TEXT,
+			timePublished TEXT,
+			tempURL TEXT)`
+		//console.log(sql);
+		conn.
+	}
+
+	updateToEncoded(videoURL, tempURL){
+		return this.dao.run(
+		 `UPDATE videos 
+		 SET videoURL = ?,
+		 tempURL = ?,
+		 isEncoded = 1
+		 WHERE tempURL = ? `, [videoURL, "COMPLETADO", tempURL]
+		);
+	}
+	
+	async create(videoURL, timePublished, tempURL){
+		return this.dao.run('INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
+			"(?, ?, ?)", [videoURL, timePublished, tempURL]);
+	}
+
+	//TODO: Set update, delete, get(one) for sale/sold
+	getAll(){
+		return this.dao.all("SELECT * FROM videos;");
+	}
+
+	getNextEncodable(){
+		return this.dao.get('SELECT * FROM videos WHERE isEncoded = 0');
+	}
+	
+}
+
+
+
+module.exports = videosRepo

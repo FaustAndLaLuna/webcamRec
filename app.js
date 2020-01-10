@@ -4,24 +4,27 @@ const fs = require('fs');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-const encodeMod = require('./serverSideModules/encode');
-var CronJob = require('cron').CronJob;
-var mysql = require('mysql');
+var cookieParser 		= require('cookie-parser');
+var logger 				= require('morgan');
+const encodeMod 		= require('./serverSideModules/encode');
+var CronJob 			= require('cron').CronJob;
+var mysql 				= require('mysql');
+var session 			= require('express-session');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
-
-var indexRouter = require('./routes/index');
-var uploadRouter = require('./routes/upload');
-var recordRouter = require('./routes/record');
-var videoRouter = require('./routes/video');
-var vidPlayerRouter = require('./routes/vidPlayer');
+var passport 			= require('passport');
+var flash 				= require('connect-flash');
+var cookieParser 		= require('cookie-parser');
+var bodyParser 			= require('body-parser');
 
 var app = express();
 
 global.ISWORKING = false;
+global.ISDEV = true;
+//ISDEV is a global variable that allows easy development. It is NOT meant to work on deployment.
+require('./middleware/passport.js')(passport);
+//IMPORTANT LINE;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,16 +32,24 @@ app.set('view engine', 'ejs');
 app.enable("trust proxy");
 app.use(logger('dev'));
 app.use(express.json());
+app.use(cookieParser());
+app.use(bodyParser());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
+app.use(session({
+	secret: "genericnonrandomstring",
+	saveUninitialized: false,
+	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
-app.use('/', indexRouter);
-app.use('/upload', uploadRouter);
-app.use('/record', recordRouter);
-app.use('/uploads', videoRouter);
-app.use('/vid', vidPlayerRouter);
+
+require('./routes/routes.js')(app, passport);
+//IMPORTANT LINE;
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,0 +1,26 @@
+TODO:
+
+PASSPORT:
+Consolidate ROUTES folder into routes file.
+Test Passport-local
+
+EJS:
+Make views for Passport (log-in, log-out, register)
+Make home view for products with available videos, questions, etc.
+Add design
+
+DB:
+Copy DB and update it
+Make the tables to upload.
+Make webpage so Lia can upload.q2221
+Check videos for uploadq	qqq`
+q
+Program Video upload/Have Lia upload videos
+
+VIDEOS:
+Process for transcription.
+Check editing.
+Markov? RNNs? for sentence generation
+
+
+|`

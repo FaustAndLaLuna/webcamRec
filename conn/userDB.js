@@ -1,61 +1,112 @@
-var mysql = require('mysql')
+var POOL = require('./pool').POOL;
+var crypto = require('crypto');
 
-class videosRepo{
+const SALT_LEN = 32;
+class userDB{
 	constructor(){
-		var pw = fs.readFileSync('../password', 'utf8');
-		var conn = mysql.createConnection({
-		host: 'localhost',
-		user: 'root',
-		password: pw,
-		database: 'biografo'
+		POOL.getConnection(function (error, conn){
+			const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
+			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
+			var sql = `CREATE TABLE IF NOT EXISTS users(
+				userID int PRIMARY KEY  AUTO_INCREMENT,
+				username varchar(128) NOT NULL UNIQUE,
+				salt char(32) NOT NULL,
+				password varchar(128),
+				createdAt datetime DEFAULT NULL,
+				isAdmin boolean DEFAULT FALSE);`
+			
+			conn.query(DB, function(err, result){
+				if (err) console.log(err);
+				console.log("DATABASE created.");
+				conn.query(Schema, function(err, result){
+					if(err) console.log(err);
+					console.log("Schema created.")
+					conn.query(sql, function(err, result){
+						if(err)	console.log(err);
+						console.log("table created.")
+						conn.release();
+				});
+			});	
 		});
-		conn.connect(function(err){
-			if(err) console.log(err);
-			console.log("Connected to users MySQL table!")
-		});
-		
-		const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
-		const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
-		const sql = `CREATE TABLE IF NOT EXISTS users(
-			id int PRIMARY KEY  AUTO_INCREMENT,
-			username varchar(128) NOT NULL,
-			salt char(32) NOT NULL,
-			password varchar(128),
-			createdAt datetime DEFAULT NULL);`
-		
-		conn.query(DB, function(err, result){
-			if (err) console.log(err);
-			console.log("DATABASE created.");
-		}).then(conn.query(Schema, function(err, result){
-			if (err) console.log(err);
-			console.log("Schema created.");
-		})).then(conn.query(sql, function(err, result){
-			if (err) console.log(err);
-			console.log("table created.")}));
-	}
-
-	updateToEncoded(videoURL, tempURL){
-		return this.dao.run(
-		 `UPDATE videos 
-		 SET videoURL = ?,
-		 tempURL = ?,
-		 isEncoded = 1
-		 WHERE tempURL = ? `, [videoURL, "COMPLETADO", tempURL]
-		);
 	}
 	
-	async create(videoURL, timePublished, tempURL){
-		return this.dao.run('INSERT INTO videos (videoURL, timePublished, tempURL) VALUES ' +
-			"(?, ?, ?)", [videoURL, timePublished, tempURL]);
+	function genSalt(length){
+		return crypto.randomBytes(Math.ceil(length/2)).toString('hex').slice(0,length);
 	}
-
-	//TODO: Set update, delete, get(one) for sale/sold
-	getAll = async function(){
-		return this.dao.all("SELECT * FROM videos;");
+	
+	function sha1(password, salt){
+		
+		var hash = crypto.createHmac('sha1', salt);
+		hash.update(password);
+		var value = hash.digest('hex');
+		return value;
 	}
-
-	getNextEncodable = async function(){
-		return this.dao.get('SELECT * FROM videos WHERE isEncoded = 0');
+	
+	async getUserID(username){
+		let q = "SELECT * FROM users WHERE username = '?';"
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query(q, username, function(err, result){
+					if(err)	reject(err);
+					if(result.length == 0){
+						resolve(-1);
+					}
+					resolve(result[0]);
+				});
+			});
+		});
+	}
+	
+	async validate(username, password){
+		let q = "SELECT * FROM users WHERE username = '?';"
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query(q, username, function(err, result){
+					if(err)	reject(err);
+					if(result.length == 0){
+						resolve(false);
+					}
+					else if(result[0].password != sha1(password, result[0].salt)){
+						resolve(false)
+					}
+					resolve(result[0]);
+				});
+			});
+		});
+	}
+	
+	async usernameExists(username){
+	let q = "SELECT * FROM users WHERE username = '?';"
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query(q, username, function(err, result){
+					if(err)	reject(err);
+					if(result.length == 0){
+						resolve(false);
+					}
+					resolve(true);
+				});
+			});
+		});
+	}
+	
+	createNew(username, password, createdAt, isAdmin){
+		salt = genSalt(SALT_LEN);
+		password = sha1(password, salt);
+		
+		let q = 'INSERT INTO users (username, salt, password, createdAt, isAdmin) VALUES ' +
+				"(?, ?, ?, ?, ?)"
+		POOL.getConnection(function (err, conn){
+			conn.query(q, [username, salt, password, createdAt, isAdmin], function(err,result){
+				if (err)	console.log(err);
+				conn.release();
+				return;
+			});
+		});
+		return {username: username, password: password, salt: salt, createdAt, createdAt, isAdmin, isAdmin}
 	}
 	
 }
