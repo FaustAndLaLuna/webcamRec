@@ -83,7 +83,7 @@ class userDB{
 	}
 	
 	createNew(username, password, createdAt, isAdmin){
-		salt = genSalt(SALT_LEN);
+		let salt = genSalt(SALT_LEN);
 		password = sha1(password, salt);
 		
 		let q = 'INSERT INTO users (username, salt, password, createdAt, isAdmin) VALUES ' +
