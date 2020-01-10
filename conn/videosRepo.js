@@ -13,9 +13,6 @@ class videosRepo{
 			videoURL varchar(100) DEFAULT NULL,
 			timePublished varchar(128),
 			tempURL varchar(100) DEFAULT NULL);`
-		conn.query(sql, function(err, result){
-			if (err) console.log(err);
-			console.log("table created.")});
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
 				if(err)	console.log(err);
