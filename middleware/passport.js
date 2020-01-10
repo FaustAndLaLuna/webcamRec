@@ -16,6 +16,7 @@ module.exports = function(passport){
 		passwordField: 'password',
 		passReqToCallback: true
 	}, function(req, username, password, done){
+		console.log("Signup Check! Username: "+ username);
 		userDB.usernameExists.then(function(result){
 			if(result){
 				return done(null, false, req.flash('signupMessage', 'Ese mail está ocupado.'));
@@ -31,6 +32,7 @@ module.exports = function(passport){
 		passwordField: 'password',
 		passReqToCallback: true
 		}, function(req, username, password, done){
+			console.log("Login Check! Username: "+ username);
 			userDB.validate(username, password).then(function(result){
 				if(result){
 					return done(null, result);
