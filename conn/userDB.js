@@ -41,7 +41,7 @@ class userDB{
 				if(err)	reject(err);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
-					if(result === undefined){
+					if(result == []){
 						return resolve(-1);
 					}
 					return resolve(result[0]);
@@ -58,7 +58,7 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					console.log(result);
-					if(result === undefined){
+					if(result == []){
 						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
@@ -77,7 +77,7 @@ class userDB{
 				if(err)	reject(err);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
-					if(result === undefined){
+					if(result == []){
 						return resolve(false);
 					}
 					return resolve(true);
