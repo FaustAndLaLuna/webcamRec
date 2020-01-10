@@ -22,14 +22,6 @@ class userDB{
 		console.log("users Table Configured!");
 	}
 	
-	sha1(password, salt){
-		
-		var hash = crypto.createHmac('sha1', salt);
-		hash.update(password);
-		var value = hash.digest('hex');
-		return value;
-	}
-	
 	getUserID(username){
 		let q = "SELECT * FROM users WHERE username = '?';"
 		return new Promise(function (resolve, reject){
@@ -99,7 +91,14 @@ class userDB{
 	}
 	
 }
-
+function sha1(password, salt){
+		
+		var hash = crypto.createHmac('sha1', salt);
+		hash.update(password);
+		var value = hash.digest('hex');
+		return value;
+}
+	
 function genSalt(length){
 		return crypto.randomBytes(Math.ceil(length/2)).toString('hex').slice(0,length);
 }
