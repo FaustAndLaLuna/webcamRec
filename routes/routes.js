@@ -24,33 +24,34 @@ module.exports = function(app, passport){
 	app.get('/login', function(req, res){
 		res.render('login.ejs', {message: req.flash('loginMessage')});
 	});
-	app.post('/login', passport.authenticate('local-login',{
-		successRedirect : '/record',
-		failureRedirect : '/login',
-		failureFlash : true
-	}, function(err, user, info){
-		if (err) {return next(err);}
-		if(!user){return res.redirect('/login');}
-		req.logIn(user, function(err){
-			if(err) {return next(err);}
-			return res.redirect('/record');
+	app.post('/login', function(req, res, next){
+		passport.authenticate('local-login',{
+			failureFlash : true
+		},function(err, user, info){
+			if (err) {return next(err);}
+			if(!user){return res.redirect('/login');}
+			req.logIn(user, function(err){
+				if(err) {return next(err);}
+				return res.redirect('/record');
+			});
 		});
-	}));
+	});
 	app.get('/signup', function(req,res){
 		res.render('signup.ejs', {message: req.flash('signupMessage')});
 	});
-	app.post('/signup', passport.authenticate('local-signup',{
-		successRedirect : '/record',
-		failureRedirect : '/signup',
-		failureFlash : true
-	},function(err, user, info){
-		if (err) {return next(err);}
-		if(!user){return res.redirect('/login');}
-		req.logIn(user, function(err){
-			if(err) {return next(err);}
-			return res.redirect('/record');
+	app.post('/signup', function(req, res, next){
+		passport.authenticate('local-signup',{
+			failureFlash : true
+		},function(err, user, info){
+			if (err) {return next(err);}
+			if(!user){return res.redirect('/login');}
+			req.logIn(user, function(err){
+				if(err) {return next(err);}
+				return res.redirect('/record');
+			});
 		});
-	}));
+	});
+	
 	app.get('/logout', function(req, res){
 		req.logout();
 		req.redirect('/');
