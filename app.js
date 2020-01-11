@@ -4,7 +4,7 @@ const fs = require('fs');
 global.ISWORKING = false;
 global.ISDEV = false;
 ISDEV = true;
-
+//ISDEV is currently NOT used
 
 
 var createError = require('http-errors');
@@ -24,14 +24,14 @@ var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 
+
+
+var app = express();
+
 app.use(function(err, req, res, next) {
     console.log(err);
 });
 
-var app = express();
-
-
-//ISDEV is a global variable that allows easy development. It is NOT meant to work on deployment.
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
 app.use(flash());
