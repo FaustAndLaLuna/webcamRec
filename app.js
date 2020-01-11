@@ -50,6 +50,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
 
+app.use(function(req, res, next){
+	console.log("Is user authenticated? "+ req.isAuthenticated());
+});
+
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 
