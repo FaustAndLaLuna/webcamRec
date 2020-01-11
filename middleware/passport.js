@@ -28,6 +28,7 @@ module.exports = function(passport){
 			}
 			else{
 				user = userDB.createNew(username, password, false).then(function(user){
+					req.logIn(user);
 					console.log(user);
 					return done(null, user);
 				});
@@ -44,6 +45,7 @@ module.exports = function(passport){
 			userDB.validate(username, password).then(function(result){
 				if(result){
 					console.log("User Logged In.");
+					req.logIn(result);
 					return done(null, result);
 				}
 				else{
