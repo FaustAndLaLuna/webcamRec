@@ -52,6 +52,7 @@ app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
 
 app.use(function(req, res, next){
 	console.log("Is user authenticated? "+ req.isAuthenticated());
+	next();
 });
 
 require('./routes/routes.js')(app, passport);
