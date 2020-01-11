@@ -30,6 +30,13 @@ var app = express();
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
 app.use(flash());
+app.use(cookieParser());
+app.use(bodyParser());
+app.use(session({
+	secret: "genericnonrandomstring",
+	saveUninitialized: false,
+	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -39,17 +46,10 @@ app.set('view engine', 'ejs');
 app.enable("trust proxy");
 app.use(logger('dev'));
 app.use(express.json());
-app.use(cookieParser());
-app.use(bodyParser());
 app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
-app.use(session({
-	secret: "genericnonrandomstring",
-	saveUninitialized: false,
-	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
-}));
+
 
 app.use(function(req, res, next) {
 	console.log(req);
