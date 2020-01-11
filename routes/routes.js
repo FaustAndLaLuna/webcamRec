@@ -28,9 +28,12 @@ module.exports = function(app, passport){
 		passport.authenticate('local-login',{
 			failureFlash : true
 		},function(err, user, info){
+			console.log("Pkachu face");
 			if (err) {return next(err);}
 			if(!user){return res.redirect('/login');}
 			req.logIn(user, function(err){
+				console.log(user);
+				console.log("logged in!");
 				if(err) {return next(err);}
 				return res.redirect('/record');
 			});
