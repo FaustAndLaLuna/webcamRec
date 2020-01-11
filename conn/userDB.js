@@ -16,6 +16,7 @@ class userDB{
 			conn.query(sql, function(error, result){
 				if (error) console.log(error);
 				console.log('BIOGRAFO.users created');
+				conn.release();
 				return;
 			});
 		});
@@ -30,8 +31,10 @@ class userDB{
 				conn.query(q, id, function(err, result){
 					if(err)	reject(err);
 					if(result.length == 0){
+						conn.release();
 						return resolve(false);
 					}
+					conn.release();
 					return resolve(result[0]);
 				});
 			});
@@ -46,11 +49,14 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result.length == 0){
+						conn.release();
 						return resolve(false);
 					}
 					else if(result[0].password != sha1(password, result[0].salt)){
+						conn.release();
 						return resolve(false)
 					}
+					conn.release();
 					return resolve(result[0]);
 				});
 			});
@@ -65,8 +71,10 @@ class userDB{
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					if(result.length == 0){
+						conn.release();
 						return resolve(false);
 					}
+					conn.release();
 					return resolve(true);
 				});
 			});
@@ -79,12 +87,15 @@ class userDB{
 		
 		let q = 'INSERT INTO users (username, salt, password, createdAt, isAdmin) VALUES ' +
 				"(?, ?, ?, NOW(), ?)"
+		
 		POOL.getConnection(function (err, conn){
 			conn.query(q, [username, salt, password, isAdmin], function(err,result){
 				if (err)	console.log(err);
-				conn.release();
-				console.log(result);
-				return result;
+				conn.query("SELECT * FROM users WHERE username = ?", [username], function(err, result){
+					if (err) console.log(err);
+					conn.release();
+					return result;
+				});
 			});
 		});
 	}

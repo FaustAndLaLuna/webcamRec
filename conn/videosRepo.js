@@ -66,6 +66,7 @@ class videosRepo{
 				if(err)	reject(err);
 				conn.query("SELECT * FROM videos", function(err, result){
 					if(err) reject(err);
+					conn.release();
 					return resolve(result);
 				});
 			});
@@ -78,6 +79,7 @@ class videosRepo{
 				if(err)	reject(err);
 				conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
 					if(err) reject(err);
+					conn.release();
 					return resolve(result);
 				});
 			});
