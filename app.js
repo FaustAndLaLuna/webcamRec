@@ -24,6 +24,10 @@ var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
 
+app.use(function(err, req, res, next) {
+    console.log(err);
+});
+
 var app = express();
 
 
