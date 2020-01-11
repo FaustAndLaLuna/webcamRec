@@ -52,7 +52,13 @@ app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
 
 app.use(function(req, res, next){
 	console.log("Is user authenticated? "+ req.isAuthenticated());
-	console.log(req.session.passport.user);
+	if(req.session){
+		if(req.session.passport){
+			if(req.session.passport.user){
+				consol.elog(req.session.passport.user);
+			}
+		}
+	}
 	next();
 });
 
