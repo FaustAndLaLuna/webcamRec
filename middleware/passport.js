@@ -12,6 +12,7 @@ module.exports = function(passport){
 			done(null, result);
 		});
 	});
+	
 	passport.use('local-signup', new LocalStrategy({
 		usernameField: 'username',
 		passwordField: 'password',
@@ -25,10 +26,12 @@ module.exports = function(passport){
 			}
 			else{
 				user = userDB.createNew(username, password, false);
+				console.log(user);
 				return done(null, user);
 			}
 		});
 	}));
+	
 	passport.use('local-login', new LocalStrategy({
 		usernameField: 'username',
 		passwordField: 'password',

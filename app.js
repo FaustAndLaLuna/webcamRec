@@ -30,6 +30,9 @@ var app = express();
 //ISDEV is a global variable that allows easy development. It is NOT meant to work on deployment.
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -48,9 +51,7 @@ app.use(session({
 	saveUninitialized: false,
 	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
 }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+
 
 
 require('./routes/routes.js')(app, passport);
