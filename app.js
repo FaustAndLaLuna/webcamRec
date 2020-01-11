@@ -15,7 +15,6 @@ var logger 				= require('morgan');
 const encodeMod 		= require('./serverSideModules/encode');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
-var session 			= require('express-session');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
@@ -23,14 +22,10 @@ var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
 var bodyParser 			= require('body-parser');
-
+var session 			= require('express-session');
 
 
 var app = express();
-
-app.use(function(err, req, res, next) {
-    console.log(err);
-});
 
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
