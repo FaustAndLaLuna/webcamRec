@@ -68,14 +68,12 @@ app.use(function(req, res, next){
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 
-function requireHTTPS(req, res, next) {
-  // The 'x-forwarded-proto' check is for Heroku
-  if (!req.secure) {
+app.use(function(req, res, next){
+	if (!req.secure) {
     return res.redirect('https://' + req.get('host') + req.url);
   }
   next();
-}
-
+}) 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
