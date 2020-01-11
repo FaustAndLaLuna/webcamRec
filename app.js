@@ -6,7 +6,7 @@ global.ISDEV = false;
 ISDEV = true;
 if(ISDEV){
 	require('./conn/restart.js')();
-	var waitTill = new Date(new Date().getTime + 3 * 1000);
+	var waitTill = new Date(new Date().getTime + 30 * 1000);
 }
 
 
