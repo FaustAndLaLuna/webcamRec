@@ -20,24 +20,14 @@ const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
-var cookieParser 		= require('cookie-parser');
-var session 			= require('express-session');
+//var session 			= require('express-session');
 
 
 var app = express();
 
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
-app.use(flash());
-app.use(cookieParser());
-app.use(session({
-	secret: "genericnonrandomstring",
-	saveUninitialized: true,
-	resave: true,
-	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
-}));
-app.use(passport.initialize());
-app.use(passport.session());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -49,6 +39,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
+
+app.use(flash());
+app.use(express.cookieParser());
+app.use(express.session({
+	secret: "genericnonrandomstring",
+	saveUninitialized: true,
+	resave: true,
+	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(function(req, res, next){
 	console.log("Is user authenticated? "+ req.isAuthenticated());
