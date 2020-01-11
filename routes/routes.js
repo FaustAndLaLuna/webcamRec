@@ -6,22 +6,18 @@ var recordRouter 	= require('./record.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated())
-		return next();
-	else res.redirect('/login');
-}
+
 
 module.exports = function(app, passport){
-	console.log(uploadRouter);
 	app.get('/', function(req, res, next) {
 		res.render('index.ejs');
 	});
+	/*
 	app.use('/upload', isLoggedIn, uploadRouter);
 	app.use('/record', isLoggedIn, recordRouter);
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
-	
+	*/
 
 	app.get('/login', function(req, res){
 		res.render('login.ejs', {message: req.flash('loginMessage')});
