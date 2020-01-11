@@ -20,7 +20,8 @@ const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
-//var session 			= require('express-session');
+var session 			= require('express-session');
+var cookieParser 		= require('cookie-parser');
 
 
 var app = express();
@@ -41,8 +42,8 @@ app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
 
 app.use(flash());
-app.use(express.cookieParser());
-app.use(express.session({
+app.use(cookieParser());
+app.use(session({
 	secret: "genericnonrandomstring",
 	saveUninitialized: true,
 	resave: true,
