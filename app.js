@@ -4,9 +4,7 @@ const fs = require('fs');
 global.ISWORKING = false;
 global.ISDEV = false;
 ISDEV = true;
-if(ISDEV){
-	require('./conn/restart.js')();
-}
+
 
 
 var createError = require('http-errors');
