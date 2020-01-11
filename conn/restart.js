@@ -22,7 +22,10 @@ module.exports = async function(){
 				resolve();
 			});
 		});
+	let waitTill = new Date(new Date().getTime() + 3 * 1000);
+	while(waitTill > new Date()){}
 	});
+	console.log("Async Await");
 	await new Promise(function(resolve, reject){
 		const DB = `CREATE DATABASE IF NOT EXISTS BIOGRAFO;`
 			const Schema = `CREATE SCHEMA IF NOT EXISTS Biografo;`
@@ -44,5 +47,7 @@ module.exports = async function(){
 				});
 			});
 		});
+	let waitTill = new Date(new Date().getTime() + 3 * 1000);
+	while(waitTill > new Date()){}
 	});
 }
