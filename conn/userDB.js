@@ -87,17 +87,19 @@ class userDB{
 		
 		let q = 'INSERT INTO users (username, salt, password, createdAt, isAdmin) VALUES ' +
 				"(?, ?, ?, NOW(), ?)"
-		
-		POOL.getConnection(function (err, conn){
-			conn.query(q, [username, salt, password, isAdmin], function(err,result){
-				if (err)	console.log(err);
-				conn.query("SELECT * FROM users WHERE username = ?", [username], function(err, result){
-					if (err) console.log(err);
-					conn.release();
-					return result;
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function (err, conn){
+				conn.query(q, [username, salt, password, isAdmin], function(err,result){
+					if (err)	console.log(err);
+					conn.query("SELECT * FROM users WHERE username = ?", [username], function(err, result){
+						if (err) console.log(err);
+						conn.release();
+						return resolve(result);
+					});
 				});
-			});
+			});	
 		});
+		
 	}
 	
 }
