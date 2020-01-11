@@ -13,7 +13,7 @@ var POOL = mysql.createPool({
 exports.POOL = POOL;
 
 module.exports = async function(){
-	console.log("ISDEV is on, restarting database.");
+	console.log("restarting database.");
 	await new Promise(function(resolve, reject){
 		DELETE = "DROP DATABASE IF EXISTS BIOGRAFO;"
 		POOL.getConnection(function(error, conn){

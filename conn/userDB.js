@@ -6,7 +6,7 @@ class userDB{
 	constructor(){
 		POOL.getConnection(function(error, conn){
 			let sql = `CREATE TABLE IF NOT EXISTS users(
-				userID int PRIMARY KEY  AUTO_INCREMENT,
+				id int PRIMARY KEY  AUTO_INCREMENT,
 				username varchar(128) NOT NULL UNIQUE,
 				salt char(32) NOT NULL,
 				password varchar(128),
@@ -24,7 +24,7 @@ class userDB{
 	}
 	
 	getUserByID(id){
-		let q = "SELECT * FROM users WHERE userID = '?';"
+		let q = "SELECT * FROM users WHERE id = '?';"
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
