@@ -17,7 +17,7 @@ module.exports = function(app, passport){
 		res.render('index.ejs');
 	});
 	
-	app.use('/upload', [isLoggedIn, uploadRouter]);
+	app.use('/upload', isLoggedIn, uploadRouter);
 	app.use('/record', recordRouter);
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
