@@ -90,7 +90,7 @@ function isLoggedIn(req, res, next){
 }
 
 app.use('/upload', isLoggedIn, uploadRouter);
-app.use('/record', isLoggedIn, recordRouter);
+app.use('/record', recordRouter);
 app.use('/uploads', videoRouter);
 app.use('/vid', vidPlayerRouter);
 
