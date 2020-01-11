@@ -35,6 +35,14 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
 
+app.use(function(req, res, next){
+		console.log(req.secure);
+		if (!req.secure) {
+			return res.redirect('https://' + req.get('host') + req.url);
+		}
+		next();
+});
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
