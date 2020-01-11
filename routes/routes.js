@@ -6,20 +6,11 @@ var recordRouter 	= require('./record.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 
-function isLoggedIn(req, res, next){
-	console.log("Using");
-	if(req.isAuthenticated())
-		next();
-	else res.redirect('/login');
-}
-
 module.exports = function(app, passport){
 	app.get('/', function(req, res, next) {
 		res.render('index.ejs');
 	});
 	
-	app.use('/upload', isLoggedIn, uploadRouter);
-	app.use('/record', recordRouter);
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
 	
