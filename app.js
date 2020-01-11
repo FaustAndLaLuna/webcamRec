@@ -32,11 +32,13 @@ require('./middleware/passport.js')(passport);
 app.use(flash());
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(session({
+/*app.use(session({
 	secret: "genericnonrandomstring",
 	saveUninitialized: false,
 	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
 }));
+*/
+app.use(session({secret:'genericnonrandomstring'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -44,6 +46,7 @@ app.use(passport.session());
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
