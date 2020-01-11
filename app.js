@@ -51,9 +51,11 @@ app.use(session({
 	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
 }));
 
-app.use(function(req,res,next){
-	if(!req.secure )
-		return res.redirect('https://' + req.get('host') + req.url);
+app.use(function(req, res, next) {
+	if(req.get('X-Forwarded-Proto') !== 'https') {
+		res.redirect('https://' + req.get('Host') + req.url);
+	} else
+		next();
 });
 
 require('./routes/routes.js')(app, passport);
