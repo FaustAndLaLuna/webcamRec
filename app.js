@@ -21,7 +21,6 @@ job.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var cookieParser 		= require('cookie-parser');
-var bodyParser 			= require('body-parser');
 var session 			= require('express-session');
 
 
@@ -31,14 +30,12 @@ require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
 app.use(flash());
 app.use(cookieParser());
-app.use(bodyParser());
-/*app.use(session({
+app.use(session({
 	secret: "genericnonrandomstring",
-	saveUninitialized: false,
+	saveUninitialized: true,
+	resave: true,
 	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
 }));
-*/
-app.use(session({secret:'genericnonrandomstring'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -49,7 +46,7 @@ app.enable("trust proxy");
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
 
