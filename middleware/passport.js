@@ -5,9 +5,6 @@ var userDB = new userDatabase();
 module.exports = function(passport){
 	console.log("Configuring passport:");
 	passport.serializeUser(function(user, done){
-		console.log("Serializing: ");
-		console.log(user);
-		console.log("Serialized user.id:" + user.id);
 		done(null, user.id);
 	});
 	passport.deserializeUser(function(id, done){
