@@ -5,10 +5,14 @@ var userDB = new userDatabase();
 module.exports = function(passport){
 	console.log("Configuring passport:");
 	passport.serializeUser(function(user, done){
+		console.log("Serializing: ");
+		console.log(user);
 		done(null, user.id);
 	});
 	passport.deserializeUser(function(id, done){
 		userDB.getUserByID(id).then(function(result){
+			console.log("Deserializing id " + id);
+			console.log(result);
 			done(null, result);
 		});
 	});
