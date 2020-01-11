@@ -94,7 +94,7 @@ class userDB{
 					conn.query("SELECT * FROM users WHERE username = ?", [username], function(err, result){
 						if (err) console.log(err);
 						conn.release();
-						return resolve(result);
+						return resolve(result[0]);
 					});
 				});
 			});	
