@@ -26,17 +26,9 @@ module.exports = function(app, passport){
 	});
 	app.post('/login', function(req, res, next){
 		passport.authenticate('local-login',{
+			successRedirect: '/record',
+			failureRedirect: '/login',
 			failureFlash : true
-		},function(err, user, info){
-			console.log("Pkachu face");
-			if (err) {return next(err);}
-			if(!user){return res.redirect('/login');}
-			req.logIn(user, function(err){
-				console.log(user);
-				console.log("logged in!");
-				if(err) {return next(err);}
-				return res.redirect('/record');
-			});
 		});
 	});
 	app.get('/signup', function(req,res){
@@ -44,14 +36,9 @@ module.exports = function(app, passport){
 	});
 	app.post('/signup', function(req, res, next){
 		passport.authenticate('local-signup',{
+			successRedirect: '/record',
+			failureRedirect: '/login',
 			failureFlash : true
-		},function(err, user, info){
-			if (err) {return next(err);}
-			if(!user){return res.redirect('/login');}
-			req.logIn(user, function(err){
-				if(err) {return next(err);}
-				return res.redirect('/record');
-			});
 		});
 	});
 	
