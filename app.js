@@ -23,13 +23,6 @@ var flash 				= require('connect-flash');
 var session 			= require('express-session');
 var cookieParser 		= require('cookie-parser');
 
-//ROUTES
-var indexRouter 	= require('./routes/index.js');
-var uploadRouter 	= require('./routes/upload.js');
-var recordRouter 	= require('./routes/record.js');
-var videoRouter 	= require('./routes/video.js');
-var vidPlayerRouter = require('./routes/vidPlayer.js');
-
 
 var app = express();
 
@@ -82,17 +75,6 @@ app.use(function(req, res, next){
 
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
-
-function isLoggedIn(req, res, next){
-	if(req.isAuthenticated())
-		return next();
-	else res.redirect('/login');
-}
-
-app.use('/upload', isLoggedIn, uploadRouter);
-app.use('/record', recordRouter);
-app.use('/uploads', videoRouter);
-app.use('/vid', vidPlayerRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
