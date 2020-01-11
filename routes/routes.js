@@ -20,7 +20,14 @@ module.exports = function(app, passport){
 	app.use('/record', isLoggedIn, recordRouter);
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
-	
+	app.use(function(req, res, next){
+		console.log(req.secure);
+		if (!req.secure) {
+			return res.redirect('https://' + req.get('host') + req.url);
+		}
+		next();
+	});
+
 	app.get('/login', function(req, res){
 		res.render('login.ejs', {message: req.flash('loginMessage')});
 	});
