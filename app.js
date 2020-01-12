@@ -36,7 +36,6 @@ app.set('view engine', 'ejs');
 app.enable("trust proxy");
 
 app.use(function(req, res, next){
-		console.log(req.secure);
 		if (!req.secure) {
 			return res.redirect('https://' + req.get('host') + req.url);
 		}
@@ -59,7 +58,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+/*
 app.use(function(req, res, next){
 	console.log("Is user authenticated? "+ req.isAuthenticated());
 	if(req.session){
@@ -72,7 +71,7 @@ app.use(function(req, res, next){
 	console.log(req.session);
 	next();
 });
-
+*/
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
