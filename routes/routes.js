@@ -15,7 +15,14 @@ module.exports = function(app, passport){
 		}
 		res.render('index.ejs', responseObj);
 	});
-	
+	app.get('/aboutUs.html', function(req, res, next) {
+		var responseObj = {isLoggedIn: false}
+		if(req.isAuthenticated()){
+			responseObj.isLoggedIn = true;
+			responseObj.user = req.user;
+		}
+		res.render('aboutUs.ejs', responseObj);
+	});
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
 	
