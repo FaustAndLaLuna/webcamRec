@@ -7,22 +7,30 @@ var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 
 module.exports = function(app, passport){
-	app.get('/', function(req, res, next) {
-		var responseObj = {isLoggedIn: false}
+	var responseObj = {isLoggedIn: false}
+	app.use(function(req,res,next){
 		if(req.isAuthenticated()){
-			responseObj.isLoggedIn = true;
 			responseObj.user = req.user;
+			responseObj.isLoggedIn = true;
 		}
+			next();
+		else res.redirect('/login');
+	});
+	
+	app.get('/', function(req, res, next) {
 		res.render('index.ejs', responseObj);
+		/*
+			PROGRAM CAROUSEL AND CAROUSEL LINKS
+			PROGRAM ALERT IF NO OBJECTS
+		*/
 	});
 	app.get('/aboutUs.html', function(req, res, next) {
-		var responseObj = {isLoggedIn: false}
-		if(req.isAuthenticated()){
-			responseObj.isLoggedIn = true;
-			responseObj.user = req.user;
-		}
 		res.render('aboutUs.ejs', responseObj);
 	});
+	app.get('/contacto.html', function(req, res, next) {
+		res.render('contacto.ejs', responseObj);
+	});
+	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
 	
