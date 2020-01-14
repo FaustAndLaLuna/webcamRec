@@ -8,7 +8,7 @@ var vidPlayerRouter = require('./vidPlayer.js');
 
 module.exports = function(app, passport){
 	app.use(function(req,res,next){
-		req.responseObj.user = {isLoggedIn:false};
+		req.responseObj = {isLoggedIn:false};
 		if(req.isAuthenticated()){
 			req.responseObj.user = req.user;
 			req.responseObj.isLoggedIn = true;

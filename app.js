@@ -61,25 +61,20 @@ app.use(passport.session());
 
 
 
-/*
-app.use(function(req, res, next){
-	console.log("Is user authenticated? "+ req.isAuthenticated());
-	if(req.session){
-		if(req.session.passport){
-			if(req.session.passport.user){
-				console.log(req.session.passport.user);
-			}
-		}
+app.use(function(req,res,next){
+	req.responseObj = {isLoggedIn:false};
+	if(req.isAuthenticated()){
+		req.responseObj.user = req.user;
+		req.responseObj.isLoggedIn = true;
 	}
-	console.log(req.session);
 	next();
 });
-*/
+	
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
 app.use(function(req, res, next){
-	if(req.isAuthenticated())
+	if(req.responseObj.isLoggedIn)
 		next();
 	else res.redirect('/login');
 });
@@ -101,6 +96,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
 
 
 https.createServer({
