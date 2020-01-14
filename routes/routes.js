@@ -13,8 +13,7 @@ module.exports = function(app, passport){
 			responseObj.user = req.user;
 			responseObj.isLoggedIn = true;
 		}
-			next();
-		else res.redirect('/login');
+		next();
 	});
 	
 	app.get('/', function(req, res, next) {
