@@ -8,7 +8,12 @@ var vidPlayerRouter = require('./vidPlayer.js');
 
 module.exports = function(app, passport){
 	app.get('/', function(req, res, next) {
-		res.render('index.ejs');
+		var responseObj = {isLoggedIn: false}
+		if(req.isAuthenticated()){
+			responseObj.isLoggedIn = true;
+			responseObj.user = req.user;
+		}
+		res.render('index.ejs', responseObj);
 	});
 	
 	app.use('/uploads', videoRouter);
@@ -20,7 +25,7 @@ module.exports = function(app, passport){
 	});
 	app.post('/login', passport.authenticate('local-login',
 	{
-		successRedirect : '/record',
+		successRedirect : '/',
 		failureRedirect : '/login',
 		failureFlash : true
 	}));
@@ -28,17 +33,14 @@ module.exports = function(app, passport){
 		res.render('signup.ejs', {message: req.flash('signupMessage')});
 	});
 	app.post('/signup', passport.authenticate('local-signup',{
-		successRedirect : '/record',
+		successRedirect : '/',
 		failureRedirect : '/signup',
 		failureFlash : true
 	}));
 	app.get('/logout', function(req, res){
 		req.logout();
 		req.redirect('/');
-	});
-	
-	
-	
+	});	
 }
 
 
