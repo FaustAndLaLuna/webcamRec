@@ -12,7 +12,7 @@ const LocalStrategy = require('passport-local').Strategy
 
 var vidTable = new videosRepo();
 
-
+//<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
 	//TODO: Add userID and objectID.
 	filename = uuidv4();

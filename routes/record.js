@@ -6,9 +6,9 @@ var path = require('path');
 router.get('/', function(req, res, next) {
 	userAgent = req.get('User-Agent');
 	if(!!userAgent.match("/iPad|iPhone|iPod/")){
-		res.sendFile(path.resolve('./public/recordiOS.html'));
+		res.render('recordiOS.ejs');
 	} else {
-		res.sendFile(path.resolve('./public/record.html'));
+		res.render('record.ejs');
 	}
 });
 

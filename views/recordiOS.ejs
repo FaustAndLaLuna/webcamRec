@@ -27,11 +27,33 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="objetos.html">objetos a la v e n t a<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="recuerdos.html">recuerdos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">biografía</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
+					<%if (isLoggedIn) {%>
+						<li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
+					<% } %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="aboutUs.html">sobre nosotros</a></li>
-                </ul><span class="navbar-text actions"> <a class="login" href="logIn.html">Log In</a><a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a></span></div>
+                </ul>
+				<span class="navbar-text actions">
+					<%if (! isLoggedIn) { %>
+						<a class="login" href="logIn.html">Log In</a>
+						<a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a>
+					<% } else { %>
+						<a class="login" href="/logout">Log Out</a>
+					<% }%>
+					
+				</span>
+				</div>
         </div>
     </nav>
+    <p style="margin-left: 7%;margin-right: 7%;">Seleccionar "Elegir archivo", luego "Tomar foto o video", y finalmente tomar video.<br><br>Luego seleccionar "Usar Video" y finalmente: "Enviar"</p>
+    <form style="background-color: rgb(228,228,228);" action="/upload" method="POST" enctype="multipart/form-data">
+        <p>&nbsp;&nbsp;</p>
+        <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Título" name="title" required=""></div>
+        <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Descripción" name="description" style="height: 76px;" required=""></div>
+        <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Palabras Clave (separadas con comas)." name="tags" required=""></div>
+        <div class="form-group"><input type="file" style="margin-left: 5%;"></div>
+        <div class="form-group"><button class="btn btn-primary" type="button" style="background-color: rgb(0,0,0);margin-left: 5%;">Subir</button></div>
+        <p>&nbsp;&nbsp;</p>
+    </form>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

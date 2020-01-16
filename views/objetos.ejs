@@ -27,9 +27,21 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="objetos.html">objetos a la v e n t a<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="recuerdos.html">recuerdos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="#">biografía</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
+					<%if (isLoggedIn) {%>
+						<li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
+					<% } %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="aboutUs.html">sobre nosotros</a></li>
-                </ul><span class="navbar-text actions"> <a class="login" href="logIn.html">Log In</a><a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a></span></div>
+                </ul>
+				<span class="navbar-text actions">
+				<%if (! isLoggedIn) { %>
+					<a class="login" href="logIn.html">Log In</a>
+					<a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a>
+				<% } else { %>
+					<a class="login" href="/logout">Log Out</a>
+				<% }%>
+				
+				</span>
+				</div>
         </div>
     </nav>
     <div>

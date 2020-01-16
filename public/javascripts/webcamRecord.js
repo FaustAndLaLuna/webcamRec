@@ -64,8 +64,8 @@ function upload() {
     recorder.destroy();
     recorder = null;
     var formData = new FormData();
-    formData.append("blob", blob, 'myfile'); //no vamos a usar nombre
-                                            // por eso lo llamo myfile
+    formData.append("blob", blob, 'myfile'); //not using name
+                                            // so it's called myfile
     var xhr = new XMLHttpRequest();
     xhr.open('POST', './upload', true);
     xhr.setRequestHeader("X-CSRFToken", csrftoken );

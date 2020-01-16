@@ -5,12 +5,22 @@ class videosRepo{
 	constructor(){
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
 			videoID int PRIMARY KEY  AUTO_INCREMENT,
-			userID int DEFAULT 0,
-			objectID int DEFAULT 0,
+			userID int DEFAULT -1,
+			objectID int DEFAULT -1,
 			isEncoded boolean DEFAULT FALSE,
 			videoURL varchar(100) DEFAULT NULL,
-			timePublished varchar(128),
-			tempURL varchar(100) DEFAULT NULL);`
+			timePublished datetime,
+			tempURL varchar(100) DEFAULT NULL,
+			CONSTRAINT fk_user
+			FOREIGN KEY (userID)
+			REFERENCES users(id)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE,
+			CONSTRAINT fk_objects
+			FOREIGN KEY (objectID)
+			REFERENCES objects(objectID)
+				ON UPDATE CASCADE
+				ON DELETE CASCADE);`
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
 				if(err)	console.log(err);
@@ -35,11 +45,11 @@ class videosRepo{
 		});
 	}
 	
-	createAssociated(videoURL, timePublished, tempURL, userID, objectID){
+	createAssociated(videoURL, tempURL, userID, objectID){
 		let q = 'INSERT INTO videos (videoURL, timePublished, tempURL, userID, objectID) VALUES ' +
-				"(?, ?, ?, ?, ?)"
+				"(?, NOW(), ?, ?, ?)"
 		POOL.getConnection(function (err, conn){
-			conn.query(q, [videoURL, timePublished, tempURL, userID, objectID], function(err,result){
+			conn.query(q, [videoURL, tempURL, userID, objectID], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
 				return;

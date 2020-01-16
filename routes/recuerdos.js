@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 	
 	vidTable.getAll().then((allVids) => {
 		req.responseObj.allVids = allVids;
-		res.render('index.ejs', req.responseObj);
+		res.render('recuerdos.ejs', req.responseObj);
 	});
 	
 	
