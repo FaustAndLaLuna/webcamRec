@@ -2,6 +2,11 @@
 <html>
 
 <head>
+	<% if (user !== undefined) {%>
+		var user = <%=user%>
+	<%} if (obj !== undefined){%>
+		var obj = <%=obj%>
+	<%}%>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>b i o g r a f o</title>

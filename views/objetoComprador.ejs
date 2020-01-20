@@ -2,6 +2,23 @@
 <html>
 
 <head>
+	<% if (user !== undefined) {%>
+		var user = <%=user%>
+	<%} if (obj !== undefined){%>
+		var obj = <%=obj%>
+	<%}%>
+	<script>
+		var submit = function(){
+			$(#pregunta).click(function(){
+				$.post("/hacerPregunta", {userID = user.id, objectID = obj.objectID, question = $("#textPregunta").val()});
+				alert ("Se ha hecho la pregunta.");
+				$("#paragraphPregunta").val($("#paragraphPregunta").val() + "<pre><br />    * </pre> " + $("#textPregunta").val());
+				$("#textPregunta").prop("disabled", true);
+				$("#pregunta").prop("disabled", true);
+			});
+		};
+	</script>
+	
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>b i o g r a f o</title>
@@ -67,18 +84,47 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Nombre_de_objeto</h4>
-                            <h5 style="color: rgb(28,147,26);">En_venta</h5>
-                            <h5 style="color: rgb(169,40,32);">Vendido</h5>
-                            <h6 class="text-muted card-subtitle mb-2">Tipo_de_venta</h6>
-                            <p class="card-text">descripción_del_objeto:</p>
-                            <p class="card-text">historia_del_objeto:</p>
-                            <p>comprado_por:</p>
-                            <p>subasta_acaba_en:</p>
-                            <h6 class="text-muted card-subtitle mb-2">Tipo_de_venta</h6><button class="btn btn-primary" type="button" style="background-color: rgb(0,0,0);">hacer_oferta</button><a class="card-link" href="#" style="margin-left: 3%;">ver_ofertas</a></div>
+							<%if(obj.soldUserID == -1){%>
+								<h5 style="color: rgb(28,147,26);">En_venta</h5>
+                            <%} else { %>
+								<h5 style="color: rgb(169,40,32);">Vendido</h5>
+                            <%}%>
+							<h6 class="text-muted card-subtitle mb-2">Tipo_de_venta : <%= obj.isAuction ? "Subasta" : "Venta Directa"%></h6>
+                            <p class="card-text">descripción_del_objeto : <%= obj.description %></p>
+                            <p class="card-text">historia_del_objeto : <%= obj.history %></p>
+                            <%if(obj.soldUserID == -1){%>
+								<p>Este objeto está en venta! </p>
+								<p>subasta_acaba_en:  </p> <p id="countdown"></p>
+								<script> 
+									var countdownDate = new Date(obj.endDate).getTime();
+									var x = setInterval(function(){
+										var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+										var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+										var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+										var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+										$("countdown").innerhtml(days + "_días__"+hours+"_horas__"+minutes+"_minutos__"+seconds+"_segundos");
+										
+										if(distance <= 0){
+											clearInterval(x);
+										}
+									}, 1000);
+								</script>
+                            <%} else { %>
+								<p>recuerdo_ganador: <a href="/recuerdoIndividual.html?videoID=" <%= obj.soldVideoID%>>Ver_recuerdo_ganador</a></p>
+                            <%}%>
+
+							<a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);" href="/record?objectID=<%= obj.objectID%>">hacer_oferta</a>
+                            <a class="card-link" href="/recuerdos.html?objectID=<%= obj.objectID%>" style="margin-left: 3%;">ver_ofertas</a></div>
                     </div>
                 </div>
                 <div class="col">
-                    <p style="margin-left: 3%;">Pregunta?<br>* Respuesta.<br>Pregunta?<br>* Respuesta</p><input type="text" style="max-width: 900px;min-width: 200px;width: 90%;margin-left: 1%;"><button class="btn btn-primary" type="button" style="background-color: rgb(0,0,0);margin-left: 1%;">Hacer_pregunta</button></div>
+					<p style="margin-left: 3%;" id="paragraphPregunta">
+				<%questions.forEach(function(question){%>
+					<%=question.question%> <br/> <pre>  * <%=question.answer?question.answer: "";%> <pre/>
+				<%});%>
+				</p>
+				<form method="get" action="/makeQuestion?objectID=<%= obj.objectID%>"><input type="text" class="form-control" style="max-width: 900px;min-width: 200px;width: 90%;margin-left: 1%;" /><button class="btn btn-primary" type="submit" style="background-color: rgb(0,0,0);margin-left: 1%;">Hacer_pregunta</button></form>
+				</div>
             </div>
         </div>
     </div>
