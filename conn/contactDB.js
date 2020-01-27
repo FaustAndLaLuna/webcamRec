@@ -26,9 +26,9 @@ class contactRepo{
 				conn.release();
 				return;
 			});
-	});
+		});
+	}
 }
-
 
 
 
