@@ -13,10 +13,10 @@ router.get('/', function(req,res,next){
 	});
 
 router.post('/', function(req,res,next){
-	filename = uuidv4();
-	thumbURL = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+	var filename = uuidv4();
+	var thumbURL = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/" + filename.slice(4) + ".";
-	filePath = path.resolve('./thumbs'+filename+".webm");
+	var filePath = path.resolve('./thumbs'+filename+".webm");
 	mkdirp(path.dirname(filePath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
