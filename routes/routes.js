@@ -32,21 +32,21 @@ module.exports = function(app, passport){
 	
 	app.get('/logIn.html', function(req, res){
 		req.responseObj.message = req.flash('loginMessage');
-		res.render('logIn.ejs', req.responseObj);
+		res.render('login.ejs', req.responseObj);
 	});
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
 		successRedirect : '/',
-		failureRedirect : '/logIn.html',
+		failureRedirect : '/login.html',
 		failureFlash : true
 	}));
 	app.get('/signUp.html', function(req,res){
-		res.render('signUp.ejs', {message: req.flash('signupMessage')});
+		res.render('signup.ejs', {message: req.flash('signupMessage')});
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
 		successRedirect : '/',
-		failureRedirect : '/signup',
+		failureRedirect : '/signup.html',
 		failureFlash : true
 	}));
 	/*
