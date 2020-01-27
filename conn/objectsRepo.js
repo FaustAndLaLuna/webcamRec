@@ -125,6 +125,7 @@ class objectsRepo{
 					return resolve(result);
 				});
 			});
+		});
 	}
 	
 	getRandomLimited(limit){
