@@ -6,7 +6,7 @@ const objectsRepo = require('../conn/objectsRepo.js')
 const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-	res.render('vender.ejs', req.resObject);
+	res.render('vender.ejs', req.responseObj);
 	});
 
 router.post('/', function(req,res,next){
