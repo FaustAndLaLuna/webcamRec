@@ -42,7 +42,8 @@ module.exports = function(app, passport){
 		failureFlash : true
 	}));
 	app.get('/signUp.html', function(req,res){
-		res.render('signup.ejs', {message: req.flash('signupMessage')});
+		req.responseObj.message = req.flash('signupMessage');
+		res.render('signup.ejs', req.responseObj);
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
 		successRedirect : '/',
