@@ -20,7 +20,6 @@ router.post('/', function(req,res,next){
 	mkdirp(path.dirname(filePath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
-		var fTypeCheck;
 		form.on('fileBegin', function (name, file){
 			fTypeCheck = file.type;
 			if(fTypeCheck.match("^image/")){
@@ -34,23 +33,27 @@ router.post('/', function(req,res,next){
 		});
 		
 		form.parse(req, function(err, fields, files){
-					console.log(fTypeCheck);
-					if(!fTypeCheck.match("^image/")){
-						fs.unlink(filePath, function(err){
-							if(err){
-								console.log(err);
-							}
-						});
-						res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir una imagen!</h1>");
-						res.end();
-						return;
-					}
-					this.filePath = file.path;
-					let filePath = this.filePath;
-					objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true"? true: false, fields.description, fields.story, fields.endDate, filePath);
-					res.write("Objeto puesto en venta exitosamente!");
-					res.end();
-				}.bind({filePath:filePath, fTypeCheck:fTypeCheck}));
+			var photoArray = [];
+			files.forEach(function(file){
+				var fTypeCheck = file.type;
+				if(!fTypeCheck.match("^image/")){
+					fs.unlink(file.path, function(err){
+						if(err){
+							console.log(err);
+						}
+					});
+				}
+				else{
+					photoArray.push();
+				}
+			});
+			photoArrayString = JSON.stringify(photoArray);
+			
+			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true"? true: false, fields.description, fields.story, fields.endDate, photoArrayString);
+			res.write("Objeto puesto en venta exitosamente!");
+			res.end();		
+					
+			}.bind({filePath:filePath}));
 		
 	}.bind({filePath:filePath}));
 });
