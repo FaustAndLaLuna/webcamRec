@@ -21,12 +21,12 @@ class contactRepo{
 	create(message, name, email){
 		let q = "INSERT INTO questions (message, name, email) VALUES (?, ?, ?);";
 		POOL.getConnection(function (err, conn){
-				conn.query(q, [message, name, email], function(err, result){
-					if (err)	console.log(err);
-					conn.release();
-					return;
-				});
-	}
+			conn.query(q, [message, name, email], function(err, result){
+				if (err)	console.log(err);
+				conn.release();
+				return;
+			});
+	});
 }
 
 
