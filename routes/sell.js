@@ -14,7 +14,7 @@ router.post('/', function(req,res,next){
 	thumbURL = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/" + filename.slice(4) + ".";
 	filePath = path.resolve('./thumbs'+filename+".webm");
-	mkdirp(path.dirname(filepath), funciton(err){
+	mkdirp(path.dirname(filepath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
 		form.on('fileBegin', function (name, file){
