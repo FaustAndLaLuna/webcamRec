@@ -2,11 +2,9 @@
 <html>
 
 <head>
-	<% if (typeof user !== "undefined") {%>
-		var user = <%=user%>
-	<%} if (typeof obj !== "undefined"){%>
-		var obj = <%=obj%>
-	<%}%>
+	<%user = typeof user !== "undefined" ? user: {}%>
+	<%obj = typeof obj !== "undefined" ? obj: {}%>
+	<%objects = typeof objects !== "undefined" ? objects: []%>
 	<script>
 		var submit = function(){
 			$(#pregunta).click(function(){
