@@ -33,7 +33,8 @@ router.post('/', function(req,res,next){
 		});
 		
 		form.parse(req, function(err, fields, files){
-			var photoArray = [];
+			console.log(files);
+			/* var photoArray = [];
 			files.forEach(function(file){
 				var fTypeCheck = file.type;
 				if(!fTypeCheck.match("^image/")){
@@ -51,7 +52,7 @@ router.post('/', function(req,res,next){
 			
 			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true"? true: false, fields.description, fields.story, fields.endDate, photoArrayString);
 			res.write("Objeto puesto en venta exitosamente!");
-			res.end();		
+			res.end();		 */
 					
 			}.bind({filePath:filePath}));
 		
