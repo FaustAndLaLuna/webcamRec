@@ -9,7 +9,6 @@ router.get('/', function(req, res, next) {
 	
 	objectsTable.getRandomLimited(5).then(function(objects){
 		req.responseObj.objects = objects;
-		console.log(objects);
 		res.render('index.ejs', req.responseObj);
 	});
 });
