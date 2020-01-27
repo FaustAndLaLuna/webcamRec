@@ -144,7 +144,7 @@ class objectsRepo{
 	create(title, userID, isAuction, description, history, endDate, images){
 		let sql = "INSERT INTO objects (title, offeringUserId, isAuction, description, history, endDate, createdAt, images) VALUES (?,?,?,?,?,?,NOW(),?);";
 		POOL.getConnection(function(err, conn){
-			conn.query(q, [title, userID, isAuction, description, history, endDate, images] function(err, result){
+			conn.query(q, [title, userID, isAuction, description, history, endDate, images], function(err, result){
 				conn.release();
 				return;
 			});
