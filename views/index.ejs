@@ -6,12 +6,13 @@
 		var user = <%=user%>
 	<%} if (typeof obj !== "undefined"){%>
 		var obj = <%=obj%>
+	<%} if(typeof objects !== "undefined"){%>
+		var objects = objects;
 	<%}%>
-	
 	<script>
-		var img0Array = JSON.parse(Objects[0].images);
-		var img1Array = JSON.parse(Objects[1].images);
-		var img2Array = JSON.parse(Objects[2].images);
+		var img0Array = JSON.parse(objects[0].images);
+		var img1Array = JSON.parse(objects[1].images);
+		var img2Array = JSON.parse(objects[2].images);
 	</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
