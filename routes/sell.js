@@ -20,14 +20,14 @@ router.post('/', function(req,res,next){
 	mkdirp(path.dirname(filePath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
-		let fTypeCheck;
+		var fTypeCheck;
 		form.on('fileBegin', function (name, file){
 			fTypeCheck = file.type;
 			if(fTypeCheck.match("^image/")){
 				filePath += fTypeCheck.replace("image/", "");
 			}
 			file.path = filePath;
-		}.bind({filePath:filePath}));
+		}.bind({filePath:filePath, fTypeCheck:fTypeCheck}));
 		
 		form.on('error', function(err){
 			console.log('An error has occurred uploading a file:\n ' + err);
@@ -50,7 +50,7 @@ router.post('/', function(req,res,next){
 					objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true"? true: false, fields.description, fields.story, fields.endDate, filePath);
 					res.write("Objeto puesto en venta exitosamente!");
 					res.end();
-				}.bind({filePath:filePath}));
+				}.bind({filePath:filePath, fTypeCheck:fTypeCheck}));
 		
 	}.bind({filePath:filePath}));
 });
