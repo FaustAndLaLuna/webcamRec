@@ -5,6 +5,7 @@ var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 var contactPostRouter = require('./contacto.js');
 var objectRouter = require('./object.js');
+var sell = require('./sell.js');
 
 module.exports = function(app, passport){
 	
@@ -20,9 +21,11 @@ module.exports = function(app, passport){
 		res.render('aboutUs.ejs', req.responseObj);
 	});
 	app.use('/contacto.html', contactPostRouter);
-	app.get('/objetos.html' function(req, res, next){
+	app.get('/objetos.html', function(req, res, next){
 		res.redirect("/object");
 	});
+	
+	app.use('/sell', sell);
 	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
