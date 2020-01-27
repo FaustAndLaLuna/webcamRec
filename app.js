@@ -74,11 +74,12 @@ require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
 /* app.use(function(req, res, next){
+	req.responseObj.isLoggedInFlag = true;
 	if(req.responseObj.isLoggedIn)
 		next();
-	else res.redirect('/login');
-}); */
-
+	else res.redirect('/logIn.html');
+});
+ */
 require('./routes/routesLogIn.js')(app);
 
 // catch 404 and forward to error handler
