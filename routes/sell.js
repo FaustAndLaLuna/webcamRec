@@ -20,6 +20,7 @@ router.post('/', function(req,res,next){
 	mkdirp(path.dirname(filePath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
+		let fTypeCheck;
 		form.on('fileBegin', function (name, file){
 			fTypeCheck = file.type;
 			if(fTypeCheck.match("^image/")){
