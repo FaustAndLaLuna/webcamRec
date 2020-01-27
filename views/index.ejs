@@ -7,7 +7,7 @@
 	<%} if (typeof obj !== "undefined"){%>
 		var obj = <%=obj%>
 	<%} if(typeof objects !== "undefined"){%>
-		var objects = objects;
+		var objects = <%=objects%>;
 	<%}%>
 	<script>
 		var img0Array = JSON.parse(objects[0].images);
