@@ -26,6 +26,7 @@ router.post('/', function(req,res,next){
 				filePath += fTypeCheck.replace("image/", "");
 			}
 			file.path = filePath;
+			console.log(file);
 		}.bind({filePath:filePath}));
 		
 		form.on('error', function(err){
