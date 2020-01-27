@@ -51,7 +51,7 @@ router.post('/', function(req,res,next){
 					res.end();
 				}.bind({filePath:filePath}));
 		
-	}).bind({filePath:filePath});
+	}.bind({filePath:filePath}));
 });
 
 module.exports = router;
