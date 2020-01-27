@@ -1,5 +1,6 @@
 //Routes for stuff
 var path = require('path');
+var indexRouter 	= require("./index.js");
 var uploadRouter 	= require('./upload.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
@@ -9,14 +10,7 @@ var sell = require('./sell.js');
 
 module.exports = function(app, passport){
 	
-	app.get('/', function(req, res, next) {
-		res.render('index.ejs', req.responseObj);
-		/*
-			PROGRAM CAROUSEL AND CAROUSEL LINKS
-			PROGRAM ALERT IF NO OBJECTS
-			DONEEEEEEEEE Check if it works
-		*/
-	});
+	app.use("/", indexRouter);
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
 	});
