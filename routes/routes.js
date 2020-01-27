@@ -10,6 +10,8 @@ var sell = require('./sell.js');
 
 module.exports = function(app, passport){
 	
+	require('../middleware/passport.js')(passport);
+	
 	app.use("/", indexRouter);
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
