@@ -138,6 +138,7 @@ class objectsRepo{
 					return resolve(result);
 				});
 			});
+		});
 	}
 	
 	create(title, userID, isAuction, description, history, endDate, images){
