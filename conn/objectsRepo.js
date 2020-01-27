@@ -85,6 +85,7 @@ class objectsRepo{
 					conn.release();
 					return;
 				});
+		}
 	}
 	
 	getAllUnsold(){
