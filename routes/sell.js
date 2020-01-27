@@ -17,7 +17,7 @@ router.post('/', function(req,res,next){
 	thumbURL = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/" + filename.slice(4) + ".";
 	filePath = path.resolve('./thumbs'+filename+".webm");
-	mkdirp(path.dirname(filepath), function(err){
+	mkdirp(path.dirname(filePath), function(err){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
 		form.on('fileBegin', function (name, file){
@@ -44,14 +44,14 @@ router.post('/', function(req,res,next){
 						res.end();
 						return;
 					}
-					filePath
+					this.filePath = file.path;
 					let filePath = this.filePath;
 					objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true"? true: false, fields.description, fields.story, fields.endDate, filePath);
 					res.write("Objeto puesto en venta exitosamente!");
 					res.end();
 				}.bind({filePath:filePath}));
 		
-	}).bind({filepath:filepath});
+	}).bind({filePath:filePath});
 });
 
 module.exports = router;
