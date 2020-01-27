@@ -2,6 +2,7 @@
 <html>
 
 <head>
+	<script>
 	<% if (typeof user !== "undefined") {%>
 		var user = <%=user%>
 	<%} if (typeof obj !== "undefined"){%>
@@ -12,6 +13,7 @@
 		var objects = [];
 	<%}%>
 	alert(objects);
+	</script>
 	<!-- <script>
 		var img0Array = JSON.parse(objects[0].images);
 		var img1Array = JSON.parse(objects[1].images);
