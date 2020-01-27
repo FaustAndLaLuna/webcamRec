@@ -3,9 +3,9 @@
 
 <head>
 	<script>
-	var user = <%= typeof user!== "undefined"? user: {}%>;
-	var obj = <%= typeof obj!== "undefined"? obj: {}%>;
-	var objects = <%=typeof objects!== "undefined"? objects: []%>;
+	<%user = typeof user !== "undefined" ? user: {}%>
+	<%obj = typeof obj !== "undefined" ? obj: {}%>
+	<%objects = typeof objects !== "undefined" ? objects: []%>
 	</script>
 	<!-- <script>
 		var img0Array = JSON.parse(objects[0].images);
