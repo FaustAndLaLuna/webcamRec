@@ -21,12 +21,12 @@ router.post('/', function(req,res,next){
 		if(err) console.log(err);
 		var form = new formidable.IncomingForm();
 		form.on('fileBegin', function (name, file){
-			fTypeCheck = file.type;
+			var fTypeCheck = file.type;
 			if(fTypeCheck.match("^image/")){
 				filePath += fTypeCheck.replace("image/", "");
 			}
 			file.path = filePath;
-		}.bind({filePath:filePath, fTypeCheck:fTypeCheck}));
+		}.bind({filePath:filePath}));
 		
 		form.on('error', function(err){
 			console.log('An error has occurred uploading a file:\n ' + err);
