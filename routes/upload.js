@@ -6,9 +6,6 @@ var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var videosRepo = require('../conn/videosRepo');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy
-
 
 var vidTable = new videosRepo();
 
