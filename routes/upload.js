@@ -41,7 +41,7 @@ router.post('/', function(req, res, next){
 				form.on('error', function(err){
 					console.log('An error has occurred uploading a file:\n ' + err);
 				});
-				form.on('end', function(file){
+				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
@@ -54,12 +54,10 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					let filePath = this.filePath;
-					vidTable.create("SIN URL", Date.now().toString(), filePath);
-					//(function (filePath){vidTable.create("SIN URL", Date.now().toString(), filePath);})(filePath);
-				res.write("Video subido exitosamente!");
-				res.end();
+					vidTable.createAssociated("SIN URL", filePath, fields.user.id, fields.obj.objectID, fields.description, fields.title, fields.tags);
+					res.write("Video subido exitosamente!");
+					res.end();
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
-				form.parse(req);
 			}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 		}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );	
 	}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );

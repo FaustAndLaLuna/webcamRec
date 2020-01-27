@@ -3,7 +3,8 @@ var path = require('path');
 var uploadRouter 	= require('./upload.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
-var 
+var contactPostRouter = require('./contacto.js');
+var objectRouter = require('./object.js');
 
 module.exports = function(app, passport){
 	
@@ -12,41 +13,21 @@ module.exports = function(app, passport){
 		/*
 			PROGRAM CAROUSEL AND CAROUSEL LINKS
 			PROGRAM ALERT IF NO OBJECTS
+			DONEEEEEEEEE Check if it works
 		*/
 	});
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
 	});
-	app.get('/contacto.html', function(req, res, next) {
-		res.render('contacto.ejs', req.responseObj);
+	app.use('/contacto.html', contactPostRouter);
+	app.get('/objetos.html' function(req, res, next){
+		res.redirect("/object");
 	});
 	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
 	
-	app.get('/objetoComprador.html', function(req, res){
-		res.render('objetoComrpador.ejs', req.responseObj);
-		/*
-			PROGRAM RETRIEVAL FROM DATABASE.
-			PROGRAM EJS.
-			*/
-	});
-	
-	app.get('/objetos.html', function(req, res){
-		res.render('objetos.ejs', req.responseObj);
-		/*
-			PROGRAM RETRIEVAL FROM DATABASE.
-			PROGRAM EJS.
-		*/
-	});
-	
-	app.get('/objetoVendedor.html', function(req, res){
-		res.render('objetoVendedor.ejs', req.responseObj);
-		/*
-			PROGRAM RETRIEVAL FROM DATABASE.
-			PROGRAM EJS.
-		*/
-	});
+	app.use('/object', objectRouter);
 	
 	app.get('/quees.html', function(req, res){
 		res.render('quees.ejs', req.responseObj);
@@ -60,7 +41,7 @@ module.exports = function(app, passport){
 	app.post('/login', passport.authenticate('local-login',
 	{
 		successRedirect : '/',
-		failureRedirect : '/login',
+		failureRedirect : '/logIn.html',
 		failureFlash : true
 	}));
 	app.get('/signUp.html', function(req,res){

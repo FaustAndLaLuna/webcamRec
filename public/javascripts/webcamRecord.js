@@ -34,7 +34,11 @@ function sendBlobAsBase64(blob){
 }
 
 function sendDataToBackend(b64data){
-    const body = JSON.stringify({data:b64data});
+	text1 = document.getElementById('title');
+	text2 = document.getElementById('description');
+	text3temp = document.getElementById('tags');
+	text3 = JSON.stringify(text3temp.split(" "));
+    const body = JSON.stringify({data:b64data, title:text1, description : text2, tags:text3, user:user, obj:obj });
     fetch('/upload', {
         method: 'POST',
         headers: {

@@ -1,22 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-const videosRepo = require('../conn/videosRepo')
+const objectsRepo = require('../conn/objectsRepo')
 
-const vidTable = new videosRepo();
+const objectsTable = new objectsRepo();
 
-// TODO Set Index
 router.get('/', function(req, res, next) {
-	resObj = {};
 	
-	vidTable.getAll().then((allVids) => {
-		req.responseObj.allVids = allVids;
+	objectsTable.getRandomLimited(5).then(function(objects){
+		req.responseObj.objects = objects;
 		res.render('index.ejs', req.responseObj);
 	});
-	
-	
-	
-	//res.sendFile(path.resolve('./public/record.html'));
 });
 
 

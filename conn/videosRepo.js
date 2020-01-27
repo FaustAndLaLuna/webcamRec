@@ -6,6 +6,11 @@ class videosRepo{
 		const sql = `CREATE TABLE IF NOT EXISTS videos(
 			videoID int PRIMARY KEY  AUTO_INCREMENT,
 			userID int DEFAULT -1,
+			description text,
+			title text,
+			tags text,
+			transcription text,
+			isTranscripted boolean DEFAULT false,
 			objectID int DEFAULT -1,
 			isEncoded boolean DEFAULT FALSE,
 			videoURL varchar(100) DEFAULT NULL,
@@ -45,11 +50,36 @@ class videosRepo{
 		});
 	}
 	
-	createAssociated(videoURL, tempURL, userID, objectID){
-		let q = 'INSERT INTO videos (videoURL, timePublished, tempURL, userID, objectID) VALUES ' +
-				"(?, NOW(), ?, ?, ?)"
+	updateToTranscripted(transcription, videoID){
+		let q = 'UPDATE videos SET transcription = ?, isTranscripted = TRUE WHERE videoID = ?';
+		POOL.getConnection(function(err, conn){
+			if (err)	console.log(err);
+			conn.query(q, [transcription, videoID], function(err, result){
+				if(err)	console.log(err);
+					conn.release();
+					return;
+			});
+		});
+	}
+	
+	getNextTranscriptable(){
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query("SELECT * FROM videos WHERE isTranscripted = false limit 1;", function(err, result){
+					conn.release();
+					if(err) reject(err);
+					return resolve(result);
+				});
+			});
+		});
+	}
+	
+	createAssociated(videoURL, tempURL, userID, objectID, description, title, tags){
+		let q = 'INSERT INTO videos (videoURL, timePublished, tempURL, userID, objectID, description, title, tags) VALUES ' +
+				"(?, NOW(), ?, ?, ?, ?, ?, ?)"
 		POOL.getConnection(function (err, conn){
-			conn.query(q, [videoURL, tempURL, userID, objectID], function(err,result){
+			conn.query(q, [videoURL, tempURL, userID, objectID, description, title, tags], function(err,result){
 				if (err)	console.log(err);
 				conn.release();
 				return;
@@ -62,8 +92,8 @@ class videosRepo{
 			"(?, ?, ?)";
 		POOL.getConnection(function (err, conn){
 			conn.query(q, [videoURL, timePublished, tempURL], function(err,result){
-				if (err)	console.log(err);
 				conn.release();
+				if (err)	console.log(err);
 				return;
 			});
 		});
@@ -75,8 +105,8 @@ class videosRepo{
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
 				conn.query("SELECT * FROM videos", function(err, result){
-					if(err) reject(err);
 					conn.release();
+					if(err) reject(err);
 					return resolve(result);
 				});
 			});
@@ -88,8 +118,8 @@ class videosRepo{
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
 				conn.query("SELECT * FROM videos WHERE isEncoded = false limit 1;", function(err, result){
-					if(err) reject(err);
 					conn.release();
+					if(err) reject(err);
 					return resolve(result);
 				});
 			});

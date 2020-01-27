@@ -3,28 +3,11 @@ var POOL = require('./pool').POOL;
 
 class questionsRepo{
 	constructor(){
-		const sql = `CREATE TABLE IF NOT EXISTS questions(
-			questionID int PRIMARY KEY  AUTO_INCREMENT,
-			question text NOT NULL,
-			objectID int NOT NULL,
-			userID int NOT NULL,
-			createdAt datetime NOT NULL,
-			answer text DEFAULT NULL,
-			answerUserID int NOT NULL,
-			CONSTRAINT fk_user
-			FOREIGN KEY (userID)
-			REFERENCES users(id)
-				ON UPDATE CASCADE
-				ON DELETE CASCADE,
-			FOREIGN KEY (answerUserID)
-			REFERENCES users(id)
-				ON UPDATE CASCADE
-				ON DELETE CASCADE,
-			CONSTRAINT fk_object
-			FOREIGN KEY (objectID)
-			REFERENCES objects(objectID)
-				ON UPDATE CASCADE
-				ON DELETE CASCADE);`
+		const sql = `CREATE TABLE IF NOT EXISTS contactMessages(
+			messageID int PRIMARY KEY AUTO_INCREMENT,
+			message TEXT,
+			name TINYTEXT,
+			email TINYTEXT);`
 				
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
@@ -32,24 +15,13 @@ class questionsRepo{
 				conn.release();
 			});
 		});
-		console.log("BIOGRAFO.questions created");
+		console.log("BIOGRAFO.contactMessages created");
 	}
 	
-	answer(answer, answerUserID, objectID){
-		let q = "UPDATE questions SET answer = ?, answerUserID = ? WHERE questionID = ?;";
+	create(message, name, email){
+		let q = "INSERT INTO questions (message, name, email) VALUES (?, ?, ?);";
 		POOL.getConnection(function (err, conn){
-				conn.query(q, [answer, answerUserID, questionID], function(err, result){
-					if (err)	console.log(err);
-					conn.release();
-					return;
-				});
-		}
-	}
-	
-	create(question, userID, objectID){
-		let q = "INSERT INTO questions (question, objectID, userID, createdAt) VALUES (?, ?, ?, NOW());";
-		POOL.getConnection(function (err, conn){
-				conn.query(q, [question, objectID, userID], function(err, result){
+				conn.query(q, [message, name, email], function(err, result){
 					if (err)	console.log(err);
 					conn.release();
 					return;

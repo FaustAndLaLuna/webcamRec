@@ -81,7 +81,7 @@
 							<div class="card-body">
 								<h4 class="card-title"><%= obj.title %></h4>
 								<h6 class="text-muted card-subtitle mb-2"><%= obj.isAuction? "subasta" : "venta_inmediata"%></h6>
-								<p class="card-text"><%= obj.description %></p><a class="card-link" href="<%= obj.offeringUserID == user.id ? "/objetoVendedor.html?objectID="+obj.objectID : "/objetoComprador.html?objectID="+obj.objectID%>">Ver Objeto</a>
+								<p class="card-text"><%= obj.description %></p><a class="card-link" href="<%= obj.offeringUserID == user.id ? "/object?objectID="+obj.objectID : "/object?objectID="+obj.objectID%>">Ver Objeto</a>
 								<%if(obj. offeringUserId != user.id){%>
 									<a class="card-link" href="<%="/record?objectID="+obj.objectID%>">Subastar Recuerdo</a></div>
 								<% } %>
