@@ -50,6 +50,8 @@
     <p style="margin-left: 7%;margin-right: 7%;">Seleccionar "Elegir archivo", luego "Tomar foto o video", y finalmente tomar video.<br><br>Luego seleccionar "Usar Video" y finalmente: "Enviar"</p>
     <form style="background-color: rgb(228,228,228);" action="/upload" method="POST" enctype="multipart/form-data">
         <p>&nbsp;&nbsp;</p>
+        <input class="hidden" name="user" value="<%= JSON.stringify(user)%>">
+        <input class="hidden" name="obj" value="<%= JSON.stringify(obj)%>">
         <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Título" name="title" required=""></div>
         <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Descripción" name="description" style="height: 76px;" required=""></div>
         <div class="form-group" style="width: 90%;margin-left: 5%;margin-right: 5%;"><input class="form-control" type="text" placeholder="Palabras Clave (separadas con comas)." name="tags" required=""></div>

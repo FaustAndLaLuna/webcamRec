@@ -32,13 +32,27 @@ router.post('/', function(req, res, next){
 		}
 	});*/
 	form.parse(req, function(err, fields, files){
+		user = JSON.parse(fields.user);
+		obj = JSON.parse(fields.obj);
 		if(err){
 			console.log(err);
 		}
-		console.log("fields ");
-		console.log(fields);
-		console.log("files ");
-		console.log(files);
+		for(var key in files){
+			file = files[key];
+			if(! file.type.match("^video/")){
+				fs.unlink(file.path, function(err){
+					if(err){
+						console.log(err);
+					}
+				});
+				res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
+				res.end();
+				return;
+			}
+			else{
+				vidTable.createAssociated("SIN URL", file.path, user.id, obj.objectID, fields.description, fields.title, fields.tags);
+			}
+		}
 	});
 });
 
