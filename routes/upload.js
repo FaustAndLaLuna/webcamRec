@@ -23,6 +23,14 @@ router.post('/', function(req, res, next){
 		console.log("Couldn't upload file because of: \n" + err);
 		next(createError(500));
 	});
+	form.onPart(function(part){
+		if((!part.filename) || file.type.match("^video/")){
+			form.handlePart(part);
+		} else {
+			res.write("<h1>ERROR, el archivo es del tipo incorrecto.</h1>");
+			return;
+		}
+	});
 	form.parse(req, function(err, fields, files){
 		if(err){
 			console.log(err);
