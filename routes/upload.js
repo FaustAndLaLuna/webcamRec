@@ -12,7 +12,7 @@ var vidTable = new videosRepo();
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
 	filePath = uuidv4();
-	filePath = "/" + filePath.slice(0,1) + "/" + filePath.slice(1,2) + "/" + filePath.slice(2,3) + "/" + filePath.slice(3,4) + "/" + filePath.slice(4);
+	filePath = "/" + filePath.slice(0,1) + "/" + filePath.slice(1,2) + "/" + filePath.slice(2,3) + "/" + filePath.slice(3,4) + "/";
 	videoFilePath = "./uploads" + filePath;
 	thumbFilePath = "./thumbs" + filePath;
 	mkdirp.sync(videoFilePath);
