@@ -18,7 +18,7 @@ router.post('/', function(req, res, next){
 	mkdirp.sync(videoFilePath);
 	mkdirp.sync(thumbFilePath);
 	formObject = {uploadDir: filePath, keepExtensions: true};
-	form = new formidable.incomingForm(formObject);
+	var form = new formidable.IncomingForm(formObject);
 	form.on('error', function(err){
 		console.log("Couldn't upload file because of: \n" + err);
 		next(createError(500));
