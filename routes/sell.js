@@ -17,8 +17,7 @@ router.post('/', function(req, res, next){
 	filePath = uuidv4();
 	filePath = "/" + filePath.slice(0,1) + "/" + filePath.slice(1,2) + "/" + filePath.slice(2,3) + "/" + filePath.slice(3,4) + "/";
 	thumbFilePath = "/public/objects/thumbs" + filePath;
-	var made = mkdirp.sync(path.dirname(thumbFilePath));
-	console.log(made);
+	fs.mkdirSync(thumbFilePath, {recursive: true});
 	formObject = {uploadDir: thumbFilePath, keepExtensions: true};
 	var form = new formidable.IncomingForm(formObject);
 	form.on('error', function(err){
