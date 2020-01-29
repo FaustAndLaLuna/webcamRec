@@ -12,17 +12,6 @@ router.get('/', function(req,res,next){
 	res.render('vender.ejs', req.responseObj);
 	});
 
-var express = require('express');
-var router = express.Router();
-var path = require('path');
-var uuidv4 = require('uuid/v4');
-var fs = require('fs');
-var formidable = require('formidable');
-var mkdirp = require('mkdirp');
-var videosRepo = require('../conn/videosRepo');
-
-var vidTable = new videosRepo();
-
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
 	filePath = uuidv4();
@@ -45,7 +34,6 @@ router.post('/', function(req, res, next){
 	});*/
 	form.parse(req, function(err, fields, files){
 		user = JSON.parse(fields.user);
-		obj = JSON.parse(fields.obj);
 		if(err){
 			console.log(err);
 		}
@@ -63,6 +51,8 @@ router.post('/', function(req, res, next){
 				imgArray.push(file.path);
 			}
 		}
+			//create(title, userID, isAuction, description, history, endDate, images){
+			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify[images]);
 	});
 });
 
