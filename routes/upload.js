@@ -24,6 +24,9 @@ router.post('/', function(req, res, next){
 		next(createError(500));
 	});
 	form.parse(req, function(err, fields, files){
+		if(err){
+			console.log(err);
+		}
 		console.log("fields ");
 		console.log(fields);
 		console.log("files ");
