@@ -19,6 +19,7 @@ router.post('/', function(req, res, next){
 	thumbFilePath = "/public/objects/thumbs" + filePath;
 	const made = mkdirp.sync(thumbFilePath);
 	console.log(`made directories, starting with ${made}`);
+	console.log(thumbFilePath);
 	fs.writeFile(filePath, '', (err)=>{
 				if(err)  console.log(err);
 		formObject = {uploadDir: thumbFilePath, keepExtensions: true};
