@@ -31,14 +31,6 @@ router.post('/', function(req, res, next){
 			return;
 		}
 	});*/
-	form.onPart = part => {
-		if(!part.filename || part.mime.match("^video/")){
-			form.handlePart(part);
-		}
-		else{
-			res.write("<h1> ERROR, el archivo es del tipo incorrecto</h1>");
-		}
-	}
 	form.parse(req, function(err, fields, files){
 		if(err){
 			console.log(err);
