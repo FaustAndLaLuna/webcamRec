@@ -49,7 +49,7 @@
     </nav>
     <div>
         <form style="background-color: rgb(228,228,228);padding-top: 30px;margin-left: 4%;margin-right: 4%;" action="/sell" method="POST" enctype="multipart/form-data">
-			<input type="hidden" name="offeringUserID"  value="<%= user.id%>">
+			<input type="hidden" name="offeringUserID"  value="<%= JSON.stringify(user.id)%>">
             <div class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* nombre_del_objeto<input class="shadow form-control" type="text" name="name" placeholder="nombre_del_objeto" autofocus=""></label></div>
             <div class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* descripción<input class="shadow form-control" type="text" name="description" placeholder="descripción" ></label></div>
     <div
