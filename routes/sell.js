@@ -17,7 +17,8 @@ router.post('/', function(req, res, next){
 	filePath = uuidv4();
 	filePath = "/" + filePath.slice(0,1) + "/" + filePath.slice(1,2) + "/" + filePath.slice(2,3) + "/" + filePath.slice(3,4) + "/";
 	thumbFilePath = "/public/objects/thumbs" + filePath;
-	mkdirp.sync(path.dirname(thumbFilePath));
+	const made = mkdirp.sync(thumbFilePath);
+	console.log(`made directories, starting with ${made}`);
 	fs.writeFile(filePath, '', (err)=>{
 				if(err)  console.log(err);
 		formObject = {uploadDir: thumbFilePath, keepExtensions: true};
