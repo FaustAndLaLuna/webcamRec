@@ -11,6 +11,7 @@ var sell = require('./sell.js');
 module.exports = function(app, passport){
 	
 	app.use("/", indexRouter);
+	app.use("/index.html", indexRouter);
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
 	});
