@@ -145,6 +145,8 @@ class objectsRepo{
 		let q = "INSERT INTO objects (title, offeringUserId, isAuction, description, history, endDate, createdAt, images) VALUES (?,?,?,?,?,?,NOW(),?);";
 		POOL.getConnection(function(err, conn){
 			conn.query(q, [title, userID, isAuction, description, history, endDate, images], function(err, result){
+				console.log("Insert done correctly!");
+				console.log(q);
 				conn.release();
 				return;
 			});
