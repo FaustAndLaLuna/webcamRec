@@ -146,7 +146,7 @@ class objectsRepo{
 		POOL.getConnection(function(err, conn){
 			conn.query(q, [title, userID, isAuction, description, history, endDate, images], function(err, result){
 				console.log("Insert done correctly!");
-				console.log(q);
+				console.log(result);
 				conn.release();
 				return;
 			});
