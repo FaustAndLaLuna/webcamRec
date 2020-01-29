@@ -19,7 +19,7 @@ class objectsRepo{
 			FOREIGN KEY (offeringUserID)
 			REFERENCES users(id)
 				ON UPDATE CASCADE
-				ON DELETE CASCADE;`
+				ON DELETE CASCADE);`
 				
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
