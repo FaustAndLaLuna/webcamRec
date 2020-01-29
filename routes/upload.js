@@ -24,7 +24,7 @@ router.post('/', function(req, res, next){
 		next(createError(500));
 	});
 	form.onPart(function(part){
-		if((!part.filename) || file.type.match("^video/")){
+		if((!part.filename) || part.filename.match("^video/")){
 			form.handlePart(part);
 		} else {
 			res.write("<h1>ERROR, el archivo es del tipo incorrecto.</h1>");
