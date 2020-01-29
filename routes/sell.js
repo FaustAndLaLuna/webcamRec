@@ -20,45 +20,48 @@ router.post('/', function(req, res, next){
 	console.log(thumbFilePath);
 	mkdirp(path.dirname(thumbFilePath), function(err){
 		if(err) console.log(err);
-		formObject = {uploadDir: thumbFilePath, keepExtensions: true};
-		var form = new formidable.IncomingForm(formObject);
-		form.on('error', function(err){
-			console.log("Couldn't upload file because of: \n" + err);
-			next(createError(500));
-		});
-		/*form.onPart(function(part){
-			if((!part.filename) || part.filename.match("^video/")){
-				form.handlePart(part);
-			} else {
-				res.write("<h1>ERROR, el archivo es del tipo incorrecto.</h1>");
-				return;
-			}
-		});*/
-		form.parse(req, function(err, fields, files){
-			if(err){
-				console.log(err);
-			}
-			imgArray = [];
-			for(var key in files){
-				file = files[key];
-				console.log(file.path);
-				if(! file.type.match("^image/")){
-					fs.unlink(file.path, function(err){
-						if(err){
-							console.log(err);
-						}
-					});
+		fs.writeFile(filePath, '', function (err){
+			if(err) console.log(err);
+			formObject = {uploadDir: thumbFilePath, keepExtensions: true};
+			var form = new formidable.IncomingForm(formObject);
+			form.on('error', function(err){
+				console.log("Couldn't upload file because of: \n" + err);
+				next(createError(500));
+			});
+			/*form.onPart(function(part){
+				if((!part.filename) || part.filename.match("^video/")){
+					form.handlePart(part);
+				} else {
+					res.write("<h1>ERROR, el archivo es del tipo incorrecto.</h1>");
+					return;
 				}
-				else{
-					imgArray.push(file.path);
+			});*/
+			form.parse(req, function(err, fields, files){
+				if(err){
+					console.log(err);
 				}
-			}
-			if(imgArray.length == 0){
-				res.write("<h1> No subiste ninguna imagen, intenta de nuevo </h1>");
-			}
-				//create(title, userID, isAuction, description, history, endDate, images){
-			console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+				imgArray = [];
+				for(var key in files){
+					file = files[key];
+					console.log(file.path);
+					if(! file.type.match("^image/")){
+						fs.unlink(file.path, function(err){
+							if(err){
+								console.log(err);
+							}
+						});
+					}
+					else{
+						imgArray.push(file.path);
+					}
+				}
+				if(imgArray.length == 0){
+					res.write("<h1> No subiste ninguna imagen, intenta de nuevo </h1>");
+				}
+					//create(title, userID, isAuction, description, history, endDate, images){
+				console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
+				objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+			});
 		});
 	});
 });
