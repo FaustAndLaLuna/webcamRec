@@ -66,7 +66,7 @@
 			<% 
 				objects.forEach( function(obj){ 
 				console.log(obj);
-				let img = obj.img[0];
+				let img = JSON.parse(obj.images)[0];
 			%>
 				<% if(isActiveFlag) {
 					isActiveFlag = false;
