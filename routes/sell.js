@@ -33,7 +33,6 @@ router.post('/', function(req, res, next){
 		}
 	});*/
 	form.parse(req, function(err, fields, files){
-		user = JSON.parse(fields.user);
 		if(err){
 			console.log(err);
 		}
