@@ -53,7 +53,7 @@
             <h4 class="card-title">s u b i r &nbsp; r e c u e r d o</h4>
             <p class="card-text">Para subir recuerdo, dar click en Grabar, luego cuando estés satisfecho, debes dar click a Parar grabación.<br>Si estás satisfecho con tu video, puedes dar click en Subir. Si no lo estás, puedes volver a grabar dando click en Grabar.<br><br>Tienes
                 que llenar lo siguiente para poder subir el video:</p>
-            <form>
+            <form action="/upload" method='POST' enctype="multipart/form-data">
                 <div class="form-group"><input class="form-control" type="text" id="title" placeholder="Descripción" name="description" style="width: 90%;margin-right: 5%;margin-left: 5%;height: 76px;"></div>
                 <div class="form-group"><input class="form-control" type="text" id="description" placeholder="Palabras clave, separadas por comas" name="tags" style="width: 90%;margin-right: 5%;margin-left: 5%;"></div>
                 <div class="form-group"><input class="form-control" type="text" id="tags" placeholder="Palabras clave, separadas por comas" name="tags" style="width: 90%;margin-right: 5%;margin-left: 5%;"></div><div class="form-group">
