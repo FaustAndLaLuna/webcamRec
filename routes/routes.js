@@ -30,7 +30,7 @@ module.exports = function(app, passport){
 		res.render('quees.ejs', req.responseObj);
 	});
 	
-	app.get('/logIn.html', function(req, res){
+	app.get('/login.html', function(req, res){
 		req.responseObj.message = req.flash('loginMessage');
 		res.render('login.ejs', req.responseObj);
 	});
@@ -41,7 +41,7 @@ module.exports = function(app, passport){
 		failureRedirect : '/login.html',
 		failureFlash : true
 	}));
-	app.get('/signUp.html', function(req,res){
+	app.get('/signup.html', function(req,res){
 		req.responseObj.message = req.flash('signupMessage');
 		res.render('signup.ejs', req.responseObj);
 	});
