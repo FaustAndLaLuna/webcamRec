@@ -48,7 +48,7 @@ router.post('/', function(req, res, next){
 				});
 			}
 			else{
-				imgArray.push(file.path);
+				imgArray.push('/'+file.path);
 			}
 		}
 		if(imgArray.length == 0){
