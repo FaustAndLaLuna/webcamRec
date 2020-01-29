@@ -13,7 +13,7 @@ function encode(URLtoVid){
 	ISWORKING = true;
 	console.log("Encoding started.")
 	
-	filename = URLtoVid.replace(".webm", "");
+	filename = URLtoVid.replace(/\..*/, "");
 	filePath = path.resolve(URLtoVid);
 	convFilePath = path.resolve(filename+".mp4");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
