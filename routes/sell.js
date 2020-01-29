@@ -51,7 +51,7 @@ router.post('/', function(req, res, next){
 			}
 		}
 			//create(title, userID, isAuction, description, history, endDate, images){
-			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify[images]);
+			objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify[imgArray]);
 	});
 });
 
