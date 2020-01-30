@@ -10,7 +10,7 @@ const objectsDB = new objectsRepo();
 router.get('/', function(req, res, next) {
 	objectsDB.getObject(req.query.objectID).then(
 		function(obj){
-			req.responseObj.obj = obj;
+			req.responseObj.obj = obj[0];
 			userAgent = req.get('User-Agent');
 			if(!!userAgent.match("/iPad|iPhone|iPod/")){
 				res.render('recordiOS.ejs', req.responseObj);
