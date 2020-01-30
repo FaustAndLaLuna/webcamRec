@@ -67,7 +67,7 @@ function upload() {
     recorder.camera.stop();
     recorder.destroy();
     recorder = null;
-    var formData = new FormData();
+    var formData = new FormData(document.getElementById('form'););
     formData.append("blob", blob, 'video'); //not using name
                                             // so it's called video
     var xhr = new XMLHttpRequest();
