@@ -75,4 +75,4 @@ class questionsRepo{
 
 
 
-module.exports = objectsRepo;
+module.exports = questionsRepo;
