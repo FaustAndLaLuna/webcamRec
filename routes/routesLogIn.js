@@ -7,6 +7,7 @@ var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 const QandARepo = require('../conn/QandA.js');
 var createError = require('http-errors');
+const objectsRepo = require('../conn/objectsRepo.js')
 const questionsDB = new QandARepo();
 const objectsDB = new objectsRepo();
 

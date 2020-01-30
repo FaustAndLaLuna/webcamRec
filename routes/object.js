@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-const objectsRepo = require('../conn/objectsRepo.js')
+const objectsRepo = require('../conn/objectsRepo.js');
 const QandARepo = require('../conn/QandA.js');
 var createError = require('http-errors');
 const questionsDB = new QandARepo();
