@@ -9,6 +9,7 @@ const objectsDB = new objectsRepo();
 router.get('/', function(req,res,next){
 	if(req.query.objectID){
 			objectsDB.getObject(req.query.objectID).then( (obj) => {
+				console.log(obj);
 				if(obj){
 					req.responseObj.obj = obj;
 					questionsDB.getAllFromObject(req.query.objectID).then((questions) =>{
