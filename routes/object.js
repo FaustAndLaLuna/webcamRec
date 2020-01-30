@@ -11,7 +11,7 @@ router.get('/', function(req,res,next){
 			objectsDB.getObject(req.query.objectID).then( (obj) => {
 				if(obj){
 					req.responseObj.obj = obj;
-					questionsDB.getAllFromObject(id).then((questions) =>{
+					questionsDB.getAllFromObject(req.query.objectID).then((questions) =>{
 						req.responseObj.questions = questions;
 						if(req.responseObj.user){
 							res.render(req.responseObj.user.id == obj.offeringUserID? "objetoVendedor.ejs":"objetoComprador.ejs", req.responseObj);
