@@ -8,7 +8,7 @@
 	<%questions = typeof questions !== "undefined" ? questions: []%>
 	
 	<script>
-		var obj = <%= obj%>;
+		var obj = JSON.parse(<%= JSON.stringify(obj)%>);
 		var submit = function(){
 			$(#pregunta).click(function(){
 				$.post("/hacerPregunta", {userID = user.id, objectID = obj.objectID, question = $("#textPregunta").val()});

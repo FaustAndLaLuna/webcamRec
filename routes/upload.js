@@ -13,8 +13,8 @@ var vidTable = new videosRepo();
 router.post('/', function(req, res, next){
 	filePath = uuidv4();
 	filePath = "/" + filePath.slice(0,1) + "/" + filePath.slice(1,2) + "/" + filePath.slice(2,3) + "/" + filePath.slice(3,4) + "/";
-	videoFilePath = "/uploads" + filePath;
-	thumbFilePath = "/public/thumbs" + filePath;
+	videoFilePath = "./uploads" + filePath;
+	thumbFilePath = "./public/thumbs" + filePath;
 	mkdirp.sync(videoFilePath);
 	mkdirp.sync(thumbFilePath);
 	formObject = {uploadDir: videoFilePath, keepExtensions: true};
@@ -50,7 +50,7 @@ router.post('/', function(req, res, next){
 				return;
 			}
 			else{
-				vidTable.createAssociated("SIN URL", file.path, user.id, obj.objectID, fields.description, fields.title, fields.tags);
+				vidTable.createAssociated("SIN URL", "/"+file.path, user.id, obj.objectID, fields.description, fields.title, fields.tags);
 			}
 		}
 	});
