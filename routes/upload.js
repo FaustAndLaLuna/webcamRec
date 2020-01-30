@@ -32,8 +32,8 @@ router.post('/', function(req, res, next){
 		}
 	});*/
 	form.parse(req, function(err, fields, files){
-		user = fields.user;
-		obj = fields.obj;
+		user = JSON.parse(fields.user);
+		obj = JSON.parse(fields.obj);
 		if(err){
 			console.log(err);
 		}
