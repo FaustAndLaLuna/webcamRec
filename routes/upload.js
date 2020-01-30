@@ -50,7 +50,8 @@ router.post('/', function(req, res, next){
 				return;
 			}
 			else{
-				vidTable.createAssociated("SIN URL", "/"+file.path, user.id, obj.objectID, fields.description, fields.title, fields.tags);
+				vidTable.createAssociated("SIN URL", "./"+file.path, user.id, obj.objectID, fields.description, fields.title, fields.tags);
+				res.redirect("/success.html");
 			}
 		}
 	});

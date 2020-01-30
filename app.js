@@ -16,7 +16,7 @@ const encodeMod 		= require('./serverSideModules/encode');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
-//const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
+const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
