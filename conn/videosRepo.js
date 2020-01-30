@@ -15,7 +15,7 @@ class videosRepo{
 			isEncoded boolean DEFAULT FALSE,
 			videoURL varchar(100) DEFAULT NULL,
 			timePublished datetime,
-			tempURL varchar(100) DEFAULT NULL`;
+			tempURL varchar(100) DEFAULT NULL)`;
 			/* `, CONSTRAINT fk_user
 			FOREIGN KEY (userID)
 			REFERENCES users(id)
