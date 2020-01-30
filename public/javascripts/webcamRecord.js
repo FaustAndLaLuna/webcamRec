@@ -51,9 +51,9 @@ function sendDataToBackend(b64data){
 }
 
 function upload() {
-	text1 = document.getElementById('title');
-	text2 = document.getElementById('description');
-	text3 = document.getElementById('tags');
+	text1 = document.getElementById('title').value;
+	text2 = document.getElementById('description').value;
+	text3 = document.getElementById('tags').value;
 	if(text1.length == 0 || text2.length == 0 || text3.length == 0){
 		alert("Los datos no están llenos. Llenar los datos y luego volver a presionar el boton subir");
 		return;
