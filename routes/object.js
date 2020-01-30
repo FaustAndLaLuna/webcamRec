@@ -6,7 +6,7 @@ const objectsRepo = require('../conn/objectsRepo.js')
 const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-	if(req.objectID){
+	if(req.query.objectID){
 			obj = objectsDB.getObject(req.objectID);
 			if(obj){
 				req.responseObj.obj = obj;
