@@ -10,8 +10,8 @@ router.get('/', function(req,res,next){
 	if(req.query.objectID){
 			objectsDB.getObject(req.query.objectID).then( (obj) => {
 				console.log(obj);
-				if(obj){
-					req.responseObj.obj = obj;
+				if(obj.length != 0){
+					req.responseObj.obj = obj[0];
 					questionsDB.getAllFromObject(req.query.objectID).then((questions) =>{
 						req.responseObj.questions = questions;
 						if(req.responseObj.user){
