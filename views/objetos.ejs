@@ -55,7 +55,7 @@
 						<div class="carousel slide" data-ride="carousel" id="carousel-1">
 							<div class="carousel-inner" role="listbox">
 								<% isActiveFlag = true; %>
-								<% obj.images.forEach( function(img){ %>
+								<% JSON.parse(obj.images).forEach( function(img){ %>
 									<% if(isActiveFlag) {
 										isActiveFlag = false;
 									%>
