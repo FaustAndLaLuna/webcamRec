@@ -39,7 +39,7 @@ router.post('/', function(req, res, next){
 					console.log('An error has occurred uploading a file:\n ' + err);
 				});
 				form.parse(req, function(err, fields, files){
-					/* console.log(fTypeCheck);
+					console.log(fTypeCheck);
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
 							if(err){
@@ -53,7 +53,7 @@ router.post('/', function(req, res, next){
 					let filePath = this.filePath;
 					vidTable.createAssociated("SIN URL", filePath, fields.user.id, fields.obj.objectID, fields.description, fields.title, fields.tags);
 					res.write("Video subido exitosamente!");
-					res.end(); */
+					res.end();
 					console.log(files);
 					console.log(fields);
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
