@@ -15,7 +15,7 @@ class objectsRepo{
 			endDate datetime NOT NULL,
 			createdAt datetime NOT NULL,
 			images varchar(1000),
-			CONSTRAINT fk_userID
+			CONSTRAINT fk_userObj
 			FOREIGN KEY (offeringUserID)
 			REFERENCES users(id)
 				ON UPDATE CASCADE

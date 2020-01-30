@@ -16,12 +16,12 @@ class videosRepo{
 			videoURL varchar(100) DEFAULT NULL,
 			timePublished datetime,
 			tempURL varchar(100) DEFAULT NULL,
-			CONSTRAINT fk_user
+			CONSTRAINT fk_userVideos
 			FOREIGN KEY (userID)
 			REFERENCES users(id)
 				ON UPDATE CASCADE
 				ON DELETE CASCADE,
-			CONSTRAINT fk_objects
+			CONSTRAINT fk_objectsVideos
 			FOREIGN KEY (objectID)
 			REFERENCES objects(objectID)
 				ON UPDATE CASCADE
