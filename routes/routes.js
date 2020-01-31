@@ -8,6 +8,7 @@ var contactPostRouter = require('./contacto.js');
 var objectRouter = require('./object.js');
 var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
+var biographyRouter = require('./biography.js');
 
 module.exports = function(app, passport){
 	
@@ -19,6 +20,7 @@ module.exports = function(app, passport){
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
 	});
+	app.use('/biografia.html', biographyRouter);
 	app.use('/contacto.html', contactPostRouter);
 	app.get('/objetos.html', function(req, res, next){
 		res.redirect("/object");
