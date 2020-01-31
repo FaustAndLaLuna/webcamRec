@@ -44,7 +44,7 @@ async function transcription(videoID, URLtoVid){
 		.join('\n');
 		
 		console.log(transcription);
-		vidTable.updateTranscription(videoID, transcription);
+		vidTable.updateToTranscripted(transcription, videoID);
 		
 		fs.unlink(convFilePath, (err) => {
 			if(err){
@@ -58,8 +58,7 @@ async function transcription(videoID, URLtoVid){
 }
 
 
-async function encodeCron(){
-	console.log("Am I encoding? " + ISWORKING);
+async function transcriptionCron(){
 	if(!ISWORKING){
 		vidTable.getNextTranscriptable().then((result) => {
 			if(result.length == 0){

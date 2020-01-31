@@ -66,7 +66,7 @@ class videosRepo{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query("SELECT * FROM videos WHERE isTranscripted = false limit 1;", function(err, result){
+				conn.query("SELECT * FROM videos WHERE isTranscripted = false AND isEncoded = true limit 1;", function(err, result){
 					conn.release();
 					if(err) reject(err);
 					return resolve(result);
