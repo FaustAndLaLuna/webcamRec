@@ -17,23 +17,12 @@ function encode(URLtoVid){
 	filePath = path.resolve(URLtoVid);
 	convFilePath = path.resolve(filename+".mp4");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
-	var cmd;
 	
-	
-	encoder = ffmpeg(filePath)
+	ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp4')
 	.size(SIZE)
 	.videoCodec('libx264')
-	.timeout(420000)
-	.on('start', () =>{
-		cmd = setTimeout(function(){
-			encoder.kill();
-			ISWORKING = false;
-			vidTable.delete(vidTable.getNextEncodable());
-			console.log("ELIMINADO ");
-		},10000);
-	})
 	.on('end', () =>{
 		vidTable.updateToEncoded(filename, URLtoVid)
 		genThumbnail(convFilePath, 
@@ -44,12 +33,8 @@ function encode(URLtoVid){
 				console.error(err);
 			}
 		});
-		clearTimeout(cmd);
 		ISWORKING = false;
 		console.log("Encoding ended.")
-	})
-	.on('error', (err) => {
-		console.log(err);
 	})
 	.run();	
 }

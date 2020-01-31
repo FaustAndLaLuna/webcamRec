@@ -22,13 +22,16 @@ async function transcription(videoID, URLtoVid){
 	
 	console.log(filePath);
 	console.log(convFilePath);
-	
+	var cmd;
 	ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp3')
 	.noVideo()
 	.audioCodec('libmp3lame')
 	.audioFrequency(22050)
+	.on('start', () =>{
+		cmd = setInterval(()=>{console.log("TRANSCRIBING")},5000);
+	});
 	.on('end', async () =>{
 		
 		const file = fs.readFileSync(convFilePath);
