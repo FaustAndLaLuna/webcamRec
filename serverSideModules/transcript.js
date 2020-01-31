@@ -59,6 +59,7 @@ async function transcription(videoID, URLtoVid){
 		ISWORKING = false;
 		console.log("Transcription ended.")
 	})
+	.on('error', (err) => {if err console.log(err);})
 	.run();	
 }
 
