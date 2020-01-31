@@ -31,6 +31,7 @@ function encode(URLtoVid){
 			encoder.kill();
 			ISWORKING = false;
 			vidTable.delete(vidTable.getNextEncodable());
+			console.log("ELIMINADO ");
 		},10000);
 	})
 	.on('end', () =>{
