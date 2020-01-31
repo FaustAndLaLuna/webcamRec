@@ -20,7 +20,7 @@ var mysql 				= require('mysql');
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
 const transJob = new CronJob('*/35 * * * * *', transcriptMod.transcriptionCron);
-
+transJob.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var session 			= require('express-session');
