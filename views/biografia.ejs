@@ -51,7 +51,8 @@
     <div>
         <div class="container bg-light shadow">
             <div class="row">
-			<%allVids.forEach((vid) => { 
+			<%console.log(allVids);
+			allVids.forEach((vid) => { 
 				if(vid.isTranscripted){
 					%>
 						<p><%= vid.transcription[Math.floor(Math.random() * vid.transcription.length)];%></p>
