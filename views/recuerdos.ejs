@@ -64,6 +64,14 @@
                             <%= vid.tags%><br>
                             Objeto:<a href='<%= "/object?objectID=" + vid.objectID %>'>ir_al_objeto</a>
                             <br>Creado en:<%= vid.createdAt%></p>
+							<%if(vid.isTranscripted){
+								JSON.parse(vid.transcription).forEach((trans) => {
+									%>
+									<p> <%=trans%> </p>
+									<br>
+									<%
+								});
+							}%>
                         <hr />
 						<a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);" href="<%= "vid" + vid.videoURL %>">ir_al_recuerdo</a>
 					</div>
