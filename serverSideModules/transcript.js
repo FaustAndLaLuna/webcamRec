@@ -18,10 +18,8 @@ async function transcription(videoID, URLtoVid){
 	
 	filename = URLtoVid.replace(/\..*/, "");
 	filePath = path.resolve("./uploads"+URLtoVid);
-	convFilePath = path.resolve(filename+".mp3");
+	convFilePath = path.resolve("./uploads" +filename+".mp3");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
-	console.log(filePath);
-	console.log(convFilePath);
 	
 	
 	
