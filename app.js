@@ -25,7 +25,6 @@ var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var session 			= require('express-session');
 var cookieParser 		= require('cookie-parser');
-var mysqlAdmin = require('node-mysql-admin');
 
 var app = express();
 
@@ -37,7 +36,6 @@ require('./middleware/passport.js')(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
-app.use(mysqlAdmin(app));
 app.use(function(req, res, next){
 		if (!req.secure) {
 			return res.redirect('https://' + req.get('host') + req.url);
