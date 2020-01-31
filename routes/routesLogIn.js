@@ -5,6 +5,7 @@ var uploadRouter 	= require('./upload.js');
 var recordRouter 	= require('./record.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
+var sell = require('./sell.js');
 const QandARepo = require('../conn/QandA.js');
 var createError = require('http-errors');
 const objectsRepo = require('../conn/objectsRepo.js')
@@ -16,7 +17,7 @@ module.exports = function(app){
 	// EDIT TO ADD USER DATA TO VID, ALSO ADD USER INFO 
 	
 	app.use('/record', recordRouter);
-	
+	app.use('/sell', sell);
 	app.post('/hacerPregunta', function(req,res, next){
 		if(req.query.objectID){
 			objectsDB.getObject(req.query.objectID).then( (obj) => {

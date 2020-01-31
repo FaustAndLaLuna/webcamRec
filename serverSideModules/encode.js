@@ -18,11 +18,12 @@ function encode(URLtoVid){
 	convFilePath = path.resolve(filename+".mp4");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
 	
-	ffmpeg(filePath)
+	cmd = ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp4')
 	.size(SIZE)
 	.videoCodec('libx264')
+	.timeout(420000)
 	.on('end', () =>{
 		vidTable.updateToEncoded(filename, URLtoVid)
 		genThumbnail(convFilePath, 
@@ -35,6 +36,12 @@ function encode(URLtoVid){
 		});
 		ISWORKING = false;
 		console.log("Encoding ended.")
+	})
+	.on('timeout', () => {
+		vidTable.delete(vidTable.getNextEncodable());
+		fs.unlink(filePath, (err) => {
+			path.resolve(URLtoVID);
+		});
 	})
 	.run();	
 }

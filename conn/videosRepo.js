@@ -50,6 +50,17 @@ class videosRepo{
 		});
 	}
 	
+	delete(videoID){
+		let q = "DELETE FROM videos WHERE videoID = ?;"
+		POOL.getConnection(function (err, conn){
+			conn.query(q, [videoID], function(err, result){
+				if (err)	console.log(err);
+				conn.release();
+				return;
+			});
+		});
+	}
+	
 	updateToTranscripted(transcription, videoID){
 		let q = 'UPDATE videos SET transcription = ?, isTranscripted = TRUE WHERE videoID = ?';
 		POOL.getConnection(function(err, conn){

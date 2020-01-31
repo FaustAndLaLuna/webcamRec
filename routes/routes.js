@@ -26,7 +26,7 @@ module.exports = function(app, passport){
 		res.redirect("/object");
 	});
 	
-	app.use('/sell', sell);
+
 	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
