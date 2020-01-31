@@ -19,9 +19,9 @@ async function transcription(videoID, URLtoVid){
 	filename = URLtoVid.replace(/\..*/, "");
 	filePath = path.resolve("./uploads"+URLtoVid);
 	convFilePath = path.resolve("./uploads" +filename+".mp3");
-	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
 	
-	
+	console.log(filePath);
+	console.log(convFilePath);
 	
 	ffmpeg(filePath)
 	.output(convFilePath)
@@ -40,10 +40,10 @@ async function transcription(videoID, URLtoVid){
 		
 		const [response] = await client.recognize(request);
 		console.log(response);
-		const transcription = response.results
+		const results = response.results
 		.map(result => result.alternatives[0].transcript)
 		.join('\n');
-		
+		console.log(results);
 		console.log(transcription);
 		vidTable.updateToTranscripted(transcription, videoID);
 		
