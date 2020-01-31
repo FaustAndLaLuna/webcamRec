@@ -51,10 +51,11 @@
     <div>
         <div class="container bg-light shadow">
             <div class="row">
-			<%console.log(allVids);
+			<%
 			allVids.forEach((vid) => { 
 				if(vid.isTranscripted){
 				trans = JSON.parse(vid.transcription);
+				console.log(trans);
 					%>
 					
 						<p><%= trans[Math.floor(Math.random() * trans.length)];%></p>
