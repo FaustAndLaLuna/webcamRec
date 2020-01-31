@@ -22,25 +22,22 @@ async function transcription(videoID, URLtoVid){
 	
 	console.log(filePath);
 	console.log(convFilePath);
-	var cmd;
+	
 	ffmpeg(filePath)
 	.output(convFilePath)
 	.format('mp3')
 	.noVideo()
 	.audioCodec('libmp3lame')
 	.audioFrequency(22050)
-	.on('start', () =>{
-		cmd = setInterval(()=>{console.log("TRANSCRIBING")},5000);
-	})
 	.on('end', async () =>{
-		clearInterval(cmd);
+		
 		const file = fs.readFileSync(convFilePath);
 		const audioBytes = file.toString('base64');
 		
 		const audio = {content: audioBytes};
 		const config = {encoding: 'mp3', sampleRateHertz:22050, languageCode: 'es-ar'};
 		const request = {audio:audio, config:config};
-		
+		console.log("waiting for google");
 		const [response] = await client.recognize(request);
 		console.log(response);
 		const transcription = response.results
@@ -59,7 +56,6 @@ async function transcription(videoID, URLtoVid){
 		ISWORKING = false;
 		console.log("Transcription ended.")
 	})
-	.on('error', (err) => {if (err) console.log(err);})
 	.run();	
 }
 
