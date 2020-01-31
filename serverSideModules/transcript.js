@@ -33,7 +33,7 @@ async function transcription(videoID, URLtoVid){
 		cmd = setInterval(()=>{console.log("TRANSCRIBING")},5000);
 	});
 	.on('end', async () =>{
-		
+		clearInterval(cmd);
 		const file = fs.readFileSync(convFilePath);
 		const audioBytes = file.toString('base64');
 		
