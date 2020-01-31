@@ -54,8 +54,10 @@
 			<%console.log(allVids);
 			allVids.forEach((vid) => { 
 				if(vid.isTranscripted){
+				trans = JSON.parse(vid.transcription);
 					%>
-						<p><%= vid.transcription[Math.floor(Math.random() * vid.transcription.length)];%></p>
+					
+						<p><%= trans[Math.floor(Math.random() * trans.length)];%></p>
 						<br />
 					<%
 					}
