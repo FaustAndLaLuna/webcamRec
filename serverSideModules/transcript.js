@@ -40,12 +40,13 @@ async function transcription(videoID, URLtoVid){
 		
 		const [response] = await client.recognize(request);
 		console.log(response);
-		const results = response.results
+		const transcription = response.results
 		.map(result => result.alternatives[0].transcript)
 		.join('\n');
-		console.log(results);
-		console.log(transcription);
-		vidTable.updateToTranscripted(transcription, videoID);
+		transcriptionArray = JSON.stringify(transcription.split('\n'));
+		
+		console.log(transcriptionArray);
+		vidTable.updateToTranscripted(transcriptionArray, videoID);
 		
 		fs.unlink(convFilePath, (err) => {
 			if(err){
