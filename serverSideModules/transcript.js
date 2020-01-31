@@ -73,4 +73,4 @@ async function transcriptionCron(){
 
 
 
-exports.encodeCron = encodeCron;
+exports.transcriptionCron = transcriptionCron;

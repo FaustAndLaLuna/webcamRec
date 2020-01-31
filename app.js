@@ -13,11 +13,14 @@ var path = require('path');
 var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
 const encodeMod 		= require('./serverSideModules/encode');
+const transcriptMod		= require('./serverSideModules/transcript');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
 job.start();
+const transJob = new CronJob('*/35 * * * * *', transcriptMod.transcriptionCron);
+
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var session 			= require('express-session');
