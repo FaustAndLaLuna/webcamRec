@@ -113,6 +113,19 @@ class videosRepo{
 		});
 	}
 
+	getAllFromObject(objectID){
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query("SELECT * FROM videos WHERE objectID = ?", [objectID], function(err, result){
+					conn.release();
+					if(err) reject(err);
+					return resolve(result);
+				});
+			});
+		});
+	}
+
 	getNextEncodable(){
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){

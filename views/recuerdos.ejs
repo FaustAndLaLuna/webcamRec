@@ -51,13 +51,21 @@
     <div>
         <div class="container bg-light shadow">
             <div class="row">
-			<%allVids.forEach((vid) => {%>
-				<a href="<%= "vid" + video.videoURL %>">
-					<img src="<%= "/thumbs"+ video.videoURL.replace("mp4", "png") %>" loading="lazy" width="80%" />
+			<%allVids.forEach((vid) => { 
+                if(vid.videoURL == 'SIN URL') return;
+                %>
+
+				<a href="<%= "vid" + vid.videoURL %>">
+					<img src="<%= "/thumbs"+ vid.videoURL.replace("mp4", "png") %>" loading="lazy" width="80%" />
 				</a>
 					<div class="col-md-3 text-lowercase text-center"><img>
-						<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br>Objeto:<a href="<%= "vid" + vid.linkedObj.url %>"><%= vid.linkedObj.title%></a><br>Creado en:<%= vid.createdAt%></p><hr />
-						<a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);" href="<%= "vid" + video.videoURL %>">ir_al_recuerdo</a>
+						<p><%= vid.title%><br>
+                            <%= vid.description%><br>
+                            <%= vid.tags%><br>
+                            Objeto:<a href='<%= "/object?objectID=" + vid.objectID %>'>ir_al_objeto</a>
+                            <br>Creado en:<%= vid.createdAt%></p>
+                        <hr />
+						<a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);" href="<%= "vid" + vid.videoURL %>">ir_al_recuerdo</a>
 					</div>
 				</div>
 			<% });%>
