@@ -28,7 +28,7 @@ async function transcription(videoID, URLtoVid){
 	.noVideo()
 	.audioCodec('libmp3lame')
 	.audioFrequency(22050)
-	.on('end', () =>{
+	.on('end', async () =>{
 		
 		const file = fs.readFileSync(convFilePath);
 		const audioBytes = file.toString('base64');
