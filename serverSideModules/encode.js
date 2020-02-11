@@ -8,7 +8,7 @@ const vidTable = new videosRepo();
 
 const SIZE = '480x?';
 
-function encode(URLtoVid){
+function encode(videoID, URLtoVid){
 	
 	ISWORKING = true;
 	console.log("Encoding started.")
@@ -54,7 +54,7 @@ async function encodeCron(){
 			if(result.length == 0){
 				return;
 			}
-			encode(result[0].tempURL);
+			encode(videoID, result[0].tempURL);
 			}).catch(function(err){
 				console.log(err);
 			});
