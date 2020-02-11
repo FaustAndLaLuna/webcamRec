@@ -56,6 +56,13 @@ async function transcription(videoID, URLtoVid){
 		ISWORKING = false;
 		console.log("Transcription ended.")
 	})
+	.on('error', function(err, stdout, stderr){
+		console.log("Error: Corrupted video, aborting. Cause: " + err.message);
+		fs.unlink(filePath, (err) => {
+			console.error(err);
+		});
+		vidTable.delete(videoID);
+	})
 	.run();	
 }
 

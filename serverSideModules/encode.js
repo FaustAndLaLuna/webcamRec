@@ -36,6 +36,13 @@ function encode(URLtoVid){
 		ISWORKING = false;
 		console.log("Encoding ended.")
 	})
+	.on('error', function(err, stdout, stderr){
+		console.log("Error: Corrupted video, aborting. Cause: " + err.message);
+		fs.unlink(filePath, (err) => {
+			console.error(err);
+		});
+		vidTable.delete(videoID);
+	})
 	.run();	
 }
 
