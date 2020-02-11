@@ -42,6 +42,7 @@ function encode(videoID, URLtoVid){
 			console.error(err);
 		});
 		vidTable.delete(videoID);
+		ISWORKING = false;
 	})
 	.run();	
 }
