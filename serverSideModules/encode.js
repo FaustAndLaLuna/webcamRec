@@ -54,7 +54,7 @@ async function encodeCron(){
 			if(result.length == 0){
 				return;
 			}
-			encode(videoID, result[0].tempURL);
+			encode(result[0].videoID, result[0].tempURL);
 			}).catch(function(err){
 				console.log(err);
 			});
