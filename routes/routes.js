@@ -44,7 +44,7 @@ module.exports = function(app, passport){
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
-		successRedirect : req.cookies.hasOwnProperty("redirect")?req.cookies.redirect.lastAddress:"/",
+		successRedirect : req.cookies.hasOwnProperty("redirect")?req.cookies["redirect"].lastAddress:"/",
 		failureRedirect : '/login.html',
 		failureFlash : true
 	}));
@@ -53,7 +53,7 @@ module.exports = function(app, passport){
 		res.render('signup.ejs', req.responseObj);
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
-		successRedirect : req.cookies.hasOwnProperty("redirect")?req.cookies.redirect.lastAddress:"/",
+		successRedirect : req.cookies.hasOwnProperty("redirect")?req.cookies["redirect"].lastAddress:"/",
 		failureRedirect : '/signup.html',
 		failureFlash : true
 	}));
