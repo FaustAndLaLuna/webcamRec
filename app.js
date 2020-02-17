@@ -5,7 +5,7 @@ global.ISWORKING = false;
 global.ISDEV = false;
 ISDEV = true;
 //ISDEV is currently NOT used
-
+var redirect = "/";
 
 var createError = require('http-errors');
 var express = require('express');
@@ -63,6 +63,21 @@ app.use(passport.session());
 
 
 app.use(function(req,res,next){
+	cookies = req.cookies;
+	if(cookies.hasOwnProperty("redirect")){
+		redirectCookie = cookies.redirect;
+		req.session.returnTo = redirectCookie.lastAddress;
+		if(redirectCookie.currAddress != '/login.html')
+			redirectCookie.lastAddress = redirectCookie.currAddress;
+		console.log(req.session.returnTo);
+	}
+	else {
+		redirectCookie = {};
+	}
+	redirectCookie.currAddress = req.url;
+	console.log("currAddress: " + redirectCookie.currAddress);
+	console.log("redirect: " + req.session.returnTo);
+	res.cookie("redirect", redirectCookie);
 	req.responseObj = {isLoggedIn:false};
 	if(req.isAuthenticated()){
 		req.responseObj.user = req.user;

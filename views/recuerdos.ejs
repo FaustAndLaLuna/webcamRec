@@ -29,7 +29,7 @@
                 <ul class="nav navbar-nav mr-auto">
                     <li class="nav-item" role="presentation"><a class="nav-link" href="objetos.html">objetos a la v e n t a<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="recuerdos.html">recuerdos</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="/biografia.html">biografía</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="#">biografía</a></li>
 					<%if (isLoggedIn) {%>
 						<li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
 					<% } %>
@@ -56,7 +56,7 @@
                 %>
 
 				<a href="<%= "vid" + vid.videoURL %>">
-					<img src="<%= "/thumbs"+ vid.videoURL.replace("mp4", "png") %>" loading="lazy" style="width:80%;" />
+					<img src="<%= "/thumbs"+ vid.videoURL.replace("mp4", "png") %>" loading="lazy" width="20vw" />
 				</a>
 					<div class="col-md-3 text-lowercase text-center"><img>
 						<p><%= vid.title%><br>
@@ -64,14 +64,6 @@
                             <%= vid.tags%><br>
                             Objeto:<a href='<%= "/object?objectID=" + vid.objectID %>'>ir_al_objeto</a>
                             <br>Creado en:<%= vid.createdAt%></p>
-							<%if(vid.isTranscripted){
-								JSON.parse(vid.transcription).forEach((trans) => {
-									%>
-									<p> <%=trans%> </p>
-									<br>
-									<%
-								});
-							}%>
                         <hr />
 						<a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);" href="<%= "vid" + vid.videoURL %>">ir_al_recuerdo</a>
 					</div>
