@@ -75,7 +75,7 @@ app.use(function(req,res,next){
 	}
 	redirectCookie.currAddress = req.url;
 	console.log("currAddress: " + redirectCookie.currAddress);
-	console.log("redirect: " + redirect);
+	console.log("redirect: " + req.session.returnTo);
 	res.cookie("redirect", redirectCookie);
 	req.responseObj = {isLoggedIn:false};
 	if(req.isAuthenticated()){
