@@ -9,8 +9,10 @@ var objectRouter = require('./object.js');
 var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
 var biographyRouter = require('./biography.js');
+var uploadRouter 	= require('./uploadAlt.js');
 
 module.exports = function(app, passport){
+	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
 	
 	app.use("/", indexRouter);
 	app.use("/index.html", function(req,res,next){
