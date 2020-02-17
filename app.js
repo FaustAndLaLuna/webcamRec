@@ -5,7 +5,7 @@ global.ISWORKING = false;
 global.ISDEV = false;
 ISDEV = true;
 //ISDEV is currently NOT used
-redirect = "/";
+var redirect = "/";
 
 var createError = require('http-errors');
 var express = require('express');
@@ -84,7 +84,7 @@ app.use(function(req,res,next){
 	next();
 });
 	
-require('./routes/routes.js')(app, passport);
+require('./routes/routes.js')(app, passport, redirect);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
 app.use(function(req, res, next){

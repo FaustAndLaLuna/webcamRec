@@ -10,7 +10,7 @@ var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
 var biographyRouter = require('./biography.js');
 
-module.exports = function(app, passport){
+module.exports = function(app, passport, redirect){
 	
 	app.use("/", indexRouter);
 	app.use("/index.html", function(req,res,next){
