@@ -8,9 +8,8 @@ var contactPostRouter = require('./contacto.js');
 var objectRouter = require('./object.js');
 var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
-var biographyRouter = require('./biography.js');
 
-module.exports = function(app, passport, redirect){
+module.exports = function(app, passport){
 	
 	app.use("/", indexRouter);
 	app.use("/index.html", function(req,res,next){
@@ -20,13 +19,12 @@ module.exports = function(app, passport, redirect){
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
 	});
-	app.use('/biografia.html', biographyRouter);
 	app.use('/contacto.html', contactPostRouter);
 	app.get('/objetos.html', function(req, res, next){
 		res.redirect("/object");
 	});
 	
-
+	app.use('/sell', sell);
 	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
@@ -44,16 +42,18 @@ module.exports = function(app, passport, redirect){
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
-		successRedirect : redirect,
 		failureRedirect : '/login.html',
 		failureFlash : true
-	}));
+	}), (req, res) =>{
+		res.redirect(req.session.returnTo);
+		delete req.session.returnTo;
+	});
 	app.get('/signup.html', function(req,res){
 		req.responseObj.message = req.flash('signupMessage');
 		res.render('signup.ejs', req.responseObj);
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
-		successRedirect : redirect,
+		successRedirect : '/',
 		failureRedirect : '/signup.html',
 		failureFlash : true
 	}));

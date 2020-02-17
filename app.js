@@ -67,7 +67,7 @@ app.use(function(req,res,next){
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
 		redirectCookie.lastAddress = redirectCookie.currAddress;
-		redirect = redirectCookie.lastAddress;
+		req.session.returnTo = redirectCookie.lastAddress;
 	}
 	else {
 		redirectCookie = {};
@@ -84,7 +84,7 @@ app.use(function(req,res,next){
 	next();
 });
 	
-require('./routes/routes.js')(app, passport, redirect);
+require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
 app.use(function(req, res, next){
