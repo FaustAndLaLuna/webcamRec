@@ -50,6 +50,17 @@ class videosRepo{
 		});
 	}
 	
+	delete(videoID){
+		let q = "DELETE FROM videos WHERE videoID = ?;"
+		POOL.getConnection(function (err, conn){
+			conn.query(q, [videoID], function(err, result){
+				if (err)	console.log(err);
+				conn.release();
+				return;
+			});
+		});
+	}
+	
 	updateToTranscripted(transcription, videoID){
 		let q = 'UPDATE videos SET transcription = ?, isTranscripted = TRUE WHERE videoID = ?';
 		POOL.getConnection(function(err, conn){
@@ -66,7 +77,7 @@ class videosRepo{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				conn.query("SELECT * FROM videos WHERE isTranscripted = false limit 1;", function(err, result){
+				conn.query("SELECT * FROM videos WHERE isTranscripted = false AND isEncoded = true limit 1;", function(err, result){
 					conn.release();
 					if(err) reject(err);
 					return resolve(result);

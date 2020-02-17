@@ -8,7 +8,7 @@ const vidTable = new videosRepo();
 
 const SIZE = '480x?';
 
-function encode(URLtoVid){
+function encode(videoID, URLtoVid){
 	
 	ISWORKING = true;
 	console.log("Encoding started.")
@@ -36,6 +36,14 @@ function encode(URLtoVid){
 		ISWORKING = false;
 		console.log("Encoding ended.")
 	})
+	.on('error', function(err, stdout, stderr){
+		console.log("Error: Corrupted video, aborting. Cause: " + err.message);
+		fs.unlink(filePath, (err) => {
+			console.error(err);
+		});
+		vidTable.delete(videoID);
+		ISWORKING = false;
+	})
 	.run();	
 }
 
@@ -47,7 +55,7 @@ async function encodeCron(){
 			if(result.length == 0){
 				return;
 			}
-			encode(result[0].tempURL);
+			encode(result[0].videoID, result[0].tempURL);
 			}).catch(function(err){
 				console.log(err);
 			});

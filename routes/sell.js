@@ -53,6 +53,7 @@ router.post('/', function(req, res, next){
 		}
 		if(imgArray.length == 0){
 			res.write("<h1> No subiste ninguna imagen, intenta de nuevo </h1>");
+			return;
 		}
 			//create(title, userID, isAuction, description, history, endDate, images){
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});

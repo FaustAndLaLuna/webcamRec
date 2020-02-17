@@ -1,0 +1,43 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+	<table style="width:80%, left:10%">
+		<thead>
+			<tr>
+				<th scope="col">questionID</th>
+				<th scope="col">question</th>
+				<th scope="col">answer</th>
+				<th scope="col">objectID</th>
+				<th scope="col">borrar</th>
+				<th scope="col">editar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%allQuestions.forEach((question) => {%>
+				<th scope="col"><%=question.questionID%></th>
+				<th scope="col"><%=question.question%></th>
+				<th scope="col"><%=question.answer%></th>
+				<th scope="col"><%=question.objectID%></th>
+				<th scope="col"><%=question.borrar%></th>
+				<th scope="col"><%=question.editar%></th>
+				<th scope="col">
+					<form action="/borrarQuest">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="ELIMINAR">
+					</form>
+				</th>
+				<th scope="col">
+					<form action="/editarQuest">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="EDITAR">
+					</form>
+				</th>
+			<%});%>
+		</tbody>
+	<table>
+
+</body>
+</html>

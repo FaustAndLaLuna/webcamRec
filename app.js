@@ -13,16 +13,18 @@ var path = require('path');
 var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
 const encodeMod 		= require('./serverSideModules/encode');
+const transcriptMod		= require('./serverSideModules/transcript');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
-const job = new CronJob('*/30 * * * * *', encodeMod.encodeCron);
+const job = new CronJob('1-59/2 * * * * *', encodeMod.encodeCron);
 job.start();
+const transJob = new CronJob('*/2 * * * * *', transcriptMod.transcriptionCron);
+transJob.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var session 			= require('express-session');
 var cookieParser 		= require('cookie-parser');
-
 
 var app = express();
 
@@ -34,7 +36,6 @@ require('./middleware/passport.js')(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
-
 app.use(function(req, res, next){
 		if (!req.secure) {
 			return res.redirect('https://' + req.get('host') + req.url);

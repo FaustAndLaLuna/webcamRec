@@ -47,34 +47,25 @@
 				</div>
         </div>
     </nav>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>¿Qué_es?</h1>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-        <p><a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);color: rgb(255,255,255);">Ver objetos</a></p>
-    </div>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>¿Cómo_funciona?</h1>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-        <p><a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);color: rgb(255,255,255);">Ver objetos</a></p>
-    </div>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>Preguntas_frecuentes</h1>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-        <p></p>
-    </div>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>Ayúdanos</h1>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-        <p></p>
-    </div>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>Contáctanos</h1>
-        <p><a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);color: rgb(255,255,255);">Mándanos un mensaje</a></p>
-    </div>
-    <div class="jumbotron" style="background-color: rgb(228,228,228);">
-        <h1>Cine Automático</h1>
-        <p>Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam.</p>
-        <p><a class="btn btn-primary" role="button" style="background-color: rgb(0,0,0);color: rgb(255,255,255);">Más información</a></p>
+    <div class="card"></div>
+    <div>
+        <div class="container bg-light shadow">
+            <div class="row">
+			<%
+			allVids.forEach((vid) => { 
+				if(vid.isTranscripted){
+				trans = JSON.parse(vid.transcription);
+				console.log(trans);
+					%>
+					
+						<p><%= trans[Math.floor(Math.random() * trans.length)];%></p>
+						<br />
+					<%
+					}
+				});
+                %>
+
+        </div>
     </div>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

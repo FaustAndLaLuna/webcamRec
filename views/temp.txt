@@ -1,0 +1,57 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+	<table style="width:80%, left:10%">
+		<thead>
+			<tr>
+				<th scope="col">objectID</th>
+				<th scope="col">title</th>
+				<th scope="col">offeringUserID</th>
+				<th scope="col">soldUserID</th>
+				<th scope="col">soldVideoID</th>
+				<th scope="col">isAuction</th>
+				<th scope="col">description</th>
+				<th scope="col">history</th>
+				<th scope="col">endDate</th>
+				<th scope="col">createdAt</th>
+				<th scope="col">images</th>
+				<th scope="col">borrar</th>
+				<th scope="col">editar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%allObjs.forEach((obj) => {%>
+				<th scope="col"><%=obj.objectID%></th>
+				<th scope="col"><%=obj.title%></th>
+				<th scope="col"><%=obj.offeringUserID%></th>
+				<th scope="col"><%=obj.soldUserID%></th>
+				<th scope="col"><%=obj.soldVideoID%></th>
+				<th scope="col"><%=obj.isAuction%></th>
+				<th scope="col"><%=obj.description%></th>
+				<th scope="col"><%=obj.history%></th>
+				<th scope="col"><%=obj.endDate%></th>
+				<th scope="col"><%=obj.createdAt%></th>
+				<th scope="col"><%=obj.images%></th>
+				<th scope="col">borrar%></th>
+				<th scope="col">editar%></th>
+				<th scope="col">
+					<form action="/borrarVid">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="ELIMINAR">
+					</form>
+				</th>
+				<th scope="col">
+					<form action="/editarVid">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="EDITAR">
+					</form>
+				</th>
+			<%});%>
+		</tbody>
+	<table>
+
+</body>
+</html>

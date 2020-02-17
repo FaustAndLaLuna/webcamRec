@@ -1,0 +1,57 @@
+<!-- views/index.ejs -->
+<!doctype html>
+<html>
+<head>
+</head>
+<body>
+	<table style="width:80%, left:10%">
+		<thead>
+			<tr>
+				<th scope="col">videoID</th>
+				<th scope="col">userID</th>
+				<th scope="col">description</th>
+				<th scope="col">title</th>
+				<th scope="col">tags</th>
+				<th scope="col">transcription</th>
+				<th scope="col">isTranscripted</th>
+				<th scope="col">objectID</th>
+				<th scope="col">isEncoded</th>
+				<th scope="col">videoURL</th>
+				<th scope="col">timePublished</th>
+				<th scope="col">tempURL</th>
+				<th scope="col">borrar</th>
+				<th scope="col">editar</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%allVids.forEach((vid) => {%>
+				<th scope="col"><%=vid.videoID%></th>
+				<th scope="col"><%=vid.userID%></th>
+				<th scope="col"><%=vid.description%></th>
+				<th scope="col"><%=vid.title%></th>
+				<th scope="col"><%=vid.tags%></th>
+				<th scope="col"><%=vid.transcription%></th>
+				<th scope="col"><%=vid.isTranscripted%></th>
+				<th scope="col"><%=vid.objectID%></th>
+				<th scope="col"><%=vid.isEncoded%></th>
+				<th scope="col"><%=vid.videoURL%></th>
+				<th scope="col"><%=vid.timePublished%></th>
+				<th scope="col"><%=vid.tempURL%></th>
+				<th scope="col">
+					<form action="/borrarVid">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="ELIMINAR">
+					</form>
+				</th>
+				<th scope="col">
+					<form action="/editarVid">
+						<input type="hidden" style="display:none;" val="<%=vid.videoID%>" name="videoID">
+						<input type="submit" value="EDITAR">
+					</form>
+				</th>
+			<%});%>
+		</tbody>
+	<table>
+
+</body>
+</html>
