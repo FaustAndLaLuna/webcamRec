@@ -5,7 +5,7 @@ global.ISWORKING = false;
 global.ISDEV = false;
 ISDEV = true;
 //ISDEV is currently NOT used
-
+redirect = "/";
 
 var createError = require('http-errors');
 var express = require('express');
@@ -67,13 +67,14 @@ app.use(function(req,res,next){
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies[redirect];
 		redirectCookie.lastAddress = redirectCookie.currAddress;
+		redirect = redirectCookie.lastAddress;
 	}
 	else {
 		redirectCookie = {};
 	}
 	redirectCookie.currAdress = req.url;
 	res.cookie("redirect", redirectCookie);
-	
+
 	req.responseObj = {isLoggedIn:false};
 	if(req.isAuthenticated()){
 		req.responseObj.user = req.user;
