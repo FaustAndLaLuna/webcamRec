@@ -66,8 +66,9 @@ app.use(function(req,res,next){
 	cookies = req.cookies;
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
-		redirectCookie.lastAddress = redirectCookie.currAddress;
 		req.session.returnTo = redirectCookie.lastAddress;
+		if(redirectCookie.currAddress != '/login.html')
+			redirectCookie.lastAddress = redirectCookie.currAddress;
 		console.log(req.session.returnTo);
 	}
 	else {
