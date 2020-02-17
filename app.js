@@ -63,7 +63,7 @@ app.use(passport.session());
 
 
 app.use(function(req,res,next){
-	cookies = req.cookies();
+	cookies = req.cookies;
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies[redirect];
 		redirectCookie.lastAddress = redirectCookie.currAddress;
