@@ -67,11 +67,13 @@ app.use(function(req,res,next){
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
 		req.session.returnTo = redirectCookie.lastAddress;
-		if(!(redirectCookie.currAddress.toLowerCase() == '/login.html' || redirectCookie.currAdress.toLowerCase() == "/signup.html" || redirectCookie.currAdress.toLowerCase() == "/login" || redirectCookie.currAdress.toLowerCase() == "/signup"))
+		if(!(redirectCookie.currAddress.toLowerCase() == '/login.html' || redirectCookie.currAdress.toLowerCase() == "/signup.html" || redirectCookie.currAdress.toLowerCase() == "/login" || redirectCookie.currAdress.toLowerCase() == "/signup")){
 			redirectCookie.lastAddress = redirectCookie.currAddress;
+		}
+		console.log("isLoginOrSignup? ===========================     " + !(redirectCookie.currAddress.toLowerCase() == '/login.html' || redirectCookie.currAdress.toLowerCase() == "/signup.html" || redirectCookie.currAdress.toLowerCase() == "/login" || redirectCookie.currAdress.toLowerCase() == "/signup"));
 		console.log("lastAddress ================================     "+redirectCookie.lastAddress);
 		console.log("currAddress ================================     "+redirectCookie.currAddress);
-		console.log("REDIRECT ================================     "+req.session.returnTo);
+		console.log("REDIRECT ===================================     "+req.session.returnTo);
 	}
 	else {
 		redirectCookie = {};
