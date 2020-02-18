@@ -67,7 +67,7 @@ app.use(function(req,res,next){
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
 		req.session.returnTo = redirectCookie.lastAddress;
-		if(!(redirectCookie.currAddress == '/login.html' || redirectCookie.currAdress == "/signup.html"))
+		if(!(redirectCookie.currAddress.toLowerCase() == '/login.html' || redirectCookie.currAdress.toLowerCase() == "/signup.html" || redirectCookie.currAdress.toLowerCase() == "/login" || redirectCookie.currAdress.toLowerCase() == "/signup"))
 			redirectCookie.lastAddress = redirectCookie.currAddress;
 		console.log("REDIRECT ================================     "+req.session.returnTo);
 	}

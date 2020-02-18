@@ -66,9 +66,10 @@ module.exports = function(app, passport){
 	/*
 		ADD REST OF DATA TO BIOGRAFO.users TABLE in middleware/Passport.js
 	*/
-	app.get('/logout', function(req, res){
+	app.get('/logout', (req, res) => {
 		req.logout();
-		res.redirect('/');
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
 	});	
 }
 
