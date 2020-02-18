@@ -1,0 +1,296 @@
+@CHARSET "UTF-8";
+div#bottomnav {
+    text-align: left;
+    margin: 0 auto 0 auto;
+    width: 1000px;
+}
+
+div#bottomnav a {
+    color: #000000;
+    font-weight: bold;
+    display: inline;
+    background-color: #ffffff;
+    text-transform: lowercase;
+    padding: 0px;
+    line-height: normal;
+    font-size: 18px;
+}
+
+div#bottomnav span {
+    color: #ffffff;
+    font-weight: bold;
+    display: inline;
+    background-color: #000000;
+    text-transform: lowercase;
+    padding: 0px;
+    line-height: normal;
+    font-size: 18px;
+}
+
+div#bottomnav a.objects:link,
+div#bottomnav a.objects:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.objects:hover,
+div#bottomnav a.objects.selected {
+    background: #ff0000 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.memento:link,
+div#bottomnav a.memento:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.memento:hover,
+div#bottomnav a.memento.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.video:link,
+div#bottomnav a.video:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.video:hover,
+div#bottomnav a.video.selected {
+    background: #ff00ff none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+/***********************************/
+
+div#bottomnav a.quees:link,
+div#bottomnav a.quees:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.quees:hover,
+div#bottomnav a.quees.selected {
+    background: #ff0000 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.howto:link,
+div#bottomnav a.howto:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.howto:hover,
+div#bottomnav a.howto.selected {
+    background: #3399ff none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.faq:link,
+div#bottomnav a.faq:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.faq:hover,
+div#bottomnav a.faq.selected {
+    background: #33ff00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.concept:link,
+div#bottomnav a.concept:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.concept:hover,
+div#bottomnav a.concept.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.helpus:link,
+div#bottomnav a.helpus:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.helpus:hover,
+div#bottomnav a.helpus.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.contact:link,
+div#bottomnav a.contact:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.contact:hover,
+div#bottomnav a.contact.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.autocine:link,
+div#bottomnav a.autocine:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.autocine:hover,
+div#bottomnav a.autocine.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+/***********************************/
+
+div#bottomnav a.auction:link,
+div#bottomnav a.auction:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+div#bottomnav a.auction:hover,
+div#bottomnav a.auction.selected {
+    background: #66cc00 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.about:link,
+div#bottomnav a.about:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.about:hover,
+div#bottomnav a.about.selected {
+    background: #CCCCCC none repeat scroll 0% 0%;
+    color: #FFFFFF;
+}
+
+/*div#bottomnav a.howto:link,div#bottomnav a.howto:visited {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+div#bottomnav a.howto:hover, div#bottomnav a.howto.selected{
+  background: #3399ff none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+*/
+
+div#bottomnav a.sold:link,
+div#bottomnav a.sold:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+div#bottomnav a.sold:hover,
+div#bottomnav a.sold.selected {
+    background: #ffff00 none repeat scroll 0% 0%;
+}
+
+div#bottomnav a.closing:link,
+div#bottomnav a.closing:visited {}
+
+div#bottomnav a.closing:hover,
+div#bottomnav a.closing.selected {
+    background: #ff00ff none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.terms:link,
+div#bottomnav a.terms:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+div#bottomnav a.terms:hover,
+div#bottomnav a.terms.selected {
+    background: #0033ff none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.payment:link,
+div#bottomnav a.payment:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+div#bottomnav a.payment:hover,
+div#bottomnav a.payment.selected {
+    background: #990099 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.register:link,
+div#bottomnav a.register:visited {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+div#bottomnav a.register:hover,
+div#bottomnav a.register.selected {
+    background: #ff9900 none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+/*div#bottomnav a.faq:link,div#bottomnav a.faq:visited {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#bottomnav a.faq:hover, div#bottomnav a.faq.selected {
+  background: #33ff00 none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+*/
+
+div#bottomnav a.forum:link,
+div#bottomnav a.forum:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#bottomnav a.forum:hover {
+    background: #6600cc none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.latest:link,
+div#bottomnav a.latest:visited {
+    color: #999999;
+    background-color: #ffffff;
+}
+
+div#bottomnav a.latest:hover,
+div#bottomnav a.latest.selected {
+    background: #6600cc none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
+div#bottomnav a.project:link,
+div#bottomnav a.project:visited {
+    color: #000000;
+}
+
+div#bottomnav a.project:hover,
+div#bottomnav a.project.selected {
+    background-color: #33ff00;
+    color: #ffffff;
+}
+
+div#bottomnav a.buynow:link,
+div#bottomnav a.buynow:visited {
+    background: #ffffff none repeat scroll 0% 0%;
+    color: #6600cc;
+    font-size: 24px;
+    font-weight: bold;
+}

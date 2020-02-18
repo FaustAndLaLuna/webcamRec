@@ -1,0 +1,204 @@
+@CHARSET "UTF-8";
+body {
+    text-align: left;
+}
+
+div.logo {
+    /*width: 90%;*/
+    margin: 0 auto;
+}
+
+div#home {
+    text-align: left;
+    margin: 0 auto 0 auto;
+    width: 1000px;
+}
+
+div#home a,
+div#home span {
+    font-family: Arial, Helvetica, Sans;
+    text-decoration: none;
+}
+
+div#home span {
+    margin: 0px;
+}
+
+div#home span.autobio {
+    /*background-color: #000000;*/
+    color: #000000;
+    font-weight: bold;
+}
+
+/*div#home a.index:link,div#home a.index:visited {
+
+  font-weight: bold;
+}
+
+div#home a.index:hover {
+  background: #000000 none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.sale:link,div#home a.sale:visited {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.sale:hover {
+  background: #ff0000 none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.auction:link,div#home a.auction:visited {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.auction:hover {
+  background: #66cc00 none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.about:link,div#home a.about:visited {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.about:hover {
+  background: #CCCCCC none repeat scroll 0% 0%;
+  color: #FFFFFF;
+}
+
+div#home a.howto:link,div#home a.howto:visited {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.howto:hover {
+  background: #3399ff none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.sold:link,div#home a.sold:visited {
+  font-size: 24px;
+  font-weight: bold;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.sold:hover {
+  background: #ffff00 none repeat scroll 0% 0%;
+}
+
+div#home a.closing:link,div#home a.closing:visited {
+  font-size: 24px;
+  font-weight: bold;
+  color: #999999;
+  background-color: #ffffff;
+}
+
+div#home a.closing:hover {
+  background: #ff00ff none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.terms:link,div#home a.terms:visited {
+
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.terms:hover {
+  font-size: 24px;
+  background: #0033ff none repeat scroll 0% 0%;
+  color: #ffffff;
+}
+
+div#home a.payment:link,div#home a.payment:visited {
+
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.payment:hover {
+  background: #990099 none repeat scroll 0% 0%;
+  color: #ffffff;
+  font-size: 24px;
+}
+div#home a.register:link,div#home a.register:visited {
+
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.register:hover {
+  background: #ff9900 none repeat scroll 0% 0%;
+  color: #ffffff;
+  font-size: 24px;
+}
+
+div#home a.faq:link,div#home a.faq:visited {
+
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.faq:hover {
+  background: #33ff00 none repeat scroll 0% 0%;
+  color: #ffffff;
+  font-size: 24px;
+}
+div#home a.forum:link,div#home a.forum:visited {
+
+  font-weight: bold;
+  font-size: 24px;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div#home a.forum:hover {
+  background: #6600cc none repeat scroll 0% 0%;
+  color: #ffffff;
+  font-size: 24px;
+}
+*/
+
+div#home span.buynow {
+    /*background: #585858 none repeat scroll 0% 0%;*/
+    color: #ff00ff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+div.footnote {
+    font-size: 24px;
+    text-align: left;
+}
+
+div.footnote strong {
+    display: inline;
+}
+
+span.blackbg {
+    font-size: 24px;
+    color: #ffffff;
+    background-color: #000000;
+    font-weight: bold;
+}
