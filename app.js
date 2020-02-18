@@ -67,16 +67,13 @@ app.use(function(req,res,next){
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
 		req.session.returnTo = redirectCookie.lastAddress;
-		if(redirectCookie.currAddress != '/login.html')
+		if(!(redirectCookie.currAddress == '/login.html' || redirectCookie.currAdress == "/signup.html"))
 			redirectCookie.lastAddress = redirectCookie.currAddress;
-		console.log(req.session.returnTo);
 	}
 	else {
 		redirectCookie = {};
 	}
 	redirectCookie.currAddress = req.url;
-	console.log("currAddress: " + redirectCookie.currAddress);
-	console.log("redirect: " + req.session.returnTo);
 	res.cookie("redirect", redirectCookie);
 	req.responseObj = {isLoggedIn:false};
 	if(req.isAuthenticated()){

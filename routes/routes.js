@@ -46,19 +46,23 @@ module.exports = function(app, passport){
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
-		successRedirect : '/',
 		failureRedirect : '/login.html',
 		failureFlash : true
-	}));
+	}), (req,res) => {
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
+	});
 	app.get('/signup.html', function(req,res){
 		req.responseObj.message = req.flash('signupMessage');
 		res.render('signup.ejs', req.responseObj);
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
-		successRedirect : '/',
 		failureRedirect : '/signup.html',
 		failureFlash : true
-	}));
+	}), (req,res) => {
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
+	});
 	/*
 		ADD REST OF DATA TO BIOGRAFO.users TABLE in middleware/Passport.js
 	*/
