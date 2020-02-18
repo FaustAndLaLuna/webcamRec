@@ -70,11 +70,6 @@ app.use(function(req,res,next){
 		var curr = redirectCookie.currAddress.toLowerCase();
 		if(!(curr === "/login.html" || curr === "/signup.html" || curr === "/login" || curr === "/signup"))
 			redirectCookie.lastAddress = redirectCookie.currAddress;
-
-		console.log("isLoginOrSignup? ===========================     " + !(curr === "/login.html" || curr === "/signup.html" || curr === "/login" || curr === "/signup"));
-		console.log("lastAddress ================================     "+redirectCookie.lastAddress);
-		console.log("currAddress ================================     "+redirectCookie.currAddress);
-		console.log("REDIRECT ===================================     "+req.session.returnTo);
 	}
 	else {
 		redirectCookie = {};

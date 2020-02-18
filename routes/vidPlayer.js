@@ -4,10 +4,10 @@ var path = require('path');
 
 router.get('/:first/:second/:third/:fourth/:filename', (req, res) => {
 	resObj = {}
-	resObj.videoURL = '/' + req.params.first + '/' + req.params.second + '/' + req.params.third +
+	req.responseObj.videoURL = '/' + req.params.first + '/' + req.params.second + '/' + req.params.third +
 					"/" + req.params.fourth + '/' + req.params.filename;
-	resObj.title = 'Video';
-	res.render('vid', resObj);
+	req.responseObj.title = 'Video';
+	res.render('vid', req.responseObj);
 });
 
 module.exports = router;
