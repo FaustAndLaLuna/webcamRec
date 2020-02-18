@@ -69,6 +69,7 @@ app.use(function(req,res,next){
 		req.session.returnTo = redirectCookie.lastAddress;
 		if(!(redirectCookie.currAddress == '/login.html' || redirectCookie.currAdress == "/signup.html"))
 			redirectCookie.lastAddress = redirectCookie.currAddress;
+		console.log(req.session.returnTo);
 	}
 	else {
 		redirectCookie = {};
