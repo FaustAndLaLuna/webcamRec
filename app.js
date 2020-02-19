@@ -65,7 +65,7 @@ app.use(passport.session());
 app.use(function(req,res,next){
 	cookies = req.cookies;
 	console.log(cookies);
-	cookies = (typeof cookies === "undefined" || cookies == null) ? {} : cookies;
+	cookies = (typeof cookies === "undefined" || cookies == null) ? console.log("isNull or undefined") : cookies;
 	console.log(cookies);
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
