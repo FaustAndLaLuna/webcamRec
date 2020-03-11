@@ -2,6 +2,7 @@
 var path = require('path');
 var indexRouter 	= require("./index.js");
 var uploadRouter 	= require('./upload.js');
+var uploadAltRouter = require('./uploadAlternative.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 var contactPostRouter = require('./contacto.js');
@@ -15,6 +16,9 @@ module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
 	
 	app.use("/", indexRouter);
+	app.use("/recordadmincreateuser112355335425.html", function(req, res, next){
+		res.render("recordadmincreateuser112355335425.ejs", req.responseObj);
+	});
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});

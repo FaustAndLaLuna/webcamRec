@@ -1,0 +1,38 @@
+<style>
+    html, body {
+        margin: 0!important;
+        padding: 0!important;
+    }
+</style>
+<head>
+</head>
+
+<body>
+    <title>WebcamRec</title>
+    <h1>Prueba</h1><br>
+	<hr/>
+	<p> Seleccionar "Elegir archivo", luego "Tomar foto o video", y finalmente tomar video.
+	Luego seleccionar "Usar Video" y finalmente: "Enviar"<br/></p>
+	<hr/>
+
+    <form action="/secretLiaUploadToDisk112355335425" method="POST" enctype="multipart/form-data">
+        <input type="file" accept="video/*;capture=camcorder" name="video">
+		NOMBRE del usuario: <input type="text" name="user"> <br />
+		objeto: 
+		<select name='objectID' >
+			<%objects.forEach ((obj) => {%>
+				<option value="<%=obj.objectID%>"> <%=obj.title%></option>
+			<%});%>
+		</select>
+		<br />
+		<input class="form-control" type="text" id="description" placeholder="Descripción" name="description" ><br />
+		<input class="form-control" type="text" id="title" placeholder="Titulo del recuerdo" name="tags"><br />
+		<input class="form-control" type="text" id="tags" placeholder="Palabras clave, separadas por comas" name="tags"><br />
+		<hr/>
+		
+		<!==vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags); ==>
+        <input type="submit">
+    </form>
+    <footer style="margin-top: 20px;"><small id="send-message"></small></footer>
+
+</body>
