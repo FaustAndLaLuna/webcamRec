@@ -11,14 +11,15 @@ var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
 var biographyRouter = require('./biography.js');
 var uploadRouter 	= require('./uploadAlt.js');
+var adminRecord 	= require("adminRecord");
 
 module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
-	
+	app.use('/secretObjectUploadToDisk', objectRouter);
+
 	app.use("/", indexRouter);
-	app.use("/recordadmincreateuser112355335425.html", function(req, res, next){
-		res.render("recordadmincreateuser112355335425.ejs", req.responseObj);
-	});
+	app.use("/recordadmincreateuser112355335425.html", adminRecord);
+	
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});
