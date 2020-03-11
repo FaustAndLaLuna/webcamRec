@@ -51,6 +51,18 @@ div#topnav a.memento.selected {
     color: #ffffff;
 }
 
+div#topnav a.sell:link,
+div#topnav a.sell:visited {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+div#topnav a.sell:hover,
+div#topnav a.sell.selected {
+    background: ##007bff none repeat scroll 0% 0%;
+    color: #ffffff;
+}
+
 div#topnav a.video:link,
 div#topnav a.video:visited {
     background-color: #000000;
