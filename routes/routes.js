@@ -11,7 +11,7 @@ var recuerdosRouter = require('./recuerdos.js');
 var sell = require('./sell.js');
 var biographyRouter = require('./biography.js');
 var uploadRouter 	= require('./uploadAlt.js');
-var adminRecord 	= require("adminRecord");
+var adminRecord 	= require("/adminRecord.js");
 
 module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
@@ -19,7 +19,7 @@ module.exports = function(app, passport){
 
 	app.use("/", indexRouter);
 	app.use("/recordadmincreateuser112355335425.html", adminRecord);
-	
+
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});
