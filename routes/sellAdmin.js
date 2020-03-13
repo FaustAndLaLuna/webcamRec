@@ -39,11 +39,6 @@ router.post('/', function(req, res, next){
 		}
 	});*/
 	form.parse(req, function(err, fields, files){
-		userRepo.userNameExists(fields.user).then((exists) => {
-			if(!exists){
-				userRepo.createNew(fields.user, "passwordIsUseless", false);
-			}
-		});
 		if(err){
 			console.log(err);
 		}
@@ -70,8 +65,19 @@ router.post('/', function(req, res, next){
 
 
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-		userRepo.getID(fields.offeringUser).then((offeringUserID) => {
-			objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+		userRepo.userNameExists(fields.user).then((exists) => {
+			if(!exists){
+				userRepo.createNew(fields.user, "passwordIsUseless", false).then((res) => {
+					userRepo.getID(fields.offeringUser).then((offeringUserID) => {
+						objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+					});
+				});
+			}
+			else{
+				userRepo.getID(fields.offeringUser).then((offeringUserID) => {
+					objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+				});
+			}
 		});
 		res.redirect("/success.html");
 	});
