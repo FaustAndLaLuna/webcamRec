@@ -86,11 +86,11 @@ class userDB{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err) reject(err);
-				conn.query(q, username, function(err, result)){
+				conn.query(q, username, function(err, result){
 					if (err) reject (err);
 					conn.release();
 					return(result[0].id);
-				}
+				});
 			});
 			reject(1);
 			return;
