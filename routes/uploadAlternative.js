@@ -43,11 +43,7 @@ router.post('/', function(req, res, next){
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
 					// userRepo.createNew(fields.user, "passwordIsUseless", false);
-					userRepo.usernameExists(fields.user).then((exists) => {
-						if(!exists){
-							userRepo.createNew(fields.user, "passwordIsUseless", false);
-						}	
-					});
+					
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
 							if(err){
@@ -59,11 +55,22 @@ router.post('/', function(req, res, next){
 						return;
 					}
 
-					let filePath = this.filePath;
 
-					userRepo.getID(fields.user).then((userID) => {
-						vidTable.createAssociated("SIN URL", filePath, userID, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+					userRepo.usernameExists(fields.user).then((exists) => {
+						if(!exists){
+							userRepo.createNew(fields.user, "passwordIsUseless", false).then((etc) => {
+								userRepo.getID(fields.user).then((userID) => {
+									vidTable.createAssociated("SIN URL", filePath, userID, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+								});
+							});
+						}
+						else{
+							userRepo.getID(fields.user).then((userID) => {
+								vidTable.createAssociated("SIN URL", filePath, userID, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+							});
+						}
 					});
+					let filePath = this.filePath;
 					
 					res.redirect("/success.html");
 					res.end();
