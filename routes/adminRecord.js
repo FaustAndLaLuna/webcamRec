@@ -8,7 +8,7 @@ const questionsDB = new QandARepo();
 const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-	objects.DB.getAll().then( (objects) => {
+	objectsDB.getAll().then( (objects) => {
 		req.responseObj.objects = objects;
 		res.render("recordadmincreateuser112355335425.ejs", req.responseObj);
 	});	
