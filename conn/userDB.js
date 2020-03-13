@@ -80,6 +80,21 @@ class userDB{
 			});
 		});
 	}
+
+	getID(username){
+		let q = "SELECT id FROM users WHERE username = ?;"
+		return new Promise(function (resolve, reject)){
+			if(err) reject(err);
+			conn.query(q, username, function(err, result){
+				if(err) reject(err);
+				conn.release();
+				return(result[0].id);
+			});
+			reject(1);
+			return;
+		}
+	}
+
 	
 	createNew(username, password, isAdmin){
 		let salt = genSalt(SALT_LEN);

@@ -60,7 +60,10 @@ router.post('/', function(req, res, next){
 
 					let filePath = this.filePath;
 
-					vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+					userRepo.getID(fields.user).then((userID) => {
+						vidTable.createAssociated("SIN URL", filePath, userID, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+					});
+					
 					res.redirect("/success.html");
 					res.end();
 					console.log(files);

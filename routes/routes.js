@@ -12,10 +12,11 @@ var sell = require('./sell.js');
 var biographyRouter = require('./biography.js');
 var uploadRouter 	= require('./uploadAlt.js');
 var adminRecord 	= require("./adminRecord.js");
+var sellAdmin		= require("./sellAdmin.js");
 
 module.exports = function(app, passport){
-	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
-	app.use('/secretObjectUploadToDisk', objectRouter);
+	app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
+	app.use('/secretObjectUploadToDisk', sellAdmin);
 
 	app.use("/", indexRouter);
 	app.use("/recordadmincreateuser112355335425.html", adminRecord);
