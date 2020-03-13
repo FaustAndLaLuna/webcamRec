@@ -9,7 +9,7 @@ var videosRepo = require('../conn/videosRepo');
 var userTable = require('../conn/userDB');
 
 var vidTable = new videosRepo();
-var userrepo = new userTable();
+var userRepo = new userTable();
 
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
