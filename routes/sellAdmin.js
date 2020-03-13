@@ -70,9 +70,9 @@ router.post('/', function(req, res, next){
 
 
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-		userRepo.getID(fields.offeringUser).then(offeringUserID){
+		userRepo.getID(fields.offeringUser).then((offeringUserID) => {
 			objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
-		}
+		});
 		res.redirect("/success.html");
 	});
 });
