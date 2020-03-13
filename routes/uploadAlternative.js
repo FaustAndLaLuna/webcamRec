@@ -60,6 +60,7 @@ router.post('/', function(req, res, next){
 						if(!exists){
 							userRepo.createNew(fields.user, "passwordIsUseless", false).then((etc) => {
 								userRepo.getID(fields.user).then((userID) => {
+									console.log(("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags));
 									vidTable.createAssociated("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags);
 								});
 							});
@@ -67,7 +68,7 @@ router.post('/', function(req, res, next){
 						else{
 							userRepo.getID(fields.user).then((userID) => {
 								console.log(("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags));
-								vidTable.createAssociated("SIN URL", filePath, userID, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+								vidTable.createAssociated("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags);
 							});
 						}
 					});
