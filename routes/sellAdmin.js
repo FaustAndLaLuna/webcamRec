@@ -43,7 +43,7 @@ router.post('/', function(req, res, next){
 			if(!exists){
 				userRepo.createNew(fields.user, "passwordIsUseless", false);
 			}
-		}
+		});
 		if(err){
 			console.log(err);
 		}
