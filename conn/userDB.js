@@ -64,7 +64,7 @@ class userDB{
 	}
 	
 	usernameExists(username){
-	let q = "SELECT * FROM users WHERE username = ?;"
+	let q = "SELECT * FROM users WHERE username = ?;";
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
@@ -82,7 +82,7 @@ class userDB{
 	}
 
 	getID(username){
-		let q = "SELECT id FROM users WHERE username = ?;"
+		let q = "SELECT id FROM users WHERE username = ?;";
 		return new Promise(function (resolve, reject){
 			if(err) reject(err);
 			conn.query(q, username, function(err, result){
@@ -92,7 +92,7 @@ class userDB{
 			});
 			reject(1);
 			return;
-		}
+		});
 	}
 
 	
