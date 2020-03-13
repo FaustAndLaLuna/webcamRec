@@ -42,7 +42,7 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
-					userRepo.userNameExists(fields.user).then((exists) => {
+					userRepo.usernameExists(fields.user).then((exists) => {
 						if(!exists){
 							userRepo.createNew(fields.user, "passwordIsUseless", false);
 						}	
