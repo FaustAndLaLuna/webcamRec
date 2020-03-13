@@ -42,11 +42,12 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
-					userRepo.usernameExists(fields.user).then((exists) => {
-						if(!exists){
-							userRepo.createNew(fields.user, "passwordIsUseless", false);
-						}	
-					});
+					userRepo.createNew(fields.user, "passwordIsUseless", false);
+					// userRepo.usernameExists(fields.user).then((exists) => {
+					// 	if(!exists){
+					// 		userRepo.createNew(fields.user, "passwordIsUseless", false);
+					// 	}	
+					// });
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
 							if(err){
