@@ -6,10 +6,10 @@ var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var videosRepo = require('../conn/videosRepo');
-var userRepo = require('../conn/userDB');
+var userTable = require('../conn/userDB');
 
 var vidTable = new videosRepo();
-var userTable = new userRepo();
+var userrepo = new userTable();
 
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
@@ -42,12 +42,12 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
-					userRepo.createNew(fields.user, "passwordIsUseless", false);
-					// userRepo.usernameExists(fields.user).then((exists) => {
-					// 	if(!exists){
-					// 		userRepo.createNew(fields.user, "passwordIsUseless", false);
-					// 	}	
-					// });
+					// userRepo.createNew(fields.user, "passwordIsUseless", false);
+					userRepo.usernameExists(fields.user).then((exists) => {
+						if(!exists){
+							userRepo.createNew(fields.user, "passwordIsUseless", false);
+						}	
+					});
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
 							if(err){
