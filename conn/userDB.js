@@ -84,7 +84,6 @@ class userDB{
 	getID(username){
 		let q = "SELECT id FROM users WHERE username = ?;";
 		return new Promise(function (resolve, reject){
-			if(err) reject(err);
 			conn.query(q, username, function(err, result){
 				if(err) reject(err);
 				conn.release();
