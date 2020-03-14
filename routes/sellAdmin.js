@@ -64,7 +64,7 @@ router.post('/', function(req, res, next){
 			//create(title, userID, isAuction, description, history, endDate, images){
 
 
-		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
+		console.log({name: fields.name, username: fields.username, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
 		userRepo.usernameExists(fields.username).then((exists) => {
 			if(!exists){
 				userRepo.createNew(fields.username, "passwordIsUseless", false).then((res) => {
