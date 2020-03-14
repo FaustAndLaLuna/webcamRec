@@ -5,10 +5,10 @@ var uuidv4 = require('uuid/v4');
 var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
-var userRepo = require('../conn/userDB');
+var userTable = require('../conn/userDB');
 
 
-var userTable = new userRepo();
+var userRepo = new userTable();
 
 
 const objectsRepo = require('../conn/objectsRepo.js')
@@ -65,7 +65,7 @@ router.post('/', function(req, res, next){
 
 
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-		userRepo.userNameExists(fields.user).then((exists) => {
+		userRepo.usernameExists(fields.user).then((exists) => {
 			if(!exists){
 				userRepo.createNew(fields.user, "passwordIsUseless", false).then((res) => {
 					userRepo.getID(fields.offeringUser).then((offeringUserID) => {
