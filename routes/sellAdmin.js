@@ -65,16 +65,16 @@ router.post('/', function(req, res, next){
 
 
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-		userRepo.usernameExists(fields.user).then((exists) => {
+		userRepo.usernameExists(fields.username).then((exists) => {
 			if(!exists){
-				userRepo.createNew(fields.user, "passwordIsUseless", false).then((res) => {
-					userRepo.getID(fields.offeringUser).then((offeringUserID) => {
+				userRepo.createNew(fields.username, "passwordIsUseless", false).then((res) => {
+					userRepo.getID(fields.username).then((offeringUserID) => {
 						objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
 					});
 				});
 			}
 			else{
-				userRepo.getID(fields.offeringUser).then((offeringUserID) => {
+				userRepo.getID(fields.username).then((offeringUserID) => {
 					objectsDB.create(fields.name, offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
 				});
 			}

@@ -68,7 +68,6 @@ class userDB{
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
-				console.log(q, username);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
 					console.log("result: " + result);
