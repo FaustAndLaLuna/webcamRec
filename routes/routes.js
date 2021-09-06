@@ -14,7 +14,7 @@ var removeVideo			= require('./removeVideo.js')
 
 
 module.exports = function(app, passport){
-
+	app.use("/secretLiaRemoveVideo112355335425", removeVideo);
 
 
 	app.use("/", indexRouter);
