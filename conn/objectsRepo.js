@@ -150,7 +150,7 @@ class objectsRepo{
 	}
 
 	delete(objectID){
-		let q = "DELETE FROM object WHERE objectID = ?;"
+		let q = "DELETE FROM objects WHERE objectID = ?;"
 		POOL.getConnection(function (err, conn){
 			conn.query(q, [objectID], function(err, result){
 				if (err)	console.log(err);
