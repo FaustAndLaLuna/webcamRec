@@ -14,7 +14,7 @@ router.get('/', function(req,res,next){
         result = result[0];
         result.images = JSON.parse(result.images);
         for(let i = 0; i < result.images.length; i++){
-            fs.unlink('uploads'+result.images[i], (err) => {
+            fs.unlink("."+result.images[i], (err) => {
                 if(err) console.log(err);
             });
         }
