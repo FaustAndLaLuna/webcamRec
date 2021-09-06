@@ -10,7 +10,7 @@ const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
 	res.render('vender.ejs', req.responseObj);
-	});
+});
 
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){

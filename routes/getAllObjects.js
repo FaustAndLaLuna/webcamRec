@@ -1,16 +1,16 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-
-const userData = require('../conn/userDB.js');
+const objectsRepo = require('../conn/objectsRepo.js');
+const QandARepo = require('../conn/QandA.js');
 var createError = require('http-errors');
-
-const userDB = new userData();
+const questionsDB = new QandARepo();
+const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-    userDB.getAllUsers().then(function(response){
+    objectsDB.getAll().then(function(objects){
         res.setHeader('Content-type', 'application/json');
-        res.end(JSON.stringify(response));
+        res.end(JSON.stringify(objects));
     });
 });
 
