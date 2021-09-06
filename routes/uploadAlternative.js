@@ -6,10 +6,8 @@ var fs = require('fs');
 var formidable = require('formidable');
 var mkdirp = require('mkdirp');
 var videosRepo = require('../conn/videosRepo');
-var userTable = require('../conn/userDB');
 
 var vidTable = new videosRepo();
-var userRepo = new userTable();
 
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
@@ -42,8 +40,6 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
-					// userRepo.createNew(fields.user, "passwordIsUseless", false);
-					
 					if(!fTypeCheck.match("^multipart/")){
 						fs.unlink(filePath, function(err){
 							if(err){
@@ -54,26 +50,8 @@ router.post('/', function(req, res, next){
 						res.end();
 						return;
 					}
-
-
-					userRepo.usernameExists(fields.user).then((exists) => {
-						if(!exists){
-							userRepo.createNew(fields.user, "passwordIsUseless", false).then((etc) => {
-								userRepo.getID(fields.user).then((userID) => {
-									console.log(("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags));
-									vidTable.createAssociated("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags);
-								});
-							});
-						}
-						else{
-							userRepo.getID(fields.user).then((userID) => {
-								console.log(("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags));
-								vidTable.createAssociated("SIN URL", filePath, userID, fields.objectID, fields.description, fields.title, fields.tags);
-							});
-						}
-					});
 					let filePath = this.filePath;
-					
+					vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
 					res.redirect("/success.html");
 					res.end();
 					console.log(files);
