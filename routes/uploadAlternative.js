@@ -51,7 +51,7 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					let filePath = this.filePath;
-					vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
+					vidTable.createAssociated("SIN URL", filePath, fields.userID, fields.objectID, fields.description, fields.title, fields.tags);
 					res.redirect("/success.html");
 					res.end();
 					console.log(files);
