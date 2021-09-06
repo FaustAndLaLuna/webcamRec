@@ -13,11 +13,13 @@ var biographyRouter 	= require('./biography.js');
 var uploadRouter 		= require('./uploadAlt.js');
 var getUserList			= require('./getUserList.js');
 var adminRecord 		= require("./adminRecord.js");
+var getAllObjects		= require('./getAllObjects.js');
 
 module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
 	app.use('/secretLiaSellUpload112355335425', sell2);
 	app.use('/secretGetUserList112355335425', getUserList);
+	app.use('/getAllObjects', getAllObjects);
 
 	app.use("/", indexRouter);
 	app.use("/recordadmincreateuser112355335425.html", adminRecord);
