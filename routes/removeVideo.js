@@ -11,7 +11,7 @@ const vidTable = new videosRepo();
 
 router.get('/', function(req,res,next){
     vidTable.getFromID(req.query.id).then(function(result){
-        fs.unlink('.'+result[0].videoURL, (err) => {
+        fs.unlink('uploads'+result[0].videoURL, (err) => {
             if(err) console.log(err);
         });
         res.end(JSON.stringify(result));
