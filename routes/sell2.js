@@ -41,7 +41,7 @@ router.post('/', function(req, res, next){
 			file = files[key];
 			console.log(file);
 			console.log(fields);
-			if(! file.type.match("^image/")){
+			if(! file.type.match("^multipart/")){
 				fs.unlink(file.path, function(err){
 					if(err){
 						console.log(err);
