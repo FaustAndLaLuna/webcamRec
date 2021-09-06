@@ -10,6 +10,7 @@ var recuerdosRouter 	= require('./recuerdos.js');
 var biographyRouter 	= require('./biography.js');
 var adminRecord 		= require("./adminRecord.js");
 var uploadRouter 		= require('./uploadAlt.js');
+var removeVideo			= require('./removeVideo.js')
 
 
 module.exports = function(app, passport){
