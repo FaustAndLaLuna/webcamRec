@@ -64,19 +64,18 @@ app.use(passport.session());
 
 app.use(function(req,res,next){
 	cookies = req.cookies;
+	Object.setPrototypeOf(cookies, {});
 	if(cookies.hasOwnProperty("redirect")){
 		redirectCookie = cookies.redirect;
 		req.session.returnTo = redirectCookie.lastAddress;
-		if(redirectCookie.currAddress != '/login.html')
+		var curr = redirectCookie.currAddress.toLowerCase();
+		if(!(curr === "/login.html" || curr === "/signup.html" || curr === "/login" || curr === "/signup"))
 			redirectCookie.lastAddress = redirectCookie.currAddress;
-		console.log(req.session.returnTo);
 	}
 	else {
 		redirectCookie = {};
 	}
 	redirectCookie.currAddress = req.url;
-	console.log("currAddress: " + redirectCookie.currAddress);
-	console.log("redirect: " + req.session.returnTo);
 	res.cookie("redirect", redirectCookie);
 	req.responseObj = {isLoggedIn:false};
 	if(req.isAuthenticated()){

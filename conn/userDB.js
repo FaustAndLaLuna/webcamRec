@@ -82,13 +82,14 @@ class userDB{
 	}
 	
 	usernameExists(username){
-	let q = "SELECT * FROM users WHERE username = ?;"
+	let q = "SELECT * FROM users WHERE username = ?;";
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){
 				if(err)	reject(err);
 				conn.query(q, username, function(err, result){
 					if(err)	reject(err);
-					if(result.length == 0){
+					console.log("result: " + result);
+					if(typeof result === "undefined" || result.length == 0){
 						conn.release();
 						return resolve(false);
 					}
@@ -98,6 +99,22 @@ class userDB{
 			});
 		});
 	}
+
+	getID(username){
+		let q = "SELECT id FROM users WHERE username = ?;";
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err) reject(err);
+				conn.query(q, username, function(err, result){
+					if (err) reject (err);
+					conn.release();
+					resolve(result[0].id);
+				});
+			});
+			return;
+		});
+	}
+
 	
 	createNew(username, password, isAdmin){
 		let salt = genSalt(SALT_LEN);

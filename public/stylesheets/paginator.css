@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+div#paginator {
+    margin-bottom: 24px;
+    margin-top: -24px;
+    text-align: left;
+}
+
+div#paginator ul {
+    padding: 0px;
+    margin: 2px 0 0 0;
+}
+
+div#paginator ul li {
+    list-style: none;
+    display: inline;
+}
+
+div#paginator ul li a:link,
+div#paginator ul li a:visited {
+    color: #666666;
+    background-color: #ffffff;
+}
+
+div#paginator ul li a:hover {
+    color: #ffffff;
+    background-color: #666666;
+}

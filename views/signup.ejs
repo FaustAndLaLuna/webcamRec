@@ -2,9 +2,9 @@
 <html>
 
 <head>
-	<%user = typeof user !== "undefined" ? user: {}%>
-	<%obj = typeof obj !== "undefined" ? obj: {}%>
-	<%objects = typeof objects !== "undefined" ? objects: []%>
+    <%user = typeof user !== "undefined" ? user: {}%>
+    <%obj = typeof obj !== "undefined" ? obj: {}%>
+    <%objects = typeof objects !== "undefined" ? objects: []%>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>b i o g r a f o</title>
@@ -30,38 +30,35 @@
                     <li class="nav-item" role="presentation"><a class="nav-link" href="objetos.html">objetos a la v e n t a<br></a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="recuerdos.html">recuerdos</a></li>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="/biografia.html">biografía</a></li>
-					<%if (isLoggedIn) {%>
-						<li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
-					<% } %>
+                    <%if (isLoggedIn) {%>
+                        <li class="nav-item" role="presentation"><a class="nav-link" href="#">mi perfil</a></li>
+                    <% } %>
                     <li class="nav-item" role="presentation"><a class="nav-link" href="aboutUs.html">sobre nosotros</a></li>
                 </ul>
-				<span class="navbar-text actions">
-				<%if (! isLoggedIn) { %>
-					<a class="login" href="logIn.html">Log In</a>
-					<a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a>
-				<% } else { %>
-					<a class="login" href="/logout">Log Out</a>
-				<% }%>
-				
-				</span>
-				</div>
+                <span class="navbar-text actions">
+                <%if (! isLoggedIn) { %>
+                    <a class="login" href="logIn.html">Log In</a>
+                    <a class="btn btn-light action-button" role="button" href="signUp.html" style="background-color: #030000;">Registrarse</a>
+                <% } else { %>
+                    <a class="login" href="/logout">Log Out</a>
+                <% }%>
+                
+                </span>
+                </div>
         </div>
     </nav>
-    <div>
-        <form style="background-color: rgb(228,228,228);padding-top: 30px;margin-left: 4%;margin-right: 4%;" action="/signUp" method="POST">
-            <div class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* email<input class="shadow form-control" type="text" name="username" placeholder="email" autofocus="" inputmode="email" required="" minlength="5" maxlength="64" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" autocomplete="on"></label></div>
-            <div
-                class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* repetir_email<input class="shadow form-control" type="text" name="usernameCheck" placeholder="confirmar_email" autofocus="" inputmode="email" required="" minlength="5" maxlength="64" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" autocomplete="off"></label></div>
-    <div
-        class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* contraseña<input class="shadow form-control" type="password" placeholder="contraseña" name="password" required="" minlength="6" maxlength="64"></label></div>
-        <div
-            class="form-group"><label style="margin-left: 8%;margin-right: 3%;max-width: 900px;min-width: 110px;width: 30%;">* repetir_contraseña<br><input class="shadow form-control" type="password" placeholder="repetir_contraseña" minlength="6" maxlength="64" required="" name="passwordCheck"></label></div>
-                <div class="form-group"><button class="btn btn-primary shadow" type="submit" style="margin-left: 60%;margin-right: 3%;background-color: rgb(0,0,0);">registrarse</button></div>
-                <p>&nbsp; &nbsp;&nbsp;</p>
-                </form>
-                </div>
-                <script src="assets/js/jquery.min.js"></script>
-                <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <div class="login-clean" style="background-color: rgb(228,228,228);">
+        <form method="post" action="/signUp" method="POST">
+            <h2 class="sr-only">Login Form</h2>
+            <div class="illustration"><i class="icon ion-ios-navigate" style="color: rgb(0,0,0);"></i></div>
+            <div class="form-group"><input class="form-control" type="email" name="username" placeholder="email" style="background-color: rgb(247,247,247);" minlength="5" required="" maxlength="64" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"></div>
+            <div class="form-group"><input class="form-control" type="password" name="password" placeholder="password" style="background-color: rgb(247,247,247);" minlength="6" maxlength="64" required=""></div>
+            <div class="form-group"><input class="form-control" type="password" name="password2" placeholder="password" style="background-color: rgb(247,247,247);" minlength="6" maxlength="64" required=""></div>
+            <div class="form-group"><button class="btn btn-primary btn-block" type="submit" style="background-color: rgb(0,0,0);">Registrarse</button></div>
+        </form>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>
