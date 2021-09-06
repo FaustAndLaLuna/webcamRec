@@ -26,11 +26,11 @@ var flash 				= require('connect-flash');
 var session 			= require('express-session');
 var cookieParser 		= require('cookie-parser');
 
-var getUserList			= require('./getUserList.js');
-var getAllObjects		= require('./getAllObjects.js');
-var getAllVideos 		= require('./getAllVideos.js');
-var sell2 				= require('./sell2.js');
-var uploadAltRouter 	= require('./uploadAlternative.js');
+var getUserList			= require('./routes/getUserList.js');
+var getAllObjects		= require('./routes/getAllObjects.js');
+var getAllVideos 		= require('./routes/getAllVideos.js');
+var sell2 				= require('./routes/sell2.js');
+var uploadAltRouter 	= require('./routes/uploadAlternative.js');
 
 var app = express();
 
