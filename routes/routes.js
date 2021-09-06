@@ -12,6 +12,8 @@ var sell2 				= require('./sell2.js');
 var biographyRouter 	= require('./biography.js');
 var uploadRouter 		= require('./uploadAlt.js');
 var getUserList			= require('./getUserList.js');
+var adminRecord 		= require("./adminRecord.js");
+var sellAdmin			= require("./sellAdmin.js");
 
 module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
