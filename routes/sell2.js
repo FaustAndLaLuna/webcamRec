@@ -40,6 +40,7 @@ router.post('/', function(req, res, next){
 		for(var key in files){
 			file = files[key];
 			console.log(file);
+			console.log(fields)
 			if(! file.type.match("^image/")){
 				fs.unlink(file.path, function(err){
 					if(err){
