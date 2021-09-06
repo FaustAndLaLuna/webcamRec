@@ -2,26 +2,18 @@
 var path 				= require('path');
 var indexRouter 		= require("./index.js");
 var uploadRouter 		= require('./upload.js');
-var uploadAltRouter 	= require('./uploadAlternative.js');
 var videoRouter 		= require('./video.js');
 var vidPlayerRouter 	= require('./vidPlayer.js');
 var contactPostRouter 	= require('./contacto.js');
 var objectRouter 		= require('./object.js');
 var recuerdosRouter 	= require('./recuerdos.js');
-var sell2 				= require('./sell2.js');
 var biographyRouter 	= require('./biography.js');
-var uploadRouter 		= require('./uploadAlt.js');
-var getUserList			= require('./getUserList.js');
 var adminRecord 		= require("./adminRecord.js");
-var getAllObjects		= require('./getAllObjects.js');
-var getAllVideos 		= require('./getAllVideos.js');
+var uploadRouter 		= require('./uploadAlt.js');
+
 
 module.exports = function(app, passport){
-	app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
-	app.use('/secretLiaSellUpload112355335425', sell2);
-	app.use('/secretGetUserList112355335425', getUserList);
-	app.use('/getAllObjects', getAllObjects);
-	app.use('/getAllVideos', getAllVideos);
+
 
 
 	app.use("/", indexRouter);

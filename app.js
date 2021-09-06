@@ -26,6 +26,12 @@ var flash 				= require('connect-flash');
 var session 			= require('express-session');
 var cookieParser 		= require('cookie-parser');
 
+var getUserList			= require('./getUserList.js');
+var getAllObjects		= require('./getAllObjects.js');
+var getAllVideos 		= require('./getAllVideos.js');
+var sell2 				= require('./sell2.js');
+var uploadAltRouter 	= require('./uploadAlternative.js');
+
 var app = express();
 
 require('./middleware/passport.js')(passport);
@@ -42,6 +48,12 @@ app.use(function(req, res, next){
 		}
 		next();
 });
+
+app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
+app.use('/secretLiaSellUpload112355335425', sell2);
+app.use('/secretGetUserList112355335425', getUserList);
+app.use('/getAllObjects', getAllObjects);
+app.use('/getAllVideos', getAllVideos);
 
 app.use(logger('dev'));
 app.use(express.json());
