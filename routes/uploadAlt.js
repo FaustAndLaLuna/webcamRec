@@ -40,7 +40,7 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
-					if(!fTypeCheck.match("^video/")){
+					if(!fTypeCheck.match("^multipart/")){
 						fs.unlink(filePath, function(err){
 							if(err){
 								console.log(err);
@@ -51,7 +51,7 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					let filePath = this.filePath;
-					vidTable.createAssociated("SIN URL", filePath, fields.user, fields.obj, fields.description, fields.title, fields.tags);
+					vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
 					res.redirect("/success.html");
 					res.end();
 					console.log(files);

@@ -41,8 +41,6 @@ router.post('/', function(req, res, next){
 					console.log('An error has occurred uploading a file:\n ' + err);
 				});
 				form.parse(req, function(err, fields, files){
-					console.log(fields);
-					console.log(files);
 					console.log(fTypeCheck);
 					// userRepo.createNew(fields.user, "passwordIsUseless", false);
 					
