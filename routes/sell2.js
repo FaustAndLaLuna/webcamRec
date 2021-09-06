@@ -41,13 +41,23 @@ router.post('/', function(req, res, next){
 			file = files[key];
 			console.log(file);
 			console.log(fields);
-			imgArray.push(file.path.replace("public",""));
+			if(! file.type.match("^image/")){
+				fs.unlink(file.path, function(err){
+					if(err){
+						console.log(err);
+					}
+				});
+			}
+			else{
+				imgArray.push(file.path.replace("public",""));
+			}
 		}
 		if(imgArray.length == 0){
 			res.write("<h1> No subiste ninguna imagen, intenta de nuevo </h1>");
 			return;
 		}
 			//create(title, userID, isAuction, description, history, endDate, images){
+		fields.endDate = new Date(fields.endDate);
 		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
 		objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
 		res.redirect("/success.html");
