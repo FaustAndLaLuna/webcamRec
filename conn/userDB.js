@@ -40,6 +40,24 @@ class userDB{
 			});
 		});
 	}
+
+	getAllUsers(){
+		let q = "SELECT * FROM users;"
+		return new Promise(function(resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err) reject(err);
+				conn.query(q, function(err, result){
+					if(err) reject(err);
+					if(result.length == 0){
+						conn.release();
+						return resolve(false);
+					}
+					conn.release();
+					return(resolve(result));
+				})
+			});
+		});
+	}
 	
 	validate(username, password){
 		let q = "SELECT * FROM users WHERE username = ?;"

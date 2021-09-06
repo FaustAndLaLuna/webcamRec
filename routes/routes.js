@@ -7,12 +7,16 @@ var vidPlayerRouter = require('./vidPlayer.js');
 var contactPostRouter = require('./contacto.js');
 var objectRouter = require('./object.js');
 var recuerdosRouter = require('./recuerdos.js');
-var sell = require('./sell.js');
+var sell2 = require('./sell2.js');
 var biographyRouter = require('./biography.js');
 var uploadRouter 	= require('./uploadAlt.js');
+var getUserList = require('./getUserList.js');
+
 
 module.exports = function(app, passport){
 	app.use('/secretLiaUploadToDisk112355335425', uploadRouter);
+	app.use('/secretLiaSellUpload112355335425', sell2);
+	app.use('/secretGetUserList', getUserList);
 	
 	app.use("/", indexRouter);
 	app.use("/index.html", function(req,res,next){

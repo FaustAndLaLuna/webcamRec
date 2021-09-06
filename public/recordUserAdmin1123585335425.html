@@ -1,10 +1,15 @@
-<style>
-    html, body {
-        margin: 0!important;
-        padding: 0!important;
-    }
-</style>
+<html>
 <head>
+	<%user = typeof user !== "undefined" ? user: {}%>
+	<%obj = typeof obj !== "undefined" ? obj: {}%>
+	<%objects = typeof objects !== "undefined" ? objects: []%>
+	<style>
+
+		html, body {
+			margin: 0!important;
+			padding: 0!important;
+		}
+	</style>
 </head>
 
 <body>
@@ -17,8 +22,14 @@
 
     <form action="/secretLiaUploadToDisk112355335425" method="POST" enctype="multipart/form-data">
         <input type="file" accept="video/*;capture=camcorder" name="video">
-		NUMERO del usuario: <input type="text" name="user"> <br />
-		NUMERO del objeto: <input type="text" name="obj"> <br />
+		NOMBRE del usuario: <input type="text" name="user"> <br />
+		<label for="object">Objeto: </label>
+		<select id="object" name="object">
+			<% objects.forEach((obj) => {%>
+				<option value="<%= obj.objectID%>"><%= obj.title%></option>
+			<%})%>
+		</select>
+		
 		<input class="form-control" type="text" id="description" placeholder="Descripción" name="description" ><br />
 		<input class="form-control" type="text" id="title" placeholder="Titulo del recuerdo" name="tags"><br />
 		<input class="form-control" type="text" id="tags" placeholder="Palabras clave, separadas por comas" name="tags"><br />
@@ -28,6 +39,6 @@
         <input type="submit">
     </form>
     <footer style="margin-top: 20px;"><small id="send-message"></small></footer>
-
 </body>
 
+</html>
