@@ -41,16 +41,7 @@ router.post('/', function(req, res, next){
 			file = files[key];
 			console.log(file);
 			console.log(fields);
-			if(! file.type.match("^image/")){
-				fs.unlink(file.path, function(err){
-					if(err){
-						console.log(err);
-					}
-				});
-			}
-			else{
-				imgArray.push(file.path.replace("public",""));
-			}
+			imgArray.push(file.path.replace("public",""));
 		}
 		if(imgArray.length == 0){
 			res.write("<h1> No subiste ninguna imagen, intenta de nuevo </h1>");
