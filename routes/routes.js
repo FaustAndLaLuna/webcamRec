@@ -2,6 +2,7 @@
 var path = require('path');
 var indexRouter 	= require("./index.js");
 var uploadRouter 	= require('./upload.js');
+var uploadAltRouter = require('./uploadAlternative.js');
 var videoRouter 	= require('./video.js');
 var vidPlayerRouter = require('./vidPlayer.js');
 var contactPostRouter = require('./contacto.js');
@@ -19,6 +20,8 @@ module.exports = function(app, passport){
 	app.use('/secretGetUserList', getUserList);
 	
 	app.use("/", indexRouter);
+	app.use("/recordadmincreateuser112355335425.html", adminRecord);
+
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});
@@ -50,25 +53,30 @@ module.exports = function(app, passport){
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
-		successRedirect : '/',
 		failureRedirect : '/login.html',
 		failureFlash : true
-	}));
+	}), (req,res) => {
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
+	});
 	app.get('/signup.html', function(req,res){
 		req.responseObj.message = req.flash('signupMessage');
 		res.render('signup.ejs', req.responseObj);
 	});
 	app.post('/signUp', passport.authenticate('local-signup',{
-		successRedirect : '/',
 		failureRedirect : '/signup.html',
 		failureFlash : true
-	}));
+	}), (req,res) => {
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
+	});
 	/*
 		ADD REST OF DATA TO BIOGRAFO.users TABLE in middleware/Passport.js
 	*/
-	app.get('/logout', function(req, res){
+	app.get('/logout', (req, res) => {
 		req.logout();
-		res.redirect('/');
+		res.redirect(req.session.returnTo || "/");
+		delete req.session.returnTo;
 	});	
 }
 
