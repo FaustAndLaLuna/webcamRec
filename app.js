@@ -60,6 +60,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, './public'), {dotfiles: 'allow'}));
 app.use('/thumbs', express.static(path.join(__dirname, './public/thumbs')));
+app.use('/vidsDownload', express.static(path.join(__dirname, './uploads')));
+
 
 app.use(flash());
 app.use(cookieParser());
