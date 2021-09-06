@@ -2,11 +2,10 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 
-const userDB = require('../conn/userDB.js');
+const userData = require('../conn/userDB.js');
 var createError = require('http-errors');
-const userDB = require('../conn/userDB.js');
 
-const userDB = new userDB();
+const userDB = new userData();
 
 router.get('/', function(req,res,next){
         userDB.getAllUsers().then(function(response){
