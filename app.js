@@ -19,7 +19,7 @@ var mysql 				= require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('1-59/2 * * * * *', encodeMod.encodeCron);
 job.start();
-const transJob = new CronJob('*/2 * * * * *', transcriptMod.transcriptionCron);
+// const transJob = new CronJob('*/2 * * * * *', transcriptMod.transcriptionCron);
 transJob.start();
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
