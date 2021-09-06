@@ -11,12 +11,11 @@ const vidTable = new videosRepo();
 
 router.get('/', function(req,res,next){
     vidTable.getFromID(req.query.id).then(function(result){
-        console.log(result);
-        // fs.unlink('.'+result.videoURL, (err) => {
-        //     if(err) console.log(err);
-        // });
-        // res.end(JSON.stringify(result));
-        // vidTable.delete(req.query.id);
+        fs.unlink('.'+result[0].videoURL, (err) => {
+            if(err) console.log(err);
+        });
+        res.end(JSON.stringify(result));
+        vidTable.delete(req.query.id);
     });
 });
 
