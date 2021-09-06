@@ -53,7 +53,7 @@ class userDB{
 						return resolve(false);
 					}
 					conn.release();
-					answer = [];
+					var answer = [];
 					for(let i = 0; i < result.length; i++){
 						answer.push({'id': result.id, 'username': result.username});
 					}
