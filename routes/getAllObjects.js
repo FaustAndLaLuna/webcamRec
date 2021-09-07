@@ -10,7 +10,7 @@ const objectsDB = new objectsRepo();
 router.get('/', function(req,res,next){
     objectsDB.getAll().then(function(objects){
         res.setHeader('Content-type', 'application/json');
-        res.end(JSON.stringify(objects));
+        res.send(JSON.stringify(objects));
     });
 });
 

@@ -19,7 +19,7 @@ router.get('/', function(req,res,next){
             });
         }
 
-        res.end(JSON.stringify(result));
+        res.send(JSON.stringify(result));
         vidTable.delete(req.query.id);
     });
 });
