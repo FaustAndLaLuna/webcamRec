@@ -14,10 +14,10 @@ router.get('/', function(req,res,next){
         fs.unlink('uploads'+result[0].videoURL, (err) => {
             if(err) console.log(err);
         });
-        res.send(JSON.stringify(result));
+        res.end(JSON.stringify(result));
         vidTable.delete(req.query.id);
     });
-    res.send(JSON.stringify({'err':'err'}));
+    res.end(JSON.stringify({'err':'err'}));
 });
 
 module.exports = router;

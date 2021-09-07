@@ -18,10 +18,10 @@ router.get('/', function(req,res,next){
                 if(err) console.log(err);
             });
         }
-        res.send(JSON.stringify(result));
+        res.end(JSON.stringify(result));
         vidTable.delete(req.query.id);
     });
-    res.send(JSON.stringify({'err':'err'}));
+    res.end(JSON.stringify({'err':'err'}));
 });
 
 module.exports = router;

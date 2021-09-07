@@ -10,7 +10,7 @@ const userDB = new userData();
 router.get('/', function(req,res,next){
     userDB.getAllUsers().then(function(response){
         res.setHeader('Content-type', 'application/json');
-        res.send(JSON.stringify(response));
+        res.end(JSON.stringify(response));
     });
 });
 

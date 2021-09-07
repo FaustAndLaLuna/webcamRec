@@ -11,7 +11,7 @@ const vidTable = new videosRepo();
 router.get('/', function(req,res,next){
     vidTable.getAll().then(function(videos){
         res.setHeader('Content-type', 'application/json');
-        res.send(JSON.stringify(videos));
+        res.end(JSON.stringify(videos));
     });
 });
 
