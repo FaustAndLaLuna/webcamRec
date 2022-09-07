@@ -17,7 +17,7 @@ router.get('/', function(req,res,next){
         tit = req.query.tit;
         desc = req.query.desc;
         hist = req.query.hist;
-        vidTable.update(objectID, tit, desc, hist);
+        vidTable.update(id, tit, desc, hist);
     });
     res.end(JSON.stringify({'err':'err'}));
 });
