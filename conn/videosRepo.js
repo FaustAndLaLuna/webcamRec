@@ -61,6 +61,18 @@ class videosRepo{
 		});
 	}
 	
+	update(videoID, description, title, tags, transcription, objectID){
+		let q = 'UPDATE videos SET description = ?, title = ?, tags = ?, transcription = ?, objectID = ? WHERE videoID = ?';
+		POOL.getConnection(function(err, conn){
+			if (err)	console.log(err);
+			conn.query(q, [description, title, tags, transcription, objectID, videoID], function(err, result){
+				if(err)	console.log(err);
+					conn.release();
+					return;
+			});
+		});
+	}
+
 	updateToTranscripted(transcription, videoID){
 		let q = 'UPDATE videos SET transcription = ?, isTranscripted = TRUE WHERE videoID = ?';
 		POOL.getConnection(function(err, conn){

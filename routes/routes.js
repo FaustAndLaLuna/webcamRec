@@ -12,11 +12,16 @@ var adminRecord 		= require("./adminRecord.js");
 var uploadRouter 		= require('./uploadAlt.js');
 var removeVideo			= require('./removeVideo.js')
 var removeItem			= require('./removeItem.js')
+var updateVideo			= require('./updateVideo.js')
+var updateItem			= require('./updateItem.js')
 
 
 module.exports = function(app, passport){
 	app.use("/secretLiaRemoveVideo112355335425", removeVideo);
 	app.use("/secretLiaRemoveItem112355335425", removeItem);
+
+	app.use("/secretLiaUpdateVideo112355335425", updateVideo);
+	app.use("/secretLiaUpdateItem112355335425", updateItem);
 
 
 	app.use("/", indexRouter);
