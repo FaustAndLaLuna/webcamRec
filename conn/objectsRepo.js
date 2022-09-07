@@ -73,7 +73,7 @@ class objectsRepo{
 	}
 	
 	update(objectID, title, description, history){
-		let q = 'UPDATE objects SET title = ?, description = ?, history = ? WHERE videoID = ?';
+		let q = 'UPDATE objects SET title = ?, description = ?, history = ? WHERE objectID = ?';
 		POOL.getConnection(function(err, conn){
 			if (err)	console.log(err);
 			conn.query(q, [title, description, history, objectID], function(err, result){
