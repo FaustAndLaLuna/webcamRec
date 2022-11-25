@@ -33,7 +33,7 @@ async function transcription(videoID, URLtoVid){
 		let srcFileName = convFilePath.slice(convFilePath.indexOf("uploads/") + "uploads/".length);
 		// console.log(srcFileName)
 		// console.log(convFilePath)
-		console.log(`gs://${bucketName}/${srcFileName}`)
+		// console.log(`gs://${bucketName}/${srcFileName}`)
 
 		await storage
 		.bucket(bucketName)
@@ -52,11 +52,11 @@ async function transcription(videoID, URLtoVid){
 		let transcription = response.results
 		console.log(transcription);
 
-		ans = []
+		let ans = [];
 		for(let i = 0; i < transcription.length; i++){
-			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
-				console.log(transcription[i]['alternatives'][0]['words'][j]);
-				ans.push(transcription[i]['alternatives'][0]['words'][j]);
+			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
+				console.log(transcription[i].alternatives[0].words[j]);
+				ans.push(transcription[i].alternatives[0].words[j]);
 			}
 		}
 		
