@@ -64,9 +64,9 @@ async function transcription(videoID, URLtoVid){
 			console.log(transcription[i].alternatives[0].words[0])
 			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
 				tempWord = transcription[i].alternatives[0].words[j].word;
-				startTime = parseInt(transcription[i].alternatives[0].words[j].startTime.second);
+				startTime = parseInt(transcription[i].alternatives[0].words[j].startTime.seconds.low);
 				startTime += parseFloat('.'+transcription[i].alternatives[0].words[j].startTime.nanos);
-				endTime = parseInt(transcription[i].alternatives[0].words[j].endTime.second);
+				endTime = parseInt(transcription[i].alternatives[0].words[j].endTime.seconds.low);
 				endTime += parseFloat('.'+transcription[i].alternatives[0].words[j].endTime.nanos);
 				tempAns = {word:tempWord,
 						startTime: startTime,
