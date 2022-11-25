@@ -28,22 +28,27 @@ async function transcription(videoID, URLtoVid){
 	.format('mp3')
 	.noVideo()
 	.audioCodec('libmp3lame')
-	.audioFrequency(22050)
+	.audioFrequency(44100)
 	.on('end', async () =>{
 		
 		const file = fs.readFileSync(convFilePath);
 		const audioBytes = file.toString('base64');
 		
 		const audio = {content: audioBytes};
-		const config = {encoding: 'mp3', sampleRateHertz:22050, languageCode: 'es-ar'};
+		const config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
 		const request = {audio:audio, config:config};
 		console.log("waiting for google");
 		const [response] = await client.recognize(request);
 		console.log(response);
 		const transcription = response.results
-		.map(result => result.alternatives[0].transcript)
-		.join('\n');
-		transcriptionArray = JSON.stringify(transcription.split('\n'));
+		ans = []
+		for(let i = 0; i < transcription.length; i++){
+			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
+				ans.push(transcription[i]['alternatives'][0]['words'][j]);
+			}
+		}
+		
+		transcriptionArray = JSON.stringify(ans);
 		
 		console.log(transcriptionArray);
 		vidTable.updateToTranscripted(transcriptionArray, videoID);

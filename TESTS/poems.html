@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<script src="https://unpkg.com/compromise"></script>
+		<script>
+			var is_loaded = false;
+			wikiText1 = '';
+			wikiText2 = '';
+			function load_wiki_1(){
+				$('#hidden-wiki-text-1').load('https://es.wikipedia.org/wiki/Radiohead .mw-parser-output > p');
+				$('#wiki-button-1').prop('disabled', 'true');
+				$('#hidden-wiki-text-1 p').each((i, el) => {
+					wikiText1 += $(el).text();
+				})
+			}
+			function load_wiki_2(){
+				$('#hidden-wiki-text-2').load('https://es.wikipedia.org/wiki/Coldplay .mw-parser-output > p');
+				$('#wiki-button-2').prop('disabled', 'true');
+				$('#hidden-wiki-text-2 p').each((i, el) => {
+					wikiText2 += $(el).text();
+				})
+			}
+			function clean_data(){
+				$('#hidden-wiki-text-2 p').each((i, el) => {
+					wikiText += $(el).text();
+				})
+				$('#hidden-wiki-text-1 p').each((i, el) => {
+					wikiText += $(el).text();
+				})
+
+			}
+			function generate_poem(){
+				
+			}
+		</script>
+		<style>
+			main{
+				width: 1366px;
+				height: 450px;
+				border: 1px solid black;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			#poesia{
+				text-align: center;
+			}
+			.center-div{
+				width: 100vw;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.center-poetry{
+				text-align: center;
+			}
+			.wiki-info{
+				width: calc(1366px/2 - 1px);
+				height: 450px;
+				border: 1px solid black;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			button{
+				color: white;
+				background: rgb(14, 5, 78);
+				padding: 20px;
+				min-width: 100px;
+				border: 1px solid black;
+				border-radius: 4px;
+			}
+			button:disabled{
+				background: lightgray;
+			}
+			.hidden-wiki-text{
+				display:none;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="center-div">
+			<main>
+				<div class="center-poetry">
+					<p id="poetry">Hola</p> <br>
+					<button>Generar Poesía</button>
+				</div>
+			</main>
+		</div>
+		<div class="center-div">
+			<div class="wiki-info">
+				<div>
+					<div id='hidden-wiki-text-1' class="hidden-wiki-text"></div>
+					<input type="text" name="" id="wiki-url-1" class="wiki-url"> <br>
+					<br>
+					<button id="wiki-button-1" onclick="load_wiki_1()">Obtener Documento</button>
+				</div>
+			</div>
+			<div class="wiki-info">
+				<div>
+					<div id='hidden-wiki-text-2' class="hidden-wiki-text"></div>
+					<input type="text" name="" id="wiki-url-1" class="wiki-url"> <br>
+					<br>
+					<button id="wiki-button-2" onclick="load_wiki_2()">Obtener Documento</button>
+				</div>
+			</div>
+		</div>
+		
+	</body>
+</html>
