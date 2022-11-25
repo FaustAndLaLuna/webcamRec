@@ -45,6 +45,7 @@ function getPhraseVideoObject(phrase){
 }
 
 function destroyVideoElement(element){
+	element.pause();
 	element.remove();
 }
 
