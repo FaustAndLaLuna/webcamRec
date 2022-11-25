@@ -12,9 +12,9 @@ function encode(videoID, URLtoVid){
 	
 	console.log("Encoding started.")
 	
-	filename = URLtoVid.replace(/\..*/, "");
-	filePath = path.resolve(URLtoVid);
-	convFilePath = path.resolve(filename+".mp4");
+	let filename = URLtoVid.replace(/\..*/, "");
+	let filePath = path.resolve(URLtoVid);
+	let convFilePath = path.resolve(filename+".mp4");
 	filename = filename.slice(filename.indexOf("uploads") + "uploads".length)+".mp4";
 	
 	ffmpeg(filePath)
@@ -23,7 +23,7 @@ function encode(videoID, URLtoVid){
 	.size(SIZE)
 	.videoCodec('libx264')
 	.on('progress', (progress) => {
-		console.log('Processing: ' + progress.percent + '% done.')
+		console.log('Encoding Video: ' + progress.percent + '% done.')
 	})
 	.on('end', () =>{
 		vidTable.updateToEncoded(filename, URLtoVid)
