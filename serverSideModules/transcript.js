@@ -5,8 +5,9 @@ const genThumbnail = require('simple-thumbnail');
 const videosRepo = require('../conn/videosRepo');
 
 const vidTable = new videosRepo();
-const speech = require('@google-cloud/speech').v1p1beta1;
+const speech = require('@google-cloud/speech');
 const client= new speech.SpeechClient();
+const {Storage} = require('@google-cloud/storage');
 
 
 const SIZE = '480x?';
@@ -31,32 +32,46 @@ async function transcription(videoID, URLtoVid){
 		let file = fs.readFileSync(convFilePath);
 		let audioBytes = file.toString('base64');
 		
-		let audio = {content: audioBytes};
-		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
-		let request = {audio:audio, config:config};
-		console.log("waiting for google");
-		let [response] = await client.recognize(request);
-		console.log(response);
-		let transcription = response.results
-		ans = []
-		for(let i = 0; i < transcription.length; i++){
-			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
-				ans.push(transcription[i]['alternatives'][0]['words'][j]);
-			}
-		}
+		const storage = new Storage({projectID: 'Biografo'});
+		const bucketName = 'biografo';
+		const srcFileName = convFilePath;
 		
-		let transcriptionArray = JSON.stringify(ans);
+		console.log(`gs://${bucket}/${convFilePath}`)
+
+		// await storage
+		// .bucket(bucketName)
+		// .upload(srcFileName, {destination: srcFileName})
+
 		
-		console.log(transcriptionArray);
-		vidTable.updateToTranscripted(transcriptionArray, videoID);
+
+		// let audio = {uri: `gs://${bucket}/${convFilePath}`};
+		// let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
+		// let request = {audio:audio, config:config};
+		// console.log("waiting for google");
+		// let [operation] = await client.longRunningRecognize(request);
+		// let [response] = await operation.promise();
+
+		// console.log(response);
+		// let transcription = response.results
+		// ans = []
+		// for(let i = 0; i < transcription.length; i++){
+		// 	for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
+		// 		ans.push(transcription[i]['alternatives'][0]['words'][j]);
+		// 	}
+		// }
 		
-		fs.unlink(convFilePath, (err) => {
-			if(err){
-				console.error(err);
-			}
-		});
-		ISWORKING = false;
-		console.log("Transcription ended.")
+		// let transcriptionArray = JSON.stringify(ans);
+		
+		// console.log(transcriptionArray);
+		// vidTable.updateToTranscripted(transcriptionArray, videoID);
+		
+		// fs.unlink(convFilePath, (err) => {
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// });
+		// ISWORKING = false;
+		// console.log("Transcription ended.")
 	})
 	.on('error', function(err, stdout, stderr){
 		console.log("Error: Corrupted video, aborting. Cause: " + err.message);
