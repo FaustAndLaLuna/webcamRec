@@ -42,7 +42,7 @@ async function transcription(videoID, URLtoVid){
 		
 
 		let audio = {uri: `gs://${bucketName}/${srcFileName}`};
-		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
+		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-ar'};
 		let request = {audio:audio, config:config};
 		console.log("waiting for google");
 		let [operation] = await client.longRunningRecognize(request);
@@ -54,8 +54,8 @@ async function transcription(videoID, URLtoVid){
 
 		ans = []
 		for(let i = 0; i < transcription.length; i++){
-			console.log(transcription[i])
 			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
+				console.log(transcription[i]['alternatives'][0]['words'][j]);
 				ans.push(transcription[i]['alternatives'][0]['words'][j]);
 			}
 		}
