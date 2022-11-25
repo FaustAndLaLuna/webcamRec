@@ -45,7 +45,7 @@ async function transcription(videoID, URLtoVid){
 		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-ar'};
 		let request = {audio:audio, config:config};
 		console.log("waiting for google");
-		let [operation] = await client.longRunningRecognize(request);
+		let [operation] = await client.recognize(request);
 		let [response] = await operation.promise();
 
 		console.log(response.totalBilledTime)
