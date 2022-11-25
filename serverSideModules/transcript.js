@@ -48,7 +48,7 @@ async function transcription(videoID, URLtoVid){
 						languageCode: 'es-AR', 
 						alternativeLanguageCodes:['es-MX', 'es-ES', 'es-CL'],
 						useEnhanced:true,
-						enableWordConfidence:true
+						enableWordTimeOffsets:true
 					};
 		let request = {audio:audio, config:config};
 		console.log("waiting for google");
