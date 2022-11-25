@@ -61,10 +61,10 @@ function createVideoElement(source){
 	video.addEventListener('loadedmetadata', function() {
 		this.currentTime = startTime;
 		this.play();
+		setTimeout(destroyVideoElement, delta, video);
 	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
-	setTimeout(destroyVideoElement, delta, video);
 }
 
 function createVideoSequence(videoObj){
