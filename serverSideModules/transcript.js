@@ -30,7 +30,7 @@ async function transcription(videoID, URLtoVid){
 	.on('end', async () =>{
 		const storage = new Storage({projectID: 'Biografo'});
 		const bucketName = 'biografo';
-		let srcFileName = convFilePath.slice(convFilePath.indexOf("uploads") + "uploads".length);
+		let srcFileName = convFilePath.slice(convFilePath.indexOf("uploads/") + "uploads/".length);
 		console.log(srcFileName)
 		console.log(convFilePath)
 		// console.log(`gs://${bucketName}/${srcFileName}`)
