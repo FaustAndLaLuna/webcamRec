@@ -71,7 +71,7 @@ function createVideoSequence(videoObj){
 	let delta = 0;
 	for(let i = 0; i < videoObj.length; i++){
 		setTimeout(createVideoElement, delta, videoObj[i]);
-		delta += ((videoObj[i].endTime - videoObj[i].startTime) * 1000);
+		delta += ((videoObj[i].endTime - videoObj[i].startTime) * 1000)+100;
 	}
 }
 
