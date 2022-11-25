@@ -1,3 +1,4 @@
+process.env.GOOGLE_APPLICATION_CREDENTIALS = '/home/fall/liaBIOGRAFO.json';
 const https = require('https');
 const fs = require('fs');
 
