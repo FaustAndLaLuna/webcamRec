@@ -36,7 +36,7 @@ async function transcription(videoID, URLtoVid){
 		const bucketName = 'biografo';
 		const srcFileName = convFilePath;
 		
-		console.log(`gs://${bucketName}${srcFileName}`)
+		console.log(`gs://${bucketName}/${srcFileName}`)
 
 		await storage
 		.bucket(bucketName)
@@ -44,7 +44,7 @@ async function transcription(videoID, URLtoVid){
 		.catch((error) => {console.log(error)})
 		
 
-		let audio = {uri: `gs://${bucketName}${srcFileName}`};
+		let audio = {uri: `gs://${bucketName}/${srcFileName}`};
 		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
 		let request = {audio:audio, config:config};
 		console.log("waiting for google");
