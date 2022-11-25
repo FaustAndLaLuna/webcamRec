@@ -6,7 +6,7 @@ const videosRepo = require('../conn/videosRepo');
 
 const vidTable = new videosRepo();
 const speech = require('@google-cloud/speech');
-const client= new speech.SpeechClient();
+const client= new speech.SpeechClient({projectID: 'Biografo'});
 const {Storage} = require('@google-cloud/storage');
 
 
