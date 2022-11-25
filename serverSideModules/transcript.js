@@ -59,6 +59,8 @@ async function transcription(videoID, URLtoVid){
 			console.log(transcription[i].alternatives[0].transcript)
 			console.log('--------------')
 			console.log(transcription[i].alternatives[0].words)
+			console.log('--------------')
+			console.log(transcription[i].alternatives[0].words.length)
 			ans.push(... transcription[i].alternatives[0].words)
 		}
 		
