@@ -41,7 +41,7 @@ async function transcription(videoID, URLtoVid){
 		await storage
 		.bucket(bucketName)
 		.upload(srcFileName, {destination: srcFileName})
-
+		.catch((error) => {console.log(error)})
 		
 
 		let audio = {uri: `gs://${bucketName}${srcFileName}`};
