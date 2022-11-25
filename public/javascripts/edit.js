@@ -53,12 +53,13 @@ function createVideoElement(source){
 	let delta = ((source.endTime - source.startTime) * 1000);
 	let video = document.createElement('video');
 	video.src = 'uploads'+source.videoURL;
+	video.autoplay = true;
 	video.controls = false;
 	video.muted = false;
-	video.addEventListener('loadedmetadata', () => {this.currentTime = startTime});
+	video.addEventListener('loadedmetadata', () => {this.currentTime = startTime; this.play();});
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
-	setTimeout(destroyVideoElement, delta, video);
+	// setTimeout(destroyVideoElement, delta, video);
 }
 
 function createVideoSequence(videoObj){
