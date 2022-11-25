@@ -55,10 +55,7 @@ async function transcription(videoID, URLtoVid){
 		let ans = [];
 		for(let i = 0; i < transcription.length; i++){
 			console.log(... transcription[i].alternatives[0].words)
-			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
-				console.log(transcription[i].alternatives[0].words[j]);
-				ans.push(transcription[i].alternatives[0].words[j]);
-			}
+			ans.push(... transcription[i].alternatives[0].words)
 		}
 		
 		let transcriptionArray = JSON.stringify(ans);
