@@ -61,7 +61,7 @@ async function transcription(videoID, URLtoVid){
 
 		let ans = [];
 		for(let i = 0; i < transcription.length; i++){
-			tempWords = []
+			console.log(transcription[i].alternatives[0].words[0])
 			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
 				tempWord = transcription[i].alternatives[0].words[j].word;
 				startTime = parseInt(transcription[i].alternatives[0].words[j].startTime.second);
