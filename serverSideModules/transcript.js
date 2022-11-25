@@ -44,7 +44,7 @@ async function transcription(videoID, URLtoVid){
 
 		
 
-		// let audio = {uri: `gs://${bucket}/${convFilePath}`};
+		// let audio = {uri: `gs://${bucketName}/${srcFileName}`};
 		// let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
 		// let request = {audio:audio, config:config};
 		// console.log("waiting for google");
