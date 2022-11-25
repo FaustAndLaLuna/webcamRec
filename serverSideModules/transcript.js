@@ -54,6 +54,7 @@ async function transcription(videoID, URLtoVid){
 
 		ans = []
 		for(let i = 0; i < transcription.length; i++){
+			console.log(transcription[i])
 			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
 				ans.push(transcription[i]['alternatives'][0]['words'][j]);
 			}
