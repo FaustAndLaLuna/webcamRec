@@ -22,6 +22,9 @@ function encode(videoID, URLtoVid){
 	.format('mp4')
 	.size(SIZE)
 	.videoCodec('libx264')
+	.on('progress', (progress) => {
+		console.log('Processing: ' + progress.percent + '% done.')
+	})
 	.on('end', () =>{
 		vidTable.updateToEncoded(filename, URLtoVid)
 		genThumbnail(convFilePath, 
