@@ -62,7 +62,7 @@ function createVideoElement(source){
 	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
-	// setTimeout(destroyVideoElement, delta, video);
+	setTimeout(destroyVideoElement, delta, video);
 }
 
 function createVideoSequence(videoObj){
