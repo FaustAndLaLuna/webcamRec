@@ -10,7 +10,6 @@ const SIZE = '480x?';
 
 function encode(videoID, URLtoVid){
 	
-	ISWORKING = true;
 	console.log("Encoding started.")
 	
 	filename = URLtoVid.replace(/\..*/, "");
@@ -51,6 +50,7 @@ function encode(videoID, URLtoVid){
 async function encodeCron(){
 	console.log("Am I encoding? " + ISWORKING);
 	if(!ISWORKING){
+		ISWORKING = true;
 		vidTable.getNextEncodable().then((result) => {
 			if(result.length == 0){
 				return;
