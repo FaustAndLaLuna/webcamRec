@@ -61,14 +61,19 @@ async function transcription(videoID, URLtoVid){
 
 		let ans = [];
 		for(let i = 0; i < transcription.length; i++){
-			console.log(transcription[i].alternatives[0])
-			console.log('--------------')
-			console.log(transcription[i].alternatives[0].transcript)
-			console.log('--------------')
-			console.log(transcription[i].alternatives[0].words)
-			console.log('--------------')
-			console.log(transcription[i].alternatives[0].words.length)
-			ans.push(... transcription[i].alternatives[0].words)
+			tempWords = []
+			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
+				tempWord = transcription[i].alternatives[0].words[j].word;
+				startTime = parseInt(transcription[i].alternatives[0].words[j].startTime.second);
+				startTime += parseFloat('.'+transcription[i].alternatives[0].words[j].startTime.nanos);
+				endTime = parseInt(transcription[i].alternatives[0].words[j].endTime.second);
+				endTime += parseFloat('.'+transcription[i].alternatives[0].words[j].endTime.nanos);
+				tempAns = {word:tempWord,
+						startTime: startTime,
+						endTime: endTime
+				}
+				ans.push(tempAns)
+			}
 		}
 		
 		let transcriptionArray = JSON.stringify(ans);
