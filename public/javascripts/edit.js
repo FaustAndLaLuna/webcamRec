@@ -56,7 +56,10 @@ function createVideoElement(source){
 	video.autoplay = true;
 	video.controls = false;
 	video.muted = false;
-	video.addEventListener('loadedmetadata', () => {this.currentTime = startTime; this.play();});
+	video.addEventListener('loadedmetadata', function() {
+		this.currentTime = startTime;
+		this.play();
+	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
 	// setTimeout(destroyVideoElement, delta, video);
