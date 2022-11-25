@@ -10,17 +10,20 @@
 				width: 100vw;
 				height: 100vh;
 				opacity: 0;
+				z-index: -100;
+			}
+			video.main{
+				opacity: 1;
+			}
+			#videoContainer{
+				width: 100vw;
+				height: 100vh;
 			}
 		</style>
 	</head>
 	<body>
-		<video class="main" controls="false" type="video/mp4"></video>
-		<video class="buffer1" controls="false" type="video/mp4"></video>
-		<video class="buffer2" controls="false" type="video/mp4"></video>
-		<video class="buffer3" controls="false" type="video/mp4"></video>
-		<video class="buffer4" controls="false" type="video/mp4"></video>
-		<video class="buffer5" controls="false" type="video/mp4"></video>
-		<video class="buffer6" controls="false" type="video/mp4"></video>
-		
+		<div id="videoContainer">
+			
+		</div>
 	</body>
 </html>
