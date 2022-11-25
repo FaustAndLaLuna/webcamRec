@@ -16,12 +16,9 @@ async function transcription(videoID, URLtoVid){
 	ISWORKING = true;
 	console.log("Transcription started.")
 	
-	filename = URLtoVid.replace(/\..*/, "");
-	filePath = path.resolve("./uploads"+URLtoVid);
-	convFilePath = path.resolve("./uploads" +filename+".mp3");
-	
-	console.log(filePath);
-	console.log(convFilePath);
+	let filename = URLtoVid.replace(/\..*/, "");
+	let filePath = path.resolve("./uploads"+URLtoVid);
+	let convFilePath = path.resolve("./uploads" +filename+".mp3");
 	
 	ffmpeg(filePath)
 	.output(convFilePath)
@@ -31,16 +28,16 @@ async function transcription(videoID, URLtoVid){
 	.audioFrequency(44100)
 	.on('end', async () =>{
 		
-		const file = fs.readFileSync(convFilePath);
-		const audioBytes = file.toString('base64');
+		let file = fs.readFileSync(convFilePath);
+		let audioBytes = file.toString('base64');
 		
-		const audio = {content: audioBytes};
-		const config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
-		const request = {audio:audio, config:config};
+		let audio = {content: audioBytes};
+		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
+		let request = {audio:audio, config:config};
 		console.log("waiting for google");
-		const [response] = await client.recognize(request);
+		let [response] = await client.recognize(request);
 		console.log(response);
-		const transcription = response.results
+		let transcription = response.results
 		ans = []
 		for(let i = 0; i < transcription.length; i++){
 			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
@@ -48,7 +45,7 @@ async function transcription(videoID, URLtoVid){
 			}
 		}
 		
-		transcriptionArray = JSON.stringify(ans);
+		let transcriptionArray = JSON.stringify(ans);
 		
 		console.log(transcriptionArray);
 		vidTable.updateToTranscripted(transcriptionArray, videoID);

@@ -12,13 +12,13 @@ var vidTable = new videosRepo();
 //<p><%= vid.title%><br><%= vid.description%><br><%= vid.tags%><br><%= vid.linkedObj%><br><%= vid.createdAt%></p>
 router.post('/', function(req, res, next){
 	//TODO: Add userID and objectID.
-	filename = uuidv4();
-	thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
+	let filename = uuidv4();
+	let thumbFolder = "/"+ filename.slice(0,1)+"/"+filename.slice(1,2)+"/"+filename.slice(2,3)+
 				"/"+filename.slice(3,4)+"/";
-	thumbName = filename.slice(4) + ".png";
+	let thumbName = filename.slice(4) + ".png";
 	filename = thumbFolder + filename.slice(4);
-	filePath = path.resolve('./uploads'+filename+".webm");
-	convFilePath = path.resolve('./uploads'+filename+".mp4");
+	let filePath = path.resolve('./uploads'+filename+".webm");
+	let convFilePath = path.resolve('./uploads'+filename+".mp4");
 	mkdirp(path.dirname(filePath), function (err){
 		if(err)
 			console.log(err);

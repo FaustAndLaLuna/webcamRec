@@ -51,7 +51,7 @@ function encode(videoID, URLtoVid){
 
 
 async function encodeCron(){
-	console.log("Am I encoding? " + ISWORKING);
+	console.log("Am I encoding/transcribing? " + ISWORKING);
 	if(!ISWORKING){
 		ISWORKING = true;
 		vidTable.getNextEncodable().then((result) => {
