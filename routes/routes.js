@@ -31,7 +31,7 @@ module.exports = function(app, passport){
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});
-	app.use("/edicion", edicion);
+	app.use("/edicion", edicionRouter);
 	app.use("/recuerdos.html", recuerdosRouter);
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);
