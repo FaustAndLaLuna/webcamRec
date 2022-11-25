@@ -53,11 +53,11 @@ function encode(videoID, URLtoVid){
 async function encodeCron(){
 	console.log("Am I encoding/transcribing? " + ISWORKING);
 	if(!ISWORKING){
-		ISWORKING = true;
 		vidTable.getNextEncodable().then((result) => {
 			if(result.length == 0){
 				return;
 			}
+			ISWORKING = true;
 			encode(result[0].videoID, result[0].tempURL);
 			}).catch(function(err){
 				console.log(err);
