@@ -28,13 +28,9 @@ async function transcription(videoID, URLtoVid){
 	.audioCodec('libmp3lame')
 	.audioFrequency(44100)
 	.on('end', async () =>{
-		
-		let file = fs.readFileSync(convFilePath);
-		let audioBytes = file.toString('base64');
-		
 		const storage = new Storage({projectID: 'Biografo'});
 		const bucketName = 'biografo';
-		const srcFileName = convFilePath;
+		let srcFileName = convFilePath.slice(filename.indexOf("uploads") + "uploads".length);
 		
 		console.log(`gs://${bucketName}/${srcFileName}`)
 
