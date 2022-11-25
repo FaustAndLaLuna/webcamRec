@@ -36,7 +36,7 @@ async function transcription(videoID, URLtoVid){
 		const bucketName = 'biografo';
 		const srcFileName = convFilePath;
 		
-		console.log(`gs://${bucket}/${convFilePath}`)
+		console.log(`gs://${bucketName}/${srcFileName}`)
 
 		// await storage
 		// .bucket(bucketName)
