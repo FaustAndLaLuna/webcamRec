@@ -31,43 +31,44 @@ async function transcription(videoID, URLtoVid){
 		const storage = new Storage({projectID: 'Biografo'});
 		const bucketName = 'biografo';
 		let srcFileName = convFilePath.slice(filename.indexOf("uploads") + "uploads".length);
-		
-		console.log(`gs://${bucketName}/${srcFileName}`)
+		console.log(srcFileName)
+		console.log(convFilePath)
+		// console.log(`gs://${bucketName}/${srcFileName}`)
 
-		await storage
-		.bucket(bucketName)
-		.upload(srcFileName, {destination: srcFileName})
-		.catch((error) => {console.log(error)})
+		// await storage
+		// .bucket(bucketName)
+		// .upload(convFilePath, {destination: srcFileName})
+		// .catch((error) => {console.log(error)})
 		
 
-		let audio = {uri: `gs://${bucketName}/${srcFileName}`};
-		let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
-		let request = {audio:audio, config:config};
-		console.log("waiting for google");
-		let [operation] = await client.longRunningRecognize(request);
-		let [response] = await operation.promise();
+		// let audio = {uri: `gs://${bucketName}/${srcFileName}`};
+		// let config = {encoding: 'mp3', sampleRateHertz:44100, languageCode: 'es-mx'};
+		// let request = {audio:audio, config:config};
+		// console.log("waiting for google");
+		// let [operation] = await client.longRunningRecognize(request);
+		// let [response] = await operation.promise();
 
-		console.log(response);
-		let transcription = response.results
-		ans = []
-		for(let i = 0; i < transcription.length; i++){
-			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
-				ans.push(transcription[i]['alternatives'][0]['words'][j]);
-			}
-		}
+		// console.log(response);
+		// let transcription = response.results
+		// ans = []
+		// for(let i = 0; i < transcription.length; i++){
+		// 	for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
+		// 		ans.push(transcription[i]['alternatives'][0]['words'][j]);
+		// 	}
+		// }
 		
-		let transcriptionArray = JSON.stringify(ans);
+		// let transcriptionArray = JSON.stringify(ans);
 		
-		console.log(transcriptionArray);
-		vidTable.updateToTranscripted(transcriptionArray, videoID);
+		// console.log(transcriptionArray);
+		// vidTable.updateToTranscripted(transcriptionArray, videoID);
 		
-		fs.unlink(convFilePath, (err) => {
-			if(err){
-				console.error(err);
-			}
-		});
-		ISWORKING = false;
-		console.log("Transcription ended.")
+		// fs.unlink(convFilePath, (err) => {
+		// 	if(err){
+		// 		console.error(err);
+		// 	}
+		// });
+		// ISWORKING = false;
+		// console.log("Transcription ended.")
 	})
 	.on('error', function(err, stdout, stderr){
 		console.log("Error: Corrupted video, aborting. Cause: " + err.message);
