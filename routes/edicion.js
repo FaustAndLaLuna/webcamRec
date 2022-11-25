@@ -9,6 +9,9 @@ router.get('/', function(req, res, next) {
 	resObj = {};
 	
 	vidTable.getAllTranscripted().then((allVids) => {
+		for(let i = 0; i < allVids.length; i++){
+			allVids[i].transcription = JSON.parse(allVids[i].transcription);
+		}
 		res.json(allVids);
 	});
 	

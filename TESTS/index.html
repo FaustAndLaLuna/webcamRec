@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+		<script>
+			var object = [];
+			jQuery.getJSON('/edicion', (data) => {
+				for(let i = 0; i < data.length; i++){
+					data[i].words = JSON.parse(data[i].words);
+					data[i].transcript = "";
+					temp = {}
+					temp.videoURL = data[i].videoURL;
+					temp.title = data[i].title;
+					temp.words = data[i].words;
+					temp.transcript = ''
+					for(let j = 0; j < data[i].words.length; j++){
+						temp.transcript += " " + data[i].words[j].word;
+					}
+					temp.transcript = temp.transcript.slice(1);
+					object.push(data[i]);
+				}
+			})
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>
