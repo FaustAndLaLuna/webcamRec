@@ -48,8 +48,10 @@ async function transcription(videoID, URLtoVid){
 		let [operation] = await client.longRunningRecognize(request);
 		let [response] = await operation.promise();
 
-		console.log(response);
+		console.log(response.totalBilledTime)
 		let transcription = response.results
+		console.log(transcription);
+
 		ans = []
 		for(let i = 0; i < transcription.length; i++){
 			for(let j = 0; j < transcription[i]['alternatives'][0]['words'].length; j++){
