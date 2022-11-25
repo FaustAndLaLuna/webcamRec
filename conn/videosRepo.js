@@ -85,6 +85,19 @@ class videosRepo{
 		});
 	}
 	
+	getAllTranscripted(){
+		return new Promise(function (resolve, reject){
+			POOL.getConnection(function(err, conn){
+				if(err)	reject(err);
+				conn.query("SELECT title, transcription, videoURL FROM videos WHERE isTranscripted = 1;", function(err, result){
+					conn.release();
+					if(err) reject(err);
+					return resolve(result);
+				});
+			});
+		});
+	}
+
 	getNextTranscriptable(){
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){

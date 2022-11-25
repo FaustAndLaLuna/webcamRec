@@ -10,10 +10,11 @@ var recuerdosRouter 	= require('./recuerdos.js');
 var biographyRouter 	= require('./biography.js');
 var adminRecord 		= require("./adminRecord.js");
 var uploadRouter 		= require('./uploadAlt.js');
-var removeVideo			= require('./removeVideo.js')
-var removeItem			= require('./removeItem.js')
-var updateVideo			= require('./updateVideo.js')
-var updateItem			= require('./updateItem.js')
+var removeVideo			= require('./removeVideo.js');
+var removeItem			= require('./removeItem.js');
+var updateVideo			= require('./updateVideo.js');
+var updateItem			= require('./updateItem.js');
+var edicionRouter		= require('./edicion.js');
 
 
 module.exports = function(app, passport){
@@ -30,6 +31,7 @@ module.exports = function(app, passport){
 	app.use("/index.html", function(req,res,next){
 		res.redirect('/');
 	});
+	app.use("/edicion", edicion);
 	app.use("/recuerdos.html", recuerdosRouter);
 	app.get('/aboutUs.html', function(req, res, next) {
 		res.render('aboutUs.ejs', req.responseObj);

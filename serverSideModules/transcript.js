@@ -57,11 +57,9 @@ async function transcription(videoID, URLtoVid){
 
 		console.log(response.totalBilledTime)
 		let transcription = response.results
-		console.log(transcription);
 
 		let ans = [];
 		for(let i = 0; i < transcription.length; i++){
-			console.log(transcription[i].alternatives[0].words[0])
 			for(let j = 0; j < transcription[i].alternatives[0].words.length; j++){
 				tempWord = transcription[i].alternatives[0].words[j].word;
 				startTime = parseInt(transcription[i].alternatives[0].words[j].startTime.seconds.low);
@@ -74,6 +72,9 @@ async function transcription(videoID, URLtoVid){
 				}
 				ans.push(tempAns)
 			}
+			console.log(transcription[i].alternatives[0].transcript)
+			console.log('--------------')
+			console.log(transcription[i].alternatives[0].confidence)
 		}
 		
 		let transcriptionArray = JSON.stringify(ans);
