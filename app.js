@@ -17,7 +17,7 @@ const transcriptMod		= require('./serverSideModules/transcript');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
-const job = new CronJob('0 1-59/2 * * * *', encodeMod.encodeCron);
+const job = new CronJob('0,30 * * * * *', encodeMod.encodeCron);
 job.start();
 // const transJob = new CronJob('0 */2 * * * *', transcriptMod.transcriptionCron);
 // transJob.start();
