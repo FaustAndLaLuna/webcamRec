@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<link rel="stylesheet" href="https://use.typekit.net/xhf3zhn.css">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
 		<script src="./javascripts/edit.js"></script>
+		<!--
+		InterstateMono Regular
+			font-family: interstate-mono, monospace;
+			font-weight: 400;
+			font-style: normal;
+
+		InterstateMono Bold
+			font-family: interstate-mono, monospace;
+			font-weight: 700;
+			font-style: normal;
+		-->
 		<style>
+			body{
+				overflow: hidden;
+			}
 			video{
 				position: absolute;
-				width: 100vw;
-				height: 100vh;
-				z-index: 100;
+				width: 100%;
+				height: 100%;
+			}
+			#textContainer{
+				position: absolute;
+				bottom: 20px;
+				left: 20px;
+				font-family: interstate-mono, monospace;
+				font-weight: 400;
+				font-style: normal;
+				width: calc(100% - 40px);
+				height: calc(30% - 40px);
+				background-color: rgba(100, 100, 100, 0.5);
+				border-radius: 20px;
+				overflow: hidden;
+			}
+			.caption{
+				position: absolute;
+				top: 50%;
+				transform: translateY(-50%);
+				transition: transform 1s linear;
 			}
 			#videoContainer{
 				width: 100vw;
@@ -19,7 +52,8 @@
 	</head>
 	<body>
 		<div id="videoContainer">
-			
+			<div id="textContainer">
+			</div>
 		</div>
 	</body>
 </html>
