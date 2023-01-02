@@ -15,6 +15,9 @@ jQuery.getJSON('/edicion', (data) => {
 			}
 		}
 	}
+	for(let i = 0; i < stopwords.length; i++){
+		delete wordDict[stopwords[i]];
+	};
 })
 function wordsNotInDict(phrase){
 	phrase = phrase.toLowerCase();
