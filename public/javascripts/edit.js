@@ -8,10 +8,10 @@ jQuery.getJSON('/edicion', (data) => {
 						endTime: data[i].transcription[j].endTime,
 						startTime: data[i].transcription[j].startTime,
 					}
-			if(data[i].transcription[j].word in wordDict){
-				wordDict[data[i].transcription[j].word].push(toAdd);
+			if(data[i].transcription[j].word.toLowerCase() in wordDict){
+				wordDict[data[i].transcription[j].word.toLowerCase()].push(toAdd);
 			} else {
-				wordDict[data[i].transcription[j].word] = [toAdd];
+				wordDict[data[i].transcription[j].word.toLowerCase()] = [toAdd];
 			}
 		}
 	}
