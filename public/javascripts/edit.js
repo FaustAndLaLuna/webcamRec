@@ -142,6 +142,7 @@ function destroyVideoElement(element){
 
 	currSrc = tmpSrc;
 	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currAns.word][currSrc].length)] - 3;
+	console.log(startTime)
 
 	if(startTime < 0){
 		startTime = 0;
@@ -157,8 +158,8 @@ function destroyVideoElement(element){
 			if(srcs[j] == currSrc){  
 				let hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
-					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(currAns.endTime + STARTMIN)} and ${(currAns.endTime + STARTMIN)}:`)
-					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (currAns.endTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (currAns.endTime + STARTMAX)))}`)
+					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(startTime + STARTMIN)} and ${(startTime + STARTMAX)}:`)
+					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))}`)
 
 					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
 					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
