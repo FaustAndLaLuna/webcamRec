@@ -80,7 +80,10 @@ function transcriptionToSentences(transcription){
 source = {startTime: 0, endTime: 60, videoURL:transcriptions[Math.floor(Math.random() * transcriptions.length)].videoURL}
 
 function setSentence(sentences){
-	console.log(sentences);
+	if(! currentlyPlaying){
+		document.querySelector('#textContainer > p').textContent = "";
+		return;
+	}
 	currentTime = document.getElementById('playingVideo').currentTime;
 	for(let i = 0; i < sentences.length; i++){
 		if(currentTime < sentences[i].phraseEnd){
@@ -89,9 +92,6 @@ function setSentence(sentences){
 		}
 	}
 	document.querySelector('#textContainer > p').textContent = sentence;
-	if(currentlyPlaying){
-
-	}
 }
 
 
