@@ -91,11 +91,12 @@ function transcriptionToSentences(transcription){
 			phrase = "";
 			phraseStart = transcription[i].startTime
 		}
-		if(transcription[i].word == currAns.word && transcription[i].startTime == currAns.startTime){
+		if(transcription[i].word.toLowerCase() == currAns.word && transcription[i].startTime == currAns.startTime){
 			phrase += `<span>${transcription[i].word}</span> `;
 		} else {
 			phrase += `${transcription[i].word} `;
 		}
+
 	}
 	sentences.push({phrase: phrase, phraseStart: phraseStart, phraseEnd: lastEnd});
 	return sentences;
