@@ -178,7 +178,7 @@ function destroyVideoElement(element){
 	}
 	currAns = {word: ans.word, endTime: endTime, startTime: startTime, videoURL: currSrc};
 	console.log(`StartTime: ${startTime}, EndTime: ${endTime}`)
-	let source = {startTime: ans.startTime, endTime: ans.endTime, videoURL: ans.videoURL};
+	let source = {startTime: startTime, endTime: endTime, videoURL: ans.videoURL};
 	// console.log(currAns);
 	// console.log(source);
 
