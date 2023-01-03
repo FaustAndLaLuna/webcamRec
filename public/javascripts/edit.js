@@ -159,8 +159,8 @@ function destroyVideoElement(element){
 					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
 					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
 						ansArr.push(wordDict[words[i]][currSrc][k]);
-						console.log(`${wordDict[words[i]][currSrc][k].word} has a valid instance!`)
-						console.log(wordDict[words[i]][currSrc][k]);
+						// console.log(`${wordDict[words[i]][currSrc][k].word} is a valid instance!`)
+						// console.log(wordDict[words[i]][currSrc][k]);
 						break;
 					}
 				}
@@ -178,8 +178,8 @@ function destroyVideoElement(element){
 	}
 	currAns = {word: ans.word, endTime: endTime, startTime: startTime, videoURL: currSrc};
 	let source = {startTime: ans.startTime, endTime: ans.endTime, videoURL: ans.videoURL};
-	console.log(currAns);
-	console.log(source);
+	// console.log(currAns);
+	// console.log(source);
 
 	createStarterVideoElement(source);
 }
@@ -196,13 +196,12 @@ function createStarterVideoElement(source){
 	video.muted = false;
 	video.id = 'playingVideo';
 	video.addEventListener('loadedmetadata', function() {
-		let startTime = source.startTime;
 		let sentences = [];
 	
 		for(let i = 0; i < transcriptions.length; i++){
 			if(transcriptions[i].videoURL === source.videoURL){
 				sentences = transcriptionToSentences(transcriptions[i]);
-				console.log(sentences);
+				// console.log(sentences);
 				break;
 			}
 		}
@@ -212,7 +211,9 @@ function createStarterVideoElement(source){
 		}
 		let delta = ((source.endTime - source.startTime) * 1000);
 
-		video.currentTime = startTime;
+		console.log(`Starting video with url: ${source.videoURL} at time ${source.startTime}, ending at time ${source.endTime}`);
+
+		video.currentTime = source.startTime;
 		video.play();
 
 		setTimeout(destroyVideoElement, delta, video);
@@ -221,6 +222,6 @@ function createStarterVideoElement(source){
 	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
-	console.log(currAns);
+	// console.log(currAns);
 
 }
