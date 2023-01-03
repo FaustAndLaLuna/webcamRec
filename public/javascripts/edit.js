@@ -179,7 +179,7 @@ function destroyVideoElement(element){
 		let endTime = 0;
 		endTime = ans.endTime + 1;
 	}
-	currAns = {word: ans.word, endTime:endTime, startTime: startTime, videoURL: currSrc};
+	currAns = {word: ans.word, endTime: endTime, startTime: startTime, videoURL: currSrc};
 	let source = {startTime: ans.startTime, endTime: ans.endTime, videoURL: ans.videoURL};
 
 	createStarterVideoElement(source);
