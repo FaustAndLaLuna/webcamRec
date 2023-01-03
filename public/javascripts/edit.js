@@ -127,6 +127,7 @@ function destroyVideoElement(element){
 	clearInterval(currPlayInterval);
 	currentlyPlaying = false;
 	document.querySelector('#textContainer > p').textContent = "";
+	lastWord = currAns.word;
 
 	if(currAns.word == false){
 		let ans = startWords[Math.floor(Math.random() * startWords.length)];
