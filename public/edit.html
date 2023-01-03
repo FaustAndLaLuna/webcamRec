@@ -47,6 +47,7 @@
 				font-size: 28px;
 			}
 			#textContainer > p > span {
+				font-weight: 700;
 				color: red;
 			}
 			#textContainer > p > span.lastWord{
@@ -62,13 +63,26 @@
 				width: 100vw;
 				height: 100vh;
 			}
+			#startButton{
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				background: none;
+				border: solid 1px black;
+				padding: 20px 30px;
+				font-family: interstate-mony, monospace;
+				font-weight: 700;
+				font-style: normal;
+				transform: translate(-50%, -50%);
+			}
 		</style>
 	</head>
 	<body>
-		<div id="videoContainer">
+		<div id="videoContainer" style="visibility:hidden;">
 			<div id="textContainer">
 				<p></p>
 			</div>
 		</div>
+		<button id="startButton" onclick="startEdit()">Empezar Video</button>
 	</body>
 </html>

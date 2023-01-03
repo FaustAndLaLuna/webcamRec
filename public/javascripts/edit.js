@@ -75,9 +75,13 @@ jQuery.getJSON('/edicion', (data) => {
 	currAns = ans;
 
 	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
-	
-	createStarterVideoElement(source);
 })
+
+function startEdit(){
+	createStarterVideoElement(source);
+	document.getElementById('startButton').style = 'display:none';
+	document.getElementById('videoContainer').style = 'visibility:visible';
+}
 
 function transcriptionToSentences(transcription){
 	transcription = transcription.transcription;
