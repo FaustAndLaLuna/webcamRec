@@ -71,7 +71,7 @@ jQuery.getJSON('/edicion', (data) => {
 	let ans = startWords[Math.floor(Math.random() * startWords.length)];
 	currAns = ans;
 
-	source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
+	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 	
 	createStarterVideoElement(source);
 	delete startWords;
@@ -157,8 +157,8 @@ function destroyVideoElement(element){
 			if(srcs[j] == currSrc){  
 				let hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
-					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(startTime + STARTMIN)} and ${(startTime + STARTMIN)}:`)
-					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))}`)
+					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(currAns.endTime + STARTMIN)} and ${(currAns.endTime + STARTMIN)}:`)
+					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (currAns.endTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (currAns.endTime + STARTMAX)))}`)
 
 					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
 					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
