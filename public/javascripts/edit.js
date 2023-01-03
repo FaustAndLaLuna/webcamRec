@@ -91,7 +91,7 @@ function transcriptionToSentences(transcription){
 			phrase = "";
 			phraseStart = transcription[i].startTime
 		}
-		if(transcription[i].word.toLowerCase() == currAns.word && transcription[i].startTime == currAns.startTime){
+		if(transcription[i].word.toLowerCase() == currAns.word && (transcription[i].startTime > (currAns.startTime - 1.5)) && (transcription[i].startTime < (currAns.startTime + 1.5))){
 			phrase += `<span>${transcription[i].word}</span> `;
 		} else {
 			phrase += `${transcription[i].word} `;
@@ -215,7 +215,7 @@ function createStarterVideoElement(source){
 
 		let delta = ((source.endTime - source.startTime) * 1000);
 
-		console.log(`Starting video with url: ${source.videoURL} at time ${source.startTime}, ending at time ${source.endTime}`);
+		console.log(`Starting video with url: ${source.videoURL} at time ${source.startTime}, ending at time ${source.endTime}. Endword = ${currAns.word}`);
 
 		video.currentTime = source.startTime;
 		video.play();
