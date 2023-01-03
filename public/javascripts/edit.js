@@ -137,8 +137,9 @@ function createAndPlayVideoElement(source){
 	let sentences = [];
 
 	for(let i = 0; i < transcriptions.length; i++){
-		if(transcriptions[i].videoURL == videoURL){
+		if(transcriptions[i].videoURL === source.videoURL){
 			sentences = transcriptionToSentences(transcriptions[i]);
+			console.log(sentences);
 			break;
 		}
 	}
