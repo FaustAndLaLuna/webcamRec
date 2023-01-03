@@ -182,7 +182,7 @@ function destroyVideoElement(element){
 
 	if(ansArr.length == 0) {
 		endTime = false;
-		currAns = {word: false, endTime: false, startTime: startTime, videoURL: currSrc};
+		ans = {word: false, endTime: false, startTime: startTime, videoURL: currSrc};
 	}else{
 		let ans = ansArr[Math.floor(Math.random() * ansArr.length)];
 		let endTime = 0;
