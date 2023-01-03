@@ -215,5 +215,6 @@ function createStarterVideoElement(source){
 	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
+	console.log(currKeyword);
 
 }
