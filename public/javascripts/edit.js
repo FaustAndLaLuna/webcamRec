@@ -90,7 +90,7 @@ function transcriptionToSentences(transcription){
 	phraseStart = 0;
 	lastEnd = 0;
 	for(let i = 0; i < transcription.length; i++){
-		transcription[i] = transcription[i].toLowerCase();
+		transcription[i].word = transcription[i].word.toLowerCase();
 		if(((transcription[i].endTime - lastEnd) > SENTENCELENGTH) || (i == (transcription.length - 1))){
 			lastEnd = transcription[i].endTime;
 			sentences.push({phrase: phrase, phraseStart: phraseStart, phraseEnd: lastEnd});
