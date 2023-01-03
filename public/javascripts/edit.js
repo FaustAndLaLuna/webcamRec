@@ -4,7 +4,7 @@ var transcriptions = [];
 
 var STARTMIN = 30;
 var STARTMAX = 60;
-var SENTENCELENGTH = 4;
+var SENTENCELENGTH = 10;
 
 var currentlyPlaying = false;
 var currPlayInterval = 0;
