@@ -8,7 +8,8 @@ STARTMAX = 60
 currentlyPlaying = false;
 currPlayInterval = 0;
 
-keyword = "";
+currKeyword = {};
+currSrc = '';
 
 jQuery.getJSON('/edicion', (data) => {
 	transcriptions = data;
@@ -23,18 +24,18 @@ jQuery.getJSON('/edicion', (data) => {
 			if(word in wordDict){
 				if(videoURL in wordDict[word]){
 					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
+						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
 					}
 					wordDict[word][videoURL].push(toAdd);
 				} else {
 					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
+						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
 					}
 					wordDict[word][videoURL] = [toAdd];
 				}
 			} else {
 				if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-					startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
+					startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
 				}
 				wordDict[word] = {};
 				wordDict[word][videoURL] = [toAdd];
@@ -66,10 +67,12 @@ jQuery.getJSON('/edicion', (data) => {
 	}
 
 	let ans = startWords[Math.floor(Math.random() * startWords.length)];
+	currKeyword = ans;
+	currSrc = ans.videoURL;
 
 	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 	
-	createAndPlayVideoElement(source);
+	createStarterVideoElement(source);
 })
 
 function transcriptionToSentences(transcription){
@@ -126,28 +129,62 @@ function destroyVideoElement(element){
 	clearInterval(currPlayInterval);
 	currentlyPlaying = false;
 	document.querySelector('#textContainer > p').textContent = "";
+
+	let tmpSrcs = Object.keys(wordDict[currKeyword.word]);
+	let tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
+
+	while(tmpSrc == currSrc){
+		let tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
+	}
+
+	currSrc = tmpSrc;
+	let startTime = wordDict[currKeyword.word][currSrc][Math.floor(Math.random() * wordDict[currKeyword.word][currSrc].length)] - 3;
+
+	if(startTime < 0){
+		startTime = 0;
+	}
+
+	let words = Object.keys(wordDict);
+	let ansArr = [];
+
+	for(let i = 0; i < words.length; i++){
+		if(currKeyword.word == wordDict[words[i]]) continue;
+		let srcs = Object.keys(wordDict[words[i]]);
+		for(let j = 0; j < srcs.length; j++){
+			if(srcs[j] == currSrc){
+				hasValidInstance = false;
+				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
+					if(wordDict[words[i]][currSrc][k].startTime > (startTime + 30)){
+						hasValidInstance = true;
+						break;
+					}
+				}
+				if(! hasValidInstance) break;
+				ansArr.push({word: words[i], instancesArr: wordDict[words[i]][currSrc] });
+				break;
+			}
+		}
+	}
+
+	if(ansArr.length == 0) {
+		endTime = 0
+	}else{
+		let ans = ansArr[Math.floor(Math.random() * ansArr.length)];
+		let endTime = 0;
+		for(let i = 0; i < ans.instancesArr.length; i++){
+			if(ans.instancesArr[i].startTime > (startTime + 30)){
+				endTime = ans.instancesArr[i].endTime;
+			}
+		}
+	}
+	currKeyword = {word: ans.word, endTime:endTime, startTime: startTime};
+	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
+
+	createStarterVideoElement(source);
+
 }
 
-function createVideoElement(source){
-	let startTime = source.startTime;
-	let delta = ((source.endTime - source.startTime) * 1000);
-	let video = document.createElement('video');
-
-	video.src = 'uploads'+source.videoURL;
-	video.autoplay = false;
-	video.controls = false;
-	video.muted = false;
-
-	video.addEventListener('loadedmetadata', function() {
-		this.currentTime = startTime;
-		setTimeout(destroyVideoElement, delta, video);
-	  }, false);
-	let container = document.getElementById('videoContainer');
-	container.appendChild(video);
-
-}
-
-function createAndPlayVideoElement(source){
+function createStarterVideoElement(source){
 	if(currentlyPlaying){
 		clearInterval(currPlayInterval);
 	}
