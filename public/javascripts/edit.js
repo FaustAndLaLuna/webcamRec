@@ -12,6 +12,7 @@ var currPlayInterval = 0;
 var startWords = [];
 
 var currAns = {};
+var lastWord = false;	
 
 jQuery.getJSON('/edicion', (data) => {
 	transcriptions = data;
@@ -93,6 +94,8 @@ function transcriptionToSentences(transcription){
 		}
 		if(transcription[i].word.toLowerCase() == currAns.word && (transcription[i].startTime > (currAns.endTime - 3)) && (transcription[i].startTime < (currAns.endTime + 3))){
 			phrase += `<span>${transcription[i].word}</span> `;
+		} else if (transcription[i].word.toLowerCase() == lastWord && (transcription[i].startTime > (currAns.startTime - 3)) && (transcription[i].startTime < (currAns.startTime + 3))){
+			phrase += `<span class='lastWord'>${transcription[i].word}</span> `;
 		} else {
 			phrase += `${transcription[i].word} `;
 		}
