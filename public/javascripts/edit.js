@@ -155,9 +155,11 @@ function destroyVideoElement(element){
 		let srcs = Object.keys(wordDict[words[i]]);
 		for(let j = 0; j < srcs.length; j++){
 			if(srcs[j] == currSrc){  
-				hasValidInstance = false;
+				let hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
-					if(wordDict[words[i]][currSrc][k].startTime > (startTime + 30)){
+					console.log(wordDict[words[i]][currSrc][k].startTime)
+					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
+					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
 						hasValidInstance = true;
 						break;
 					}
