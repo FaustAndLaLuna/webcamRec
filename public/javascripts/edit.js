@@ -145,6 +145,9 @@ function destroyVideoElement(element){
 
 	let tmpSrcs = Object.keys(wordDict[currAns.word]);
 	let currSrc;
+	let ans;
+	let words = Object.keys(wordDict);
+	let ansArr = [];
 	let tmpSrc;
 
 	do{
@@ -158,8 +161,6 @@ function destroyVideoElement(element){
 		startTime = 0;
 	}
 
-	let words = Object.keys(wordDict);
-	let ansArr = [];
 
 	for(let i = 0; i < words.length; i++){
 		if(currAns.word == wordDict[words[i]]) continue;
@@ -179,12 +180,11 @@ function destroyVideoElement(element){
 			}
 		}
 	}
-
 	if(ansArr.length == 0) {
 		endTime = false;
 		ans = {word: false, endTime: false, startTime: startTime, videoURL: currSrc};
 	}else{
-		let ans = ansArr[Math.floor(Math.random() * ansArr.length)];
+		ans = ansArr[Math.floor(Math.random() * ansArr.length)];
 		let endTime = 0;
 		endTime = ans.endTime + 1;
 	}
