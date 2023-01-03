@@ -142,7 +142,6 @@ function destroyVideoElement(element){
 
 	currSrc = tmpSrc;
 	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currAns.word][currSrc].length)].startTime - 2;
-	console.log(startTime)
 
 	if(startTime < 0){
 		startTime = 0;
@@ -158,19 +157,14 @@ function destroyVideoElement(element){
 			if(srcs[j] == currSrc){  
 				let hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
-					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(startTime + STARTMIN)} and ${(startTime + STARTMAX)}:`)
-					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))}`)
-
 					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
 					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
-						hasValidInstance = true;
+						ansArr.push(wordDict[words[i]][currSrc][k]);
 						console.log(`${wordDict[words[i]][currSrc][k].word} has a valid instance!`)
+						console.log(wordDict[words[i]][currSrc][k]);
 						break;
 					}
 				}
-				if(! hasValidInstance) break;
-				ansArr.push(wordDict[words[i]][currSrc][k]);
-				console.log(wordDict[words[i]][currSrc][k]);
 				break;
 			}
 		}
