@@ -135,11 +135,9 @@ function destroyVideoElement(element){
 	}
 
 	let tmpSrcs = Object.keys(wordDict[currAns.word]);
-	let currSrc;
-	let ans;
 	let words = Object.keys(wordDict);
 	let ansArr = [];
-	let tmpSrc;
+	let endTime, currSrc, ans, tmpSrc;
 
 	do{
 		tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
@@ -176,7 +174,7 @@ function destroyVideoElement(element){
 		ans = {word: false, endTime: false, startTime: startTime, videoURL: currSrc};
 	}else{
 		ans = ansArr[Math.floor(Math.random() * ansArr.length)];
-		let endTime = 0;
+		 endTime = 0;
 		endTime = ans.endTime + 1;
 	}
 	currAns = {word: ans.word, endTime: endTime, startTime: startTime, videoURL: currSrc};
