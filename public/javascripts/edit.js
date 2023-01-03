@@ -91,7 +91,7 @@ function transcriptionToSentences(transcription){
 			phrase = "";
 			phraseStart = transcription[i].startTime
 		}
-		if(transcription[i].word.toLowerCase() == currAns.word && (transcription[i].startTime > (currAns.startTime - 1.5)) && (transcription[i].startTime < (currAns.startTime + 1.5))){
+		if(transcription[i].word.toLowerCase() == currAns.word && (transcription[i].startTime > (currAns.endTime - 1.5)) && (transcription[i].startTime < (currAns.endTime + 1.5))){
 			phrase += `<span>${transcription[i].word}</span> `;
 		} else {
 			phrase += `${transcription[i].word} `;
