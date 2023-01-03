@@ -170,6 +170,7 @@ function destroyVideoElement(element){
 			}
 		}
 	}
+	console.log(ansArr)
 
 	if(ansArr.length == 0) {
 		endTime = 0
