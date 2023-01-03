@@ -141,7 +141,7 @@ function destroyVideoElement(element){
 	}while(tmpSrc == currAns.videoURL);
 
 	currSrc = tmpSrc;
-	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currKeyword.word][currSrc].length)] - 3;
+	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currAns.word][currSrc].length)] - 3;
 
 	if(startTime < 0){
 		startTime = 0;
