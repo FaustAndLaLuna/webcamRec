@@ -157,10 +157,13 @@ function destroyVideoElement(element){
 			if(srcs[j] == currSrc){  
 				let hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
-					console.log(wordDict[words[i]][currSrc][k].startTime)
+					console.log(`Comparing ${wordDict[words[i]][currSrc][k].startTime} with ${(startTime + STARTMIN)} and ${(startTime + STARTMIN)}:`)
+					console.log(`${(wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) } and ${((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))}`)
+
 					if(   (wordDict[words[i]][currSrc][k].startTime > (startTime + STARTMIN)) 
 					&& ((wordDict[words[i]][currSrc][k].startTime < (startTime + STARTMAX)))   ){
 						hasValidInstance = true;
+						console.log(`${wordDict[words[i]][currSrc][k].word} has a valid instance!`)
 						break;
 					}
 				}
