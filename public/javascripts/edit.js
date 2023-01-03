@@ -23,18 +23,18 @@ jQuery.getJSON('/edicion', (data) => {
 			if(word in wordDict){
 				if(videoURL in wordDict[word]){
 					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, videoURL: videoURL})
+						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
 					}
 					wordDict[word][videoURL].push(toAdd);
 				} else {
 					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, videoURL: videoURL})
+						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
 					}
 					wordDict[word][videoURL] = [toAdd];
 				}
 			} else {
 				if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-					startWords.push({startTime: toAdd.startTime, videoURL: videoURL})
+					startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL})
 				}
 				wordDict[word] = {};
 				wordDict[word][videoURL] = [toAdd];
@@ -65,9 +65,9 @@ jQuery.getJSON('/edicion', (data) => {
 		}
 	}
 
-	ans = startWords[Math.floor(Math.random() * startWords.length)];
+	let ans = startWords[Math.floor(Math.random() * startWords.length)];
 
-	source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
+	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 	
 	createAndPlayVideoElement(source);
 })
