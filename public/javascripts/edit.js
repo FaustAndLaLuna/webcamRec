@@ -90,20 +90,16 @@ function transcriptionToSentences(transcription){
 			phrase = "";
 			phraseStart = transcription[i].startTime
 		}
-		phrase += `${transcription[i].word} `;
+		if(transcription[i].word == currAns.word && phraseStart > currAns.startTime){
+			phrase += `<span>${transcription[i].word}</span> `;
+		} else {
+			phrase += `${transcription[i].word} `;
+		}
 		lastEnd = transcription[i].endTime;
 	}
 	sentences.push({phrase: phrase, phraseStart: phraseStart, phraseEnd: lastEnd});
 	return sentences;
 }
-
-// ** TEST AREA
-
-// for(let i = 0; i < transcriptions.length; i++){
-//     sentences = transcriptionToSentences(transcriptions[i]);
-//     console.log(`Transcription ${i} divided into ${sentences.length} sentences`);
-// } 
-
 
 function setSentence(sentences){
 	if(! currentlyPlaying){
@@ -117,13 +113,8 @@ function setSentence(sentences){
 			break;
 		}
 	}
-	document.querySelector('#textContainer > p').textContent = sentence;
+	document.querySelector('#textContainer > p').innerHTML = sentence;
 }
-
-
-
-
-// ** END TEST AREA
 
 function destroyVideoElement(element){
 	element.pause();
@@ -189,7 +180,7 @@ function destroyVideoElement(element){
 		endTime = ans.endTime + 1;
 	}
 	currAns = {word: ans.word, endTime:endTime, startTime: startTime, videoURL: currSrc};
-	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
+	let source = {startTime: ans.startTime, endTime: ans.endTime, videoURL: ans.videoURL};
 
 	createStarterVideoElement(source);
 }
@@ -224,8 +215,7 @@ function createStarterVideoElement(source){
 
 		video.currentTime = startTime;
 		video.play();
-		video.currentTime = startTime;
-		
+
 		setTimeout(destroyVideoElement, delta, video);
 		currPlayInterval = setInterval(setSentence, 100, sentences);
 		currentlyPlaying = true;
