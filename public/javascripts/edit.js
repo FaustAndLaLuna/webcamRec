@@ -8,8 +8,7 @@ STARTMAX = 60
 currentlyPlaying = false;
 currPlayInterval = 0;
 
-currKeyword = {};
-currSrc = '';
+currAns = {};
 
 jQuery.getJSON('/edicion', (data) => {
 	transcriptions = data;
@@ -72,12 +71,12 @@ jQuery.getJSON('/edicion', (data) => {
 	}
 
 	let ans = startWords[Math.floor(Math.random() * startWords.length)];
-	currKeyword = ans;
-	currSrc = ans.videoURL;
+	currAns = ans;
 
 	source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 	
 	createStarterVideoElement(source);
+	delete startWords;
 })
 
 function transcriptionToSentences(transcription){
@@ -135,15 +134,14 @@ function destroyVideoElement(element){
 	currentlyPlaying = false;
 	document.querySelector('#textContainer > p').textContent = "";
 
-	let tmpSrcs = Object.keys(wordDict[currKeyword.word]);
-	let tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
+	let tmpSrcs = Object.keys(wordDict[currAns.word]);
 
-	while(tmpSrc == currSrc){
+	do{
 		let tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
-	}
+	}while(tmpSrc == currSrc);
 
 	currSrc = tmpSrc;
-	let startTime = wordDict[currKeyword.word][currSrc][Math.floor(Math.random() * wordDict[currKeyword.word][currSrc].length)] - 3;
+	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currKeyword.word][currSrc].length)] - 3;
 
 	if(startTime < 0){
 		startTime = 0;
@@ -153,10 +151,10 @@ function destroyVideoElement(element){
 	let ansArr = [];
 
 	for(let i = 0; i < words.length; i++){
-		if(currKeyword.word == wordDict[words[i]]) continue;
+		if(currAns.word == wordDict[words[i]]) continue;
 		let srcs = Object.keys(wordDict[words[i]]);
 		for(let j = 0; j < srcs.length; j++){
-			if(srcs[j] == currSrc){
+			if(srcs[j] == currSrc){  
 				hasValidInstance = false;
 				for(let k = 0; k < wordDict[words[i]][currSrc].length; k++){
 					if(wordDict[words[i]][currSrc][k].startTime > (startTime + 30)){
@@ -165,12 +163,12 @@ function destroyVideoElement(element){
 					}
 				}
 				if(! hasValidInstance) break;
-				ansArr.push({word: words[i], instancesArr: wordDict[words[i]][currSrc] });
+				ansArr.push(wordDict[words[i]][currSrc][k]);
+				console.log(wordDict[words[i]][currSrc][k]);
 				break;
 			}
 		}
 	}
-	console.log(ansArr)
 
 	if(ansArr.length == 0) {
 		endTime = 0
@@ -187,7 +185,6 @@ function destroyVideoElement(element){
 	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 
 	createStarterVideoElement(source);
-
 }
 
 function createStarterVideoElement(source){
