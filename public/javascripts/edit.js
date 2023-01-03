@@ -133,6 +133,16 @@ function destroyVideoElement(element){
 	currentlyPlaying = false;
 	document.querySelector('#textContainer > p').textContent = "";
 
+	if(currAns.word == false){
+		let ans = startWords[Math.floor(Math.random() * startWords.length)];
+		currAns = ans;
+
+		source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
+		
+		createStarterVideoElement(source);
+		return;
+	}
+
 	let tmpSrcs = Object.keys(wordDict[currAns.word]);
 	let currSrc;
 	let tmpSrc;
@@ -189,6 +199,7 @@ function createStarterVideoElement(source){
 		clearInterval(currPlayInterval);
 	}
 
+	let video = document.createElement('video');
 	video.src = 'uploads'+source.videoURL;
 	video.autoplay = false;
 	video.controls = false;
@@ -196,7 +207,6 @@ function createStarterVideoElement(source){
 	video.id = 'playingVideo';
 	video.addEventListener('loadedmetadata', function() {
 		let startTime = source.startTime;
-		let video = document.createElement('video');
 		let sentences = [];
 	
 		for(let i = 0; i < transcriptions.length; i++){
