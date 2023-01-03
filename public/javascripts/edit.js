@@ -76,6 +76,10 @@ function transcriptionToSentences(transcription){
 
 source = {startTime: 0, endTime: 60, videoURL:transcriptions[Math.floor(Math.random() * transcriptions.length)].videoURL}
 
+function setSentence(){
+
+}
+
 
 // ** END TEST AREA
 
@@ -86,6 +90,25 @@ function destroyVideoElement(element){
 }
 
 function createVideoElement(source){
+	let startTime = source.startTime;
+	let delta = ((source.endTime - source.startTime) * 1000);
+	let video = document.createElement('video');
+
+	video.src = 'uploads'+source.videoURL;
+	video.autoplay = false;
+	video.controls = false;
+	video.muted = false;
+
+	video.addEventListener('loadedmetadata', function() {
+		this.currentTime = startTime;
+		setTimeout(destroyVideoElement, delta, video);
+	  }, false);
+	let container = document.getElementById('videoContainer');
+	container.appendChild(video);
+
+}
+
+function createAndPlayVideoElement(source){
 	let startTime = source.startTime;
 	let delta = ((source.endTime - source.startTime) * 1000);
 	let video = document.createElement('video');
@@ -102,6 +125,7 @@ function createVideoElement(source){
 	video.autoplay = false;
 	video.controls = false;
 	video.muted = false;
+	video.id = 'playingVideo';
 	video.addEventListener('loadedmetadata', function() {
 		this.currentTime = startTime;
 		this.play();
