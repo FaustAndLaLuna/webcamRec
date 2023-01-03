@@ -54,11 +54,9 @@ jQuery.getJSON('/edicion', (data) => {
 			count += 1;
 		}
 		if(count > 16 || count < 4){
-			console.log(`Deleting ${word} with count ${count}`);
 			delete wordDict[word];
 		} else{
 			if(Object.keys(wordDict[word]).length < 4){
-				console.log(`Deleting ${word} with appearance in ${count} videos`);
 				delete wordDict[word];
 			}
 		}
@@ -135,9 +133,10 @@ function destroyVideoElement(element){
 	document.querySelector('#textContainer > p').textContent = "";
 
 	let tmpSrcs = Object.keys(wordDict[currAns.word]);
-
+	let tmpSrc;
+	
 	do{
-		let tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
+		tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
 	}while(tmpSrc == currSrc);
 
 	currSrc = tmpSrc;
@@ -218,6 +217,6 @@ function createStarterVideoElement(source){
 	  }, false);
 	let container = document.getElementById('videoContainer');
 	container.appendChild(video);
-	console.log(currKeyword);
+	console.log(currAns);
 
 }
