@@ -222,8 +222,10 @@ function createStarterVideoElement(source){
 		}
 		let delta = ((source.endTime - source.startTime) * 1000);
 
-		this.currentTime = startTime;
-		this.play();
+		video.currentTime = startTime;
+		video.play();
+		video.currentTime = startTime;
+		
 		setTimeout(destroyVideoElement, delta, video);
 		currPlayInterval = setInterval(setSentence, 100, sentences);
 		currentlyPlaying = true;
