@@ -75,7 +75,7 @@ jQuery.getJSON('/edicion', (data) => {
 	currKeyword = ans;
 	currSrc = ans.videoURL;
 
-	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
+	source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 	
 	createStarterVideoElement(source);
 })
