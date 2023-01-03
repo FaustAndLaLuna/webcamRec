@@ -49,7 +49,7 @@ jQuery.getJSON('/edicion', (data) => {
 			delete wordDict[word];
 		}
 	}
-	for(word in wordDict){
+	for(letword in wordDict){
 		count = 0;
 		for(videoURL in wordDict[word]){
 			count += 1;
@@ -65,8 +65,8 @@ jQuery.getJSON('/edicion', (data) => {
 		}
 	}
 
-	for(word in wordDict){
-		for(source in wordDict[word]){
+	for(let word in wordDict){
+		for(let source in wordDict[word]){
 			if((wordDict[word][source][0].startTime > STARTMIN) && (wordDict[word][source][0].startTime < STARTMAX)) startWords.push(wordDict[word][source][0]);
 		}
 	}
