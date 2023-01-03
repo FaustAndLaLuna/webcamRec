@@ -16,37 +16,36 @@ jQuery.getJSON('/edicion', (data) => {
 	let startWords = [];
 	for(let i = 0; i < data.length; i++){
 		for(let j = 0; j < data[i].transcription.length; j++){
+			videoURL = data[i].videoURL;
 			let word = data[i].transcription[j].word.toLowerCase();
 			toAdd = {	endTime: data[i].transcription[j].endTime,
-						startTime: data[i].transcription[j].startTime
+						startTime: data[i].transcription[j].startTime,
+						word: word,
+						videoURL: videoURL
 					}
-			videoURL = data[i].videoURL;
 			if(word in wordDict){
 				if(videoURL in wordDict[word]){
-					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
-					}
 					wordDict[word][videoURL].push(toAdd);
 				} else {
-					if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-						startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
-					}
 					wordDict[word][videoURL] = [toAdd];
 				}
 			} else {
-				if((toAdd.startTime > STARTMIN) && (toAdd.startTime < STARTMAX)){
-					startWords.push({startTime: toAdd.startTime, endTime: toAdd.endTime, videoURL: videoURL, word: word})
-				}
 				wordDict[word] = {};
 				wordDict[word][videoURL] = [toAdd];
 			}
 		}
 	}
 	for(let i = 0; i < stopwords.length; i++){
+		if(startWords.includes(stopwords[i])){
+			startWords.splice(arr.indexOf(stopwords[i]), 1);
+		}
 		delete wordDict[stopwords[i]];
 	};
 	for(word in wordDict){
 		if(Object.keys(wordDict[word]).length < 4){
+			if(startWords.includes(word)){
+				startWords.splice(arr.indexOf(word), 1);
+			}
 			delete wordDict[word];
 		}
 	}
@@ -63,6 +62,12 @@ jQuery.getJSON('/edicion', (data) => {
 				console.log(`Deleting ${word} with appearance in ${count} videos`);
 				delete wordDict[word];
 			}
+		}
+	}
+
+	for(word in wordDict){
+		for(source in wordDict[word]){
+			if((wordDict[word][source][0].startTime > STARTMIN) && (wordDict[word][source][0].startTime < STARTMAX)) startWords.push(wordDict[word][source][0]);
 		}
 	}
 
