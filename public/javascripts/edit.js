@@ -84,7 +84,8 @@ function transcriptionToSentences(transcription){
 	phraseStart = 0;
 	lastEnd = 0;
 	for(let i = 0; i < transcription.length; i++){
-		if((transcription[i].endTime - lastEnd) > 4){
+		if(((transcription[i].endTime - lastEnd) > 4) || (i == (transcription.length - 1))){
+			lastEnd = transcription[i].endTime;
 			sentences.push({phrase: phrase, phraseStart: phraseStart, phraseEnd: lastEnd});
 			phrase = "";
 			phraseStart = transcription[i].startTime
@@ -94,7 +95,6 @@ function transcriptionToSentences(transcription){
 		} else {
 			phrase += `${transcription[i].word} `;
 		}
-		lastEnd = transcription[i].endTime;
 	}
 	sentences.push({phrase: phrase, phraseStart: phraseStart, phraseEnd: lastEnd});
 	return sentences;
@@ -127,7 +127,7 @@ function destroyVideoElement(element){
 		let ans = startWords[Math.floor(Math.random() * startWords.length)];
 		currAns = ans;
 
-		source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
+		let source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 		
 		createStarterVideoElement(source);
 		return;
