@@ -177,6 +177,7 @@ function destroyVideoElement(element){
 		endTime = ans.endTime + 1;
 	}
 	currAns = {word: ans.word, endTime: endTime, startTime: startTime, videoURL: currSrc};
+	console.log(`StartTime: ${startTime}, EndTime: ${endTime}`)
 	let source = {startTime: ans.startTime, endTime: ans.endTime, videoURL: ans.videoURL};
 	// console.log(currAns);
 	// console.log(source);
@@ -209,6 +210,7 @@ function createStarterVideoElement(source){
 		if (source.endTime == false){
 			source.endTime = video.duration;
 		}
+
 		let delta = ((source.endTime - source.startTime) * 1000);
 
 		console.log(`Starting video with url: ${source.videoURL} at time ${source.startTime}, ending at time ${source.endTime}`);
