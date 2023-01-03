@@ -49,6 +49,8 @@ jQuery.getJSON('/edicion', (data) => {
 			}
 		}
 	}
+
+	source = {startTime: 0, endTime: 60, videoURL:transcriptions[Math.floor(Math.random() * transcriptions.length)].videoURL}
 })
 
 function transcriptionToSentences(transcription){
@@ -77,7 +79,6 @@ function transcriptionToSentences(transcription){
 //     console.log(`Transcription ${i} divided into ${sentences.length} sentences`);
 // } 
 
-source = {startTime: 0, endTime: 60, videoURL:transcriptions[Math.floor(Math.random() * transcriptions.length)].videoURL}
 
 function setSentence(sentences){
 	if(! currentlyPlaying){
@@ -105,7 +106,7 @@ function destroyVideoElement(element){
 	element.remove();
 	clearInterval(currPlayInterval);
 	currentlyPlaying = false;
-
+	document.querySelector('#textContainer > p').textContent = "";
 }
 
 function createVideoElement(source){
