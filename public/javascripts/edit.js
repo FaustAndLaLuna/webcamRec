@@ -8,13 +8,12 @@ var STARTMAX = 60
 var currentlyPlaying = false;
 var currPlayInterval = 0;
 
-var startWords;
+var startWords = [];
 
 var currAns = {};
 
 jQuery.getJSON('/edicion', (data) => {
 	transcriptions = data;
-	let startWords = [];
 	for(let i = 0; i < data.length; i++){
 		for(let j = 0; j < data[i].transcription.length; j++){
 			videoURL = data[i].videoURL;
@@ -90,7 +89,7 @@ function transcriptionToSentences(transcription){
 			phrase = "";
 			phraseStart = transcription[i].startTime
 		}
-		if(transcription[i].word == currAns.word && phraseStart > currAns.startTime){
+		if(transcription[i].word == currAns.word && transcription[i].startTime == currAns.startTime){
 			phrase += `<span>${transcription[i].word}</span> `;
 		} else {
 			phrase += `${transcription[i].word} `;
