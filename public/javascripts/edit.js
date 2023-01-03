@@ -133,11 +133,12 @@ function destroyVideoElement(element){
 	document.querySelector('#textContainer > p').textContent = "";
 
 	let tmpSrcs = Object.keys(wordDict[currAns.word]);
+	let currSrc;
 	let tmpSrc;
-	
+
 	do{
 		tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
-	}while(tmpSrc == currSrc);
+	}while(tmpSrc == currAns.videoURL);
 
 	currSrc = tmpSrc;
 	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currKeyword.word][currSrc].length)] - 3;
@@ -180,7 +181,7 @@ function destroyVideoElement(element){
 			}
 		}
 	}
-	currKeyword = {word: ans.word, endTime:endTime, startTime: startTime};
+	currAns = {word: ans.word, endTime:endTime, startTime: startTime, videoURL: currSrc};
 	let source = {startTime: 0, endTime: ans.endTime, videoURL: ans.videoURL};
 
 	createStarterVideoElement(source);
