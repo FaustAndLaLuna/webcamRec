@@ -5,6 +5,8 @@ transcriptions = [];
 currentlyPlaying = false;
 currPlayInterval = 0;
 
+keyword = "";
+
 jQuery.getJSON('/edicion', (data) => {
 	transcriptions = data;
 	for(let i = 0; i < data.length; i++){
@@ -50,7 +52,20 @@ jQuery.getJSON('/edicion', (data) => {
 		}
 	}
 
-	source = {startTime: 0, endTime: 60, videoURL:transcriptions[Math.floor(Math.random() * transcriptions.length)].videoURL}
+	sourceIsSet = false;
+	words = Object.keys(wordDict);
+	while(! sourceIsSet){
+		let word = words[Math.floor(Math.random() * words.length)];
+		let vidSrcs = Object.keys(wordDict[word]);
+		let vidSrc = vidSrcs[Math.floor(Math.random() * vidSrcs.length)]
+		let ans = wordDict[word][vidSrc];
+		if((ans.startTime > 30) && (ans.startTime < 60)){
+			sourceIsSet = true;
+			source = {startTime: 0, endTime: ans.endTime, videoURL:vidSrc};
+			keyword = ans;
+		}
+	}
+	createAndPlayVideoElement(source);
 })
 
 function transcriptionToSentences(transcription){
