@@ -84,7 +84,7 @@ function startEdit(){
 		seed = seed.replace('ó','ó');
 		seed = seed.replace('ú','u');
 		seed = seed.replace('ñ','n');
-		seed = seed.replace('u','ü');
+		seed = seed.replace('ü','u');
 		console.log(`Seed: ${seed}`)
 	}
 
