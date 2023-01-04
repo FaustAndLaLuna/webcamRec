@@ -235,7 +235,7 @@ function createStarterVideoElement(source){
 		}
 
 		if (source.endTime == false){
-			source.endTime = video.duration;
+			source.endTime = video.duration + 1;
 		}
 
 		let delta = ((source.endTime - source.startTime) * 1000);
