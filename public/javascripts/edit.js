@@ -81,7 +81,7 @@ function startEdit(){
 		seed = seed.replace('á','a');
 		seed = seed.replace('é','e');
 		seed = seed.replace('í','i');
-		seed = seed.replace('ó','ó');
+		seed = seed.replace('ó','o');
 		seed = seed.replace('ú','u');
 		seed = seed.replace('ñ','n');
 		seed = seed.replace('ü','u');
