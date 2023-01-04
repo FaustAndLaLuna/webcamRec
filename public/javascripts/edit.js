@@ -12,9 +12,10 @@ var currPlayInterval = 0;
 var startWords = [];
 
 var currAns = {};
-var lastWord = false;	
+var lastWord = false;
 
 jQuery.getJSON('/edicion', (data) => {
+	
 	transcriptions = data;
 	for(let i = 0; i < data.length; i++){
 		for(let j = 0; j < data[i].transcription.length; j++){
@@ -69,6 +70,12 @@ jQuery.getJSON('/edicion', (data) => {
 		for(let source in wordDict[word]){
 			if((wordDict[word][source][0].startTime > STARTMIN) && (wordDict[word][source][0].startTime < STARTMAX)) startWords.push(wordDict[word][source][0]);
 		}
+	}
+
+	{
+		let seed = `${[Math.floor(Math.random() * stopwords.length)]}${[Math.floor(Math.random() * stopwords.length)]}${[Math.floor(Math.random() * stopwords.length)]}.`;
+		console.log(`Seed: ${seed}`)
+		Math.seedrandom(seed);
 	}
 
 	let ans = startWords[Math.floor(Math.random() * startWords.length)];
