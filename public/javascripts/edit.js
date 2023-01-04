@@ -13,6 +13,7 @@ var startWords = [];
 
 var currAns = {};
 var lastWord = false;
+var seed = 'abecedario';
 
 jQuery.getJSON('/edicion', (data) => {
 	
@@ -72,8 +73,8 @@ jQuery.getJSON('/edicion', (data) => {
 		}
 	}
 
-	{
-		let seed = `${[Math.floor(Math.random() * stopwords.length)]}${[Math.floor(Math.random() * stopwords.length)]}${[Math.floor(Math.random() * stopwords.length)]}.`;
+	if(!seed){
+		seed = `${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}.`;
 		console.log(`Seed: ${seed}`)
 		Math.seedrandom(seed);
 	}
