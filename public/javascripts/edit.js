@@ -13,7 +13,8 @@ var startWords = [];
 
 var currAns = {};
 var lastWord = false;
-var seed = 'abecedario';
+var seed;
+var prng;
 
 jQuery.getJSON('/edicion', (data) => {
 	
@@ -72,20 +73,27 @@ jQuery.getJSON('/edicion', (data) => {
 			if((wordDict[word][source][0].startTime > STARTMIN) && (wordDict[word][source][0].startTime < STARTMAX)) startWords.push(wordDict[word][source][0]);
 		}
 	}
-
-	if(!seed){
-		seed = `${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}.`;
-		console.log(`Seed: ${seed}`)
-		Math.seedrandom(seed);
-	}
-
-	let ans = startWords[Math.floor(Math.random() * startWords.length)];
-	currAns = ans;
-
-	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 })
 
 function startEdit(){
+	if(!seed){
+		seed = `${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}.`;
+		seed = seed.replace('á','a');
+		seed = seed.replace('é','e');
+		seed = seed.replace('í','i');
+		seed = seed.replace('ó','ó');
+		seed = seed.replace('ú','u');
+		seed = seed.replace('ñ','n');
+		seed = seed.replace('u','ü');
+		console.log(`Seed: ${seed}`)
+	}
+
+	prng = new Math.seedrandom(seed);
+
+	let ans = startWords[Math.floor(prng()() * startWords.length)];
+	currAns = ans;
+
+	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 	createStarterVideoElement(source);
 	document.getElementById('startButton').style = 'display:none';
 	document.getElementById('videoContainer').style = 'visibility:visible';
@@ -143,7 +151,7 @@ function destroyVideoElement(element){
 	lastWord = currAns.word;
 
 	if(currAns.word == false){
-		let ans = startWords[Math.floor(Math.random() * startWords.length)];
+		let ans = startWords[Math.floor(prng()() * startWords.length)];
 		currAns = ans;
 
 		let source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
@@ -158,11 +166,11 @@ function destroyVideoElement(element){
 	let endTime, currSrc, ans, tmpSrc;
 
 	do{
-		tmpSrc = tmpSrcs[Math.floor(Math.random() * tmpSrcs.length)];
+		tmpSrc = tmpSrcs[Math.floor(prng()() * tmpSrcs.length)];
 	}while(tmpSrc == currAns.videoURL);
 
 	currSrc = tmpSrc;
-	let startTime = wordDict[currAns.word][currSrc][Math.floor(Math.random() * wordDict[currAns.word][currSrc].length)].startTime - 2;
+	let startTime = wordDict[currAns.word][currSrc][Math.floor(prng()() * wordDict[currAns.word][currSrc].length)].startTime - 2;
 
 	if(startTime < 0){
 		startTime = 0;
@@ -191,7 +199,7 @@ function destroyVideoElement(element){
 		endTime = false;
 		ans = {word: false, endTime: false, startTime: startTime, videoURL: currSrc};
 	}else{
-		ans = ansArr[Math.floor(Math.random() * ansArr.length)];
+		ans = ansArr[Math.floor(prng()() * ansArr.length)];
 		 endTime = 0;
 		endTime = ans.endTime + 1;
 	}
