@@ -5,7 +5,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="./javascripts/seedrandom.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-		<script src="./javascripts/edit.js"></script>
+		<script src="./javascripts/edit_wordcloud/wordcloud2.js"></script>
+		<script src="./javascripts/edit_wordcloud/edit.js"></script>
 		<!--
 		InterstateMono Regular
 			font-family: interstate-mono, monospace;
@@ -67,7 +68,7 @@
 			#startButton{
 				position: absolute;
 				left: 50%;
-				top: 50%;
+				bottom: 20px;
 				background: none;
 				border: solid 1px black;
 				padding: 20px 30px;
@@ -76,14 +77,32 @@
 				font-style: normal;
 				transform: translate(-50%, -50%);
 			}
+			#choose{
+				width: 80vw;
+				height: 80vh;
+				position: absolute;
+				top: 10vh;
+				left: 10vw;
+				border: solid 1px black;
+			}
+			#wordcloud{
+				width: 90%;
+				height: calc(100% - 160px);
+				left: 5%;
+				position: relative;
+			}
 		</style>
 	</head>
 	<body>
+		<div id="choose">
+			<div id="wordcloud">
+			</div>
+			<button id="startButton" onclick="startEdit()">Empezar Video</button>
+		</div>
 		<div id="videoContainer" style="visibility:hidden;">
 			<div id="textContainer">
 				<p></p>
 			</div>
 		</div>
-		<button id="startButton" onclick="startEdit()">Empezar Video</button>
 	</body>
 </html>
