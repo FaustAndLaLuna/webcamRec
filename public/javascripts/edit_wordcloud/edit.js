@@ -5,11 +5,22 @@ var transcriptions = [];
 var STARTMIN = 10;
 var STARTMAX = 20;
 var SENTENCELENGTH = 10;
+var FONTSIZEFACTOR = 12;
 
 var currentlyPlaying = false;
 var currPlayInterval = 0;
 
 var startWords = [];
+var wcArray = [];
+var wcList = {};
+var wcOptions = {
+	fontFamily : 'interstate-mono, monospace',
+	fontWeight: 400,
+	clearCanvas: true,
+	shrinktoFit: true,
+	rotateRatio: 0.5,
+	rotationSteps: 2
+};
 
 var currAns = {};
 var lastWord = false;
@@ -89,6 +100,26 @@ function startEdit(){
 	}
 
 	prng = new Math.seedrandom(seed);
+
+	/*
+	wcArray = [];
+	wcList = {};
+
+	for(let i in startWords){
+		if(startWords[i].word in wcList){
+			wcList[startWords[i].word].count += 1;
+			continue;
+		}
+		wcList[startWords[i]['word']] = {count: 1, ans: startWords[i]};
+	}
+	for(let i in wcList){
+		wcArray.push([i, wcList[i] * FONTSIZEFACTOR]);
+	}
+
+	wcOptions.list = wcArray;
+	
+	WordCloud(document.getElementById('wordcloud'), wcOptions ); 
+	*/
 
 	let ans = startWords[Math.floor(prng() * startWords.length)];
 	currAns = ans;
