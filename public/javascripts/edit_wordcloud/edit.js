@@ -84,6 +84,26 @@ jQuery.getJSON('/edicion', (data) => {
 			if((wordDict[word][source][0].startTime > STARTMIN) && (wordDict[word][source][0].startTime < STARTMAX)) startWords.push(wordDict[word][source][0]);
 		}
 	}
+
+	wcArray = [];
+	wcList = {};
+
+	for(let i in startWords){
+		if(startWords[i].word in wcList){
+			wcList[startWords[i].word].count += 1;
+			continue;
+		}
+		wcList[startWords[i]['word']] = {count: 1, ans: startWords[i]};
+	}
+	for(let i in wcList){
+		wcArray.push([i, wcList[i].count * FONTSIZEFACTOR]);
+	}
+
+	wcOptions.list = wcArray;
+	
+	WordCloud(document.getElementById('wordcloud'), wcOptions ); 
+
+
 })
 
 function startEdit(){
@@ -101,32 +121,12 @@ function startEdit(){
 
 	prng = new Math.seedrandom(seed);
 
-	/*
-	wcArray = [];
-	wcList = {};
-
-	for(let i in startWords){
-		if(startWords[i].word in wcList){
-			wcList[startWords[i].word].count += 1;
-			continue;
-		}
-		wcList[startWords[i]['word']] = {count: 1, ans: startWords[i]};
-	}
-	for(let i in wcList){
-		wcArray.push([i, wcList[i] * FONTSIZEFACTOR]);
-	}
-
-	wcOptions.list = wcArray;
-	
-	WordCloud(document.getElementById('wordcloud'), wcOptions ); 
-	*/
-
 	let ans = startWords[Math.floor(prng() * startWords.length)];
 	currAns = ans;
 
 	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 	createStarterVideoElement(source);
-	document.getElementById('startButton').style = 'display:none';
+	document.getElementById('choose').style = 'display:none';
 	document.getElementById('videoContainer').style = 'visibility:visible';
 }
 
