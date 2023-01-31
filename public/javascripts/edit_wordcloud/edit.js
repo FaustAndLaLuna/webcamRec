@@ -22,7 +22,7 @@ var wcOptions = {
 	rotationSteps: 2
 };
 
-var currAns = {};
+var currAns = [];
 var lastWord = false;
 var seed;
 var prng;
@@ -106,6 +106,18 @@ jQuery.getJSON('/edicion', (data) => {
 
 })
 
+function addWord(word){
+	newPoss = wordDict[word];
+	newWcList = {};
+
+	for(let src in newPoss){
+		for(let i in newPoss[src]){
+			
+		}
+	}
+
+}
+
 function startEdit(){
 	if(!seed){
 		seed = `${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}${stopwords[Math.floor(Math.random() * stopwords.length)]}.`;
@@ -122,7 +134,7 @@ function startEdit(){
 	prng = new Math.seedrandom(seed);
 
 	let ans = startWords[Math.floor(prng() * startWords.length)];
-	currAns = ans;
+	currAns.push(ans);
 
 	source = {startTime: 0, endTime: ans.endTime + 1, videoURL: ans.videoURL};
 	createStarterVideoElement(source);
