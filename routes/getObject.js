@@ -8,13 +8,13 @@ const questionsDB = new QandARepo();
 const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-    if(typeof req.query.id == 'undefined'){
+    if(typeof req.query.ID == 'undefined'){
         objectsDB.getAll().then(function(objects){
             res.setHeader('Content-type', 'application/json');
             res.end(JSON.stringify(objects));
         });
     } else {
-        objectsDB.getFromID(req.query.id).then(function(objects){
+        objectsDB.getFromID(req.query.ID).then(function(objects){
             res.setHeader('Content-type', 'application/json');
             res.end(JSON.stringify(objects));}
             ).catch((err) => {
@@ -26,13 +26,13 @@ router.get('/', function(req,res,next){
 });
 
 router.post('/', function(req,res,next){
-    if(typeof req.query.id == 'undefined'){
+    if(typeof req.query.ID == 'undefined'){
         objectsDB.getAll().then(function(objects){
             res.setHeader('Content-type', 'application/json');
             res.end(JSON.stringify(objects));
         });
     } else {
-        objectsDB.getFromID(req.query.id).then(function(objects){
+        objectsDB.getFromID(req.query.ID).then(function(objects){
             res.setHeader('Content-type', 'application/json');
             res.end(JSON.stringify(objects));}
             ).catch((err) => {
