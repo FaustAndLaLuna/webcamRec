@@ -8,10 +8,22 @@ const questionsDB = new QandARepo();
 const objectsDB = new objectsRepo();
 
 router.get('/', function(req,res,next){
-    objectsDB.getAll().then(function(objects){
-        res.setHeader('Content-type', 'application/json');
-        res.end(JSON.stringify(objects));
-    });
+    if(typeof req.query.id == 'undefined'){
+        objectsDB.getAll().then(function(objects){
+            res.setHeader('Content-type', 'application/json');
+            res.end(JSON.stringify(objects));
+        });
+    } else {
+        objectsDB.getFromID(req.query.id).then(function(objects){
+            res.setHeader('Content-type', 'application/json');
+            res.end(JSON.stringify(objects));}
+            ).catch((err) => {
+                res.setHeader('Content-type', 'application/json');
+                ans = {error: err};
+                res.end(JSON.stringify(ans));}
+            )
+    }
+    
 });
 
 module.exports = router;

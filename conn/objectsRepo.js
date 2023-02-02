@@ -71,6 +71,10 @@ class objectsRepo{
 			});
 		});	
 	}
+
+	getFromID(objectID){
+		return this.getObject(objectID);
+	}
 	
 	update(objectID, title, description, history){
 		let q = 'UPDATE objects SET title = ?, description = ?, history = ? WHERE objectID = ?';

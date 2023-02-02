@@ -162,6 +162,10 @@ class videosRepo{
 		});
 	}
 
+	getVideo(videoID){
+		return this.getFromID(videoID);
+	}
+
 	getFromID(videoID){
 		return new Promise(function (resolve, reject){
 			POOL.getConnection(function(err, conn){

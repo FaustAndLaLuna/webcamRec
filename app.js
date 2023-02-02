@@ -132,9 +132,9 @@ app.use(function(err, req, res, next) {
 
 
 http.createServer({
-	key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
-	cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
-	ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
+		// key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
+		// cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
+		// ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
 },app).listen(8888);
 
 module.exports = app;
