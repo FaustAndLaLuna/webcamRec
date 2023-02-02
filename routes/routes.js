@@ -15,6 +15,8 @@ var removeItem			= require('./removeItem.js');
 var updateVideo			= require('./updateVideo.js');
 var updateItem			= require('./updateItem.js');
 var edicionRouter		= require('./edicion.js');
+var getObject			= require('./getObject.js');
+var getVideo			= require('./getVideos.js');
 
 
 module.exports = function(app, passport){
@@ -46,6 +48,8 @@ module.exports = function(app, passport){
 	
 	app.use('/uploads', videoRouter);
 	app.use('/vid', vidPlayerRouter);
+	app.use('/getObjects', getObject);
+	app.use('/getVideos', getVideo);
 	
 	app.use('/object', objectRouter);
 	

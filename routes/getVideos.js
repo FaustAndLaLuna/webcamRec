@@ -26,4 +26,22 @@ router.get('/', function(req,res,next){
     }
 });
 
+router.post('/', function(req,res,next){
+    if(typeof req.query.id == 'undefined'){
+        vidTable.getAll().then(function(videos){
+            res.setHeader('Content-type', 'application/json');
+            res.end(JSON.stringify(videos));
+        });
+    } else {
+        vidTable.getFromID(req.query.id).then(function(objects){
+            res.setHeader('Content-type', 'application/json');
+            res.end(JSON.stringify(objects));}
+            ).catch((err) => {
+                res.setHeader('Content-type', 'application/json');
+                ans = {error: err};
+                res.end(JSON.stringify(ans));}
+            )
+    }
+});
+
 module.exports = router;
