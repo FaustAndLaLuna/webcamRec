@@ -25,7 +25,7 @@ router.get('/', function(req,res,next){
     }
 });
 
-router.push('/', function(req,res,next){
+router.post('/', function(req,res,next){
     if(typeof req.query.id == 'undefined'){
         objectsDB.getAll().then(function(objects){
             res.setHeader('Content-type', 'application/json');
