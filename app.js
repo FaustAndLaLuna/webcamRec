@@ -71,7 +71,7 @@ app.use(session({
 	secret: "genericnonrandomstring",
 	saveUninitialized: true,
 	resave: true,
-	cookie: {secure: true, httpOnly: false, path: '/', maxAge: 259200000}
+	cookie: {secure: false, httpOnly: false, path: '/', maxAge: 259200000}
 }));
 app.use(passport.initialize());
 app.use(passport.session());

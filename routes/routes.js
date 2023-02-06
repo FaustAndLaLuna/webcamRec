@@ -68,6 +68,7 @@ module.exports = function(app, passport){
 		failureFlash : true
 	}), (req,res) => {
 		res.redirect(req.session.returnTo || "/");
+		console.log(req.user);
 		delete req.session.returnTo;
 	});
 	app.get('/signup.html', function(req,res){
