@@ -29,10 +29,10 @@ module.exports = function(app, passport){
 	app.get('/isLoggedIn', (req, res) => {
 		let ans = {loggedIn : false}
 		if(req.responseObj.isLoggedIn){
-			ans = {isLoggedIn : true}
+			ans = {loggedIn : true}
 		}
 		res.setHeader('Content-type', 'application/json');
-		res.end(JSON.stringify(isLoggedIn));
+		res.end(JSON.stringify(ans));
 	})
 
 	app.use("/", indexRouter);
