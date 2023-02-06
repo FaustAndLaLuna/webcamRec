@@ -9,23 +9,38 @@
 		<script>
 			function signup(){
 				data = {username: signupemail.value,
-						password: signuppassword.value}
+						password: signuppassword.value};
 				console.log(data);
+				$.ajax("https://example.com/v2/login", {
+					method: 'POST',
+					data: data,
+					crossDomain: true,
+					success: () => {console.log('Success')}
+				});
 			}
 			function login(){
 				data = {username: loginemail.value,
-						password: loginpassword.value}
+						password: loginpassword.value};
 				console.log(data);
+				jQuery.ajax("http://biografoimaginario.com:8888/login", {
+					method: 'POST',
+					data: data,
+					crossDomain: true,
+					success: () => {console.log('login success')}
+				});
 			}
 			async function checklogin(){
-				jQuery.ajax({
-					dataType: 'json',
-					url: 'http://biografoimaginario.com:8888/isLoggedIn',
-					data: {},
-					success: (data) =>{
-						console.log(data);
+				jQuery.ajax('http://biografoimaginario.com:8888/isLoggedIn',
+					{
+						method: 'GET',
+						dataType: 'json',
+						xhrFields: { withCredentials: true },
+						crossDomain: true,
+						success: (data) => {
+							console.log(`isLoggedIn: ${data.loggedIn}`)
+						},
 					}
-				});
+				);
 			}
 		</script>
 		<style>
@@ -42,7 +57,7 @@
 			SIGN UP
 			<input type="email" name="username" maxlength='64' pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="email" id='signupemail' required>
 			<input type="password" name="password" placeholder="password" id='signuppassword' required>
-			<button onclick="signup()">signup</button>
+			<button type="button" onclick="signup()">signup</button>
 		</form>
 		<br>
 		<br>
@@ -51,8 +66,8 @@
 		<form method="post" action="http://biografoimaginario.com:8888/login">
 			Login
 			<input type="email" name="username" maxlength='64' pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" placeholder="email" id='loginemail' required>
-			<input type="password" name="password" placeholder="password" id="loginemail" required>
-			<button onclick="login()">login</button>
+			<input type="password" name="password" placeholder="password" id="loginpassword" required>
+			<button type="button" onclick="login()">login</button>
 		</form>
 		<br>
 		<br>
