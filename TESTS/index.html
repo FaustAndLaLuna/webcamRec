@@ -2,7 +2,10 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+		<script
+			  src="https://code.jquery.com/jquery-3.6.3.min.js"
+			  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+			  crossorigin="anonymous"></script>
 		<script>
 			function signup(){
 				data = {username: signupemail.value,
@@ -11,11 +14,18 @@
 			}
 			function login(){
 				data = {username: loginemail.value,
-						password: signuppassword.value}
+						password: loginpassword.value}
 				console.log(data);
 			}
-			function checklogin(){
-				
+			async function checklogin(){
+				jQuery.ajax({
+					dataType: 'json',
+					url: 'http://biografoimaginario.com:8888/isLoggedIn',
+					data: {},
+					success: (data) =>{
+						console.log(data);
+					}
+				});
 			}
 		</script>
 		<style>
