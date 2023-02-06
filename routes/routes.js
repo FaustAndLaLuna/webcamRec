@@ -86,9 +86,15 @@ module.exports = function(app, passport){
 		ADD REST OF DATA TO BIOGRAFO.users TABLE in middleware/Passport.js
 	*/
 	app.get('/logout', (req, res) => {
-		req.logout();
-		res.redirect(req.session.returnTo || "/");
-		delete req.session.returnTo;
+		req.logout((err) => {
+			if(err) logResponse = {success: false, error: err};
+			else {
+				logResponse = {success: true}
+			}
+			res.setHeader('Content-type', 'application/json');
+            res.end(JSON.stringify(logResponse));
+			delete req.session.returnTo;
+		});
 	});	
 }
 
