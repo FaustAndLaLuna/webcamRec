@@ -13,6 +13,7 @@
 				console.log(data);
 				$.ajax("https://example.com/v2/login", {
 					method: 'POST',
+					xhrFields: { withCredentials: true },
 					data: data,
 					crossDomain: true,
 					success: () => {console.log('Success')}
