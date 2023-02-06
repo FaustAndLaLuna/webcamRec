@@ -18,12 +18,13 @@
 					success: () => {console.log('Success')}
 				});
 			}
-			function login(){
+			async function login(){
 				data = {username: loginemail.value,
 						password: loginpassword.value};
 				console.log(data);
 				jQuery.ajax("http://biografoimaginario.com:8888/login", {
 					method: 'POST',
+					xhrFields: { withCredentials: true },
 					data: data,
 					crossDomain: true,
 					success: () => {console.log('login success')}
@@ -38,6 +39,19 @@
 						crossDomain: true,
 						success: (data) => {
 							console.log(`isLoggedIn: ${data.loggedIn}`)
+						},
+					}
+				);
+			}
+			async function logout(){
+				jQuery.ajax('http://biografoimaginario.com:8888/logout',
+					{
+						method: 'GET',
+						dataType: 'json',
+						xhrFields: { withCredentials: true },
+						crossDomain: true,
+						success: (data) => {
+							console.log(`Logout: ${Object.values(data)}`)
 						},
 					}
 				);
@@ -74,5 +88,6 @@
 		<br>
 		<br>
 		<button onclick="checklogin()">Check Login</button>
+		<button onclick="logout()">Log Out</button>
 	</body>
 </html>
