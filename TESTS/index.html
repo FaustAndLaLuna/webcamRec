@@ -11,13 +11,15 @@
 				data = {username: signupemail.value,
 						password: signuppassword.value};
 				console.log(data);
-				$.ajax("http://biografoimaginario.com:8888/signUp, {
+				$.ajax("http://biografoimaginario.com:8888/signUp", 
+				{
 					method: 'POST',
 					xhrFields: { withCredentials: true },
 					data: data,
 					crossDomain: true,
 					success: () => {console.log('Success')}
-				});
+				}
+				);
 			}
 			async function login(){
 				data = {username: loginemail.value,
