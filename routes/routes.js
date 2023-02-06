@@ -26,6 +26,14 @@ module.exports = function(app, passport){
 	app.use("/secretLiaUpdateVideo112355335425", updateVideo);
 	app.use("/secretLiaUpdateItem112355335425", updateItem);
 
+	app.get('/isLoggedIn', (req, res) => {
+		let ans = {loggedIn : false}
+		if(req.responseObj.isLoggedIn){
+			ans = {isLoggedIn : true}
+		}
+		res.setHeader('Content-type', 'application/json');
+		res.end(JSON.stringify(isLoggedIn));
+	})
 
 	app.use("/", indexRouter);
 	app.use("/recordadmincreateuser112355335425.html", adminRecord);
