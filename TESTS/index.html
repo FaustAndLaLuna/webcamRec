@@ -7,32 +7,50 @@
 			  integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
 			  crossorigin="anonymous"></script>
 		<script>
-			function signup(){
-				data = {username: signupemail.value,
-						password: signuppassword.value};
-				console.log(data);
-				$.ajax("http://biografoimaginario.com:8888/signUp", 
-				{
-					method: 'POST',
-					xhrFields: { withCredentials: true },
-					data: data,
-					crossDomain: true,
-					success: () => {console.log('Success')}
-				}
-				);
-			}
+			// function signup(){
+			// 	data = {username: signupemail.value,
+			// 			password: signuppassword.value};
+			// 	console.log(data);
+			// 	$.ajax("http://biografoimaginario.com:8888/signUp", 
+			// 	{
+			// 		method: 'POST',
+			// 		xhrFields: { withCredentials: true }, // IMPORTANTE
+			// 		data: data,
+			// 		crossDomain: true,
+			// 		success: () => {console.log('Success')}
+			// 	}
+			// 	);
+			// }
 			async function login(){
-				data = {username: loginemail.value,
-						password: loginpassword.value};
-				console.log(data);
-				jQuery.ajax("http://biografoimaginario.com:8888/login", {
-					method: 'POST',
-					xhrFields: { withCredentials: true },
-					data: data,
-					crossDomain: true,
-					success: () => {console.log('login success')}
-				});
+				try {
+					const response = await fetch('http://biografoimaginario.com:8888/login/', {
+					  method: 'POST',
+					  credentials: 'include',
+					  body: JSON.stringify({username:'lorem@ipsum.com', password:'asdfasdf'}),
+					  mode: 'cors',
+					  headers: {
+					    'Access-Control-Allow-Origin': 'http://localhost:3000/',
+					  }
+					});
+
+					console.log(response.status)
+					} catch (error) {
+					console.error(error);
+					}
 			}
+
+			// async function login(){
+			// 	data = {username: loginemail.value,
+			// 			password: loginpassword.value};
+			// 	console.log(data);
+			// 	jQuery.ajax("http://biografoimaginario.com:8888/login", {
+			// 		method: 'POST',
+			// 		xhrFields: { withCredentials: true },
+			// 		data: data,
+			// 		crossDomain: true,
+			// 		success: () => {console.log('login success')}
+			// 	});
+			// }
 			async function checklogin(){
 				jQuery.ajax('http://biografoimaginario.com:8888/isLoggedIn',
 					{

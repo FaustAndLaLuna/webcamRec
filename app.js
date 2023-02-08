@@ -18,6 +18,7 @@ const encodeMod 		= require('./serverSideModules/encode');
 const transcriptMod		= require('./serverSideModules/transcript');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
+var cors = require('cors');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('1-59/2 * * * * *', encodeMod.encodeCron);
 job.start();
@@ -35,6 +36,8 @@ var sell2 				= require('./routes/sell2.js');
 var uploadAltRouter 	= require('./routes/uploadAlternative.js');
 
 var app = express();
+
+app.use(cors())
 
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
