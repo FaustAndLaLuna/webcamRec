@@ -28,7 +28,7 @@ module.exports = function(app, passport){
 
 	app.get('/isLoggedIn', (req, res) => {
 		let ans = {isLoggedIn : false}
-		if(req.responseObj.isLoggedIn){
+		if(req.user){
 			ans = {isLoggedIn : true}
 		}
 		res.setHeader('Content-type', 'application/json');
