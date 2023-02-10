@@ -41,11 +41,12 @@ const whitelist = ['http://localhost:3000', 'http://biografoimaginario.com', 'ht
 const corsOptions = {
 	credentials: true,
 	origin: (origin, callback) => {
+		origin = origin || req.headers.host;
 		console.log(origin);
-	  if(whitelist.includes(origin))
-		return callback(null, true);
+		if(whitelist.includes(origin))
+			return callback(null, true);
 		callback(new Error('Not allowed by CORS'));
-	}
+		}
   }
 app.use(cors(corsOptions))
 
