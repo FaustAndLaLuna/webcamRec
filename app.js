@@ -40,6 +40,7 @@ var app = express();
 const whitelist = ['http://localhost:3000', 'http://biografoimaginario.com', 'https://biografoimaginario.com', 'http://biografoimaginario.com:8888', 'https://biografoimaginario.com:8888'];
 const corsOptions = {
 	credentials: true,
+	methods: ['GET', 'POST', 'PUT'],
 	origin: (origin, callback) => {
 		origin = origin || 'http://biografoimaginario.com:8888';
 		console.log(origin);
