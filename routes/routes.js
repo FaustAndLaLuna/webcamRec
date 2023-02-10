@@ -75,7 +75,7 @@ module.exports = function(app, passport){
 		failureFlash : true
 	}), (req,res) => {
 		let ans = {success : false}
-		if(req.responseObj.isLoggedIn){
+		if(req.user){
 			ans = {success : true}
 		}
 		console.log(req.user);
