@@ -37,7 +37,9 @@ var uploadAltRouter 	= require('./routes/uploadAlternative.js');
 
 var app = express();
 
-app.use(cors())
+app.use(cors({
+	origin: '*'
+}))
 
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
