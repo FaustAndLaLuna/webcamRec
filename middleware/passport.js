@@ -19,10 +19,12 @@ module.exports = function(passport){
 	}, function(req, username, password, done){
 		userDB.usernameExists(username).then(function(result){
 			if(result){
+				console.log(`Usuario ${username} ya está registrado.`);
 				return done(null, false, req.flash('signupMessage', 'Ese mail está ocupado.'));
 			}
 			else{
 				user = userDB.createNew(username, password, false).then(function(user){
+					console.log(`Registro de ${username} completo.`);
 					return done(null, user);
 				});
 			}
@@ -36,9 +38,11 @@ module.exports = function(passport){
 		}, function(req, username, password, done){
 			userDB.validate(username, password).then(function(result){
 				if(result){
+					console.log(`Usuario ${username} loggeado correctamente.`);
 					return done(null, result);
 				}
 				else{
+					console.log(`Error al loggear a ${username}.`);
 					return done(null, false, req.flash('loginMessage', "No se encontró el usuario o la contraseña es incorrecta."));
 				}
 			});
