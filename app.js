@@ -37,7 +37,16 @@ var uploadAltRouter 	= require('./routes/uploadAlternative.js');
 
 var app = express();
 
-app.use(cors())
+const whitelist = ['http://localhost:3000', 'http://biografoimaginario.com', 'https://biografoimaginario.com'];
+const corsOptions = {
+	credentials: true,
+	origin: (origin, callback) => {
+	  if(whitelist.includes(origin))
+		return callback(null, true);
+		callback(new Error('Not allowed by CORS'));
+	}
+  }
+app.use(cors(corsOptions))
 
 require('./middleware/passport.js')(passport);
 //IMPORTANT LINE;
