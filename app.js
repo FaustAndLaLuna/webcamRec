@@ -37,7 +37,7 @@ var uploadAltRouter 	= require('./routes/uploadAlternative.js');
 
 var app = express();
 
-const whitelist = ['http://localhost:3000', 'http://biografoimaginario.com', 'https://biografoimaginario.com'];
+const whitelist = ['http://localhost:3000', 'http://biografoimaginario.com', 'https://biografoimaginario.com', 'http://biografoimaginario.com:8888', 'https://biografoimaginario.com:8888'];
 const corsOptions = {
 	credentials: true,
 	origin: (origin, callback) => {
