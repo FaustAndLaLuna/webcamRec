@@ -8,7 +8,8 @@ var POOL = mysql.createPool({
 	host: 'localhost',
 	user: 'root',
 	password: pw,
-	database: "BIOGRAFO"
+	database: "BIOGRAFO",
+	socketPath: '/var/run/mysqld/mysqld.sock'
 });
 
 exports.POOL = POOL;

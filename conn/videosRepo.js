@@ -29,10 +29,10 @@ class videosRepo{
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
 				if(err)	console.log(err);
-				conn.release();
+					console.log("BIOGRAFO.videos created");
+					conn.release();
 			});
 		});
-		console.log("BIOGRAFO.videos created");
 	}
 	
 	updateToEncoded(videoURL, tempURL){

@@ -12,10 +12,10 @@ class contactRepo{
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
 				if(err)	console.log(err);
+				console.log("BIOGRAFO.contactMessages created");
 				conn.release();
 			});
 		});
-		console.log("BIOGRAFO.contactMessages created");
 	}
 	
 	create(message, name, email){

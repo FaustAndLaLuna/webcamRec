@@ -24,10 +24,10 @@ class objectsRepo{
 		POOL.getConnection(function (error, conn){
 			conn.query(sql, function(err, result){
 				if(err)	console.log(err);
+				console.log("BIOGRAFO.objects created");
 				conn.release();
 			});
 		});
-		console.log("BIOGRAFO.objects created");
 	}
 	
 	getAllFromSeller(userID){
