@@ -27,9 +27,9 @@ module.exports = function(app, passport){
 	app.use("/secretLiaUpdateItem112355335425", updateItem);
 
 	app.get('/isLoggedIn', (req, res) => {
-		let ans = {loggedIn : false}
+		let ans = {isLoggedIn : false}
 		if(req.responseObj.isLoggedIn){
-			ans = {loggedIn : true}
+			ans = {isLoggedIn : true}
 		}
 		res.setHeader('Content-type', 'application/json');
 		res.end(JSON.stringify(ans));
@@ -72,12 +72,15 @@ module.exports = function(app, passport){
 	
 	app.post('/login', passport.authenticate('local-login',
 	{
-		failureRedirect : '/login.html',
 		failureFlash : true
 	}), (req,res) => {
-		res.redirect(req.session.returnTo || "/");
+		let ans = {success : false}
+		if(req.responseObj.isLoggedIn){
+			ans = {success : true}
+		}
 		console.log(req.user);
-		delete req.session.returnTo;
+		res.setHeader('Content-type', 'application/json');
+		res.end(JSON.stringify(ans));
 	});
 	app.get('/signup.html', function(req,res){
 		req.responseObj.message = req.flash('signupMessage');
