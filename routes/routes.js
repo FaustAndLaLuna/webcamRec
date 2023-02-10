@@ -75,7 +75,7 @@ module.exports = function(app, passport){
 		let ans = {success : false}
 		if(req.user){
 			ans = {success : true,
-					cookie : req.cookies}
+					cookie : JSON.stringify(req.cookies)}
 		}
 		console.log(req.user);
 		res.setHeader('Content-type', 'application/json');
