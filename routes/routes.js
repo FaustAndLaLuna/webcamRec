@@ -27,6 +27,7 @@ module.exports = function(app, passport){
 	app.use("/secretLiaUpdateItem112355335425", updateItem);
 
 	app.get('/isLoggedIn', (req, res) => {
+		console.log(req.user)
 		let ans = {isLoggedIn : false}
 		if(req.user){
 			ans = {isLoggedIn : true}
@@ -73,7 +74,8 @@ module.exports = function(app, passport){
 	app.post('/login', passport.authenticate('local-login'), (req,res) => {
 		let ans = {success : false}
 		if(req.user){
-			ans = {success : true}
+			ans = {success : true,
+					cookie : req.cookies}
 		}
 		console.log(req.user);
 		res.setHeader('Content-type', 'application/json');
