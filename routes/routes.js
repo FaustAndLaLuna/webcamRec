@@ -70,10 +70,7 @@ module.exports = function(app, passport){
 		res.render('login.ejs', req.responseObj);
 	});
 	
-	app.post('/login', passport.authenticate('local-login',
-	{
-		failureFlash : true
-	}), (req,res) => {
+	app.post('/login', passport.authenticate('local-login'), (req,res) => {
 		let ans = {success : false}
 		if(req.user){
 			ans = {success : true}

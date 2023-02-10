@@ -43,7 +43,7 @@ module.exports = function(passport){
 				}
 				else{
 					console.log(`Error al loggear a ${username}.`);
-					return done(null, false, req.flash('loginMessage', "No se encontró el usuario o la contraseña es incorrecta."));
+					return done(null, false);
 				}
 			});
 		}));
