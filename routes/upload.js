@@ -50,6 +50,7 @@ router.post('/', function(req, res, next){
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
+					console.log(files);
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
 							if (err){
