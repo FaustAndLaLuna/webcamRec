@@ -1,6 +1,6 @@
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '/home/fall/liaBIOGRAFO.json';
 // const https = require('https');
-const https = require('http');
+const http = require('http');
 const fs = require('fs');
 
 global.ISWORKING = false;
@@ -60,12 +60,12 @@ require('./middleware/passport.js')(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
-app.use(function(req, res, next){
-		if (!req.secure) {
-			return res.redirect('https://' + req.get('host') + req.url);
-		}
-		next();
-});
+// app.use(function(req, res, next){
+// 		if (!req.secure) {
+// 			return res.redirect('https://' + req.get('host') + req.url);
+// 		}
+// 		next();
+// });
 
 app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
 app.use('/secretLiaSellUpload112355335425', sell2);
@@ -147,10 +147,10 @@ app.use(function(err, req, res, next) {
 
 
 
-https.createServer({
-		key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
-		cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
-		ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
+http.createServer({
+		// key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
+		// cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
+		// ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
 },app).listen(8888);
 
 module.exports = app;
