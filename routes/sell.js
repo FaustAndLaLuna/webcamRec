@@ -22,7 +22,8 @@ router.post('/', function(req, res, next){
 	var form = new formidable.IncomingForm(formObject);
 	form.on('error', function(err){
 		console.log("Couldn't upload file because of: \n" + err);
-		next(createError(500));
+		res.json({success: false, error: err})
+		// next(createError(500));
 	});
 	/*form.onPart(function(part){
 		if((!part.filename) || part.filename.match("^video/")){
@@ -35,14 +36,15 @@ router.post('/', function(req, res, next){
 	form.parse(req, function(err, fields, files){
 		if(err){
 			console.log(err);
+			res.json({success: false})
 		}
 		imgArray = [];
 		for(var key in files){
 			file = files[key];
-			console.log(file.path);
 			if(! file.type.match("^image/")){
 				fs.unlink(file.path, function(err){
 					if(err){
+						res.json({success: false, error: err})
 						console.log(err);
 					}
 				});
@@ -56,9 +58,9 @@ router.post('/', function(req, res, next){
 			return;
 		}
 			//create(title, userID, isAuction, description, history, endDate, images){
-		console.log({name: fields.name, offeringUserID: fields.offeringUserID, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
-		objectsDB.create(fields.name, fields.offeringUserID, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
-		res.redirect("/success.html");
+		console.log({name: fields.name, offeringUserID: fields.uid, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
+		objectsDB.create(fields.name, fields.uid, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
+		res.json({success: true})
 	});
 });
 

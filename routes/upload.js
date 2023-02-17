@@ -20,14 +20,21 @@ router.post('/', function(req, res, next){
 	let filePath = path.resolve('./uploads'+filename+".webm");
 	let convFilePath = path.resolve('./uploads'+filename+".mp4");
 	mkdirp(path.dirname(filePath), function (err){
-		if(err)
+		if (err){
 			console.log(err);
+			res.json({success:false, error: err})
+		}
 		mkdirp(path.dirname(filePath.replace("uploads", "public/thumbs")), function (err){
-			if (err)
+			if (err){
 				console.log(err);
+				res.json({success:false, error: err})
+			}
 
 			fs.writeFile(filePath, '', function (err){
-				if(err)  console.log(err);
+				if (err){
+					console.log(err);
+					res.json({success:false, error: err})
+				}
 				fTypeCheck = "";
 
 				var form = new formidable.IncomingForm();
@@ -36,14 +43,18 @@ router.post('/', function(req, res, next){
 					fTypeCheck = file.type;
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
 				form.on('error', function(err){
-					console.log('An error has occurred uploading a file:\n ' + err);
+					if (err){
+						console.log(err);
+						res.json({success:false, error: err})
+					}
 				});
 				form.parse(req, function(err, fields, files){
 					console.log(fTypeCheck);
 					if(!fTypeCheck.match("^video/")){
 						fs.unlink(filePath, function(err){
-							if(err){
+							if (err){
 								console.log(err);
+								res.json({success:false, error: err})
 							}
 						});
 						res.write("<h2>Tipo de archivo incorrecto!</h2> <br> <h1>Intenta subir un video</h1>");
@@ -51,11 +62,9 @@ router.post('/', function(req, res, next){
 						return;
 					}
 					let filePath = this.filePath;
-					vidTable.createAssociated("SIN URL", filePath, JSON.parse(fields.user).id, JSON.parse(fields.obj).objectID, fields.description, fields.title, fields.tags);
-					res.redirect("/success.html");
+					vidTable.createAssociated("SIN URL", filePath, fields.uid, fields.objectID, fields.description, fields.title, fields.tags);
+					res.json({success: true})
 					res.end();
-					console.log(files);
-					console.log(fields);
 				}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}));
 			}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );
 		}.bind({filename:filename, thumbFolder:thumbFolder, filePath:filePath, convFilePath:convFilePath}) );	

@@ -1,6 +1,6 @@
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '/home/fall/liaBIOGRAFO.json';
 // const https = require('https');
-const http = require('http');
+const https = require('http');
 const fs = require('fs');
 
 global.ISWORKING = false;
@@ -9,21 +9,22 @@ ISDEV = true;
 //ISDEV is currently NOT used
 var redirect = "/";
 
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
+var createError 		= require('http-errors');
+var express 			= require('express');
+var path 				= require('path');
 var cookieParser 		= require('cookie-parser');
 var logger 				= require('morgan');
 const encodeMod 		= require('./serverSideModules/encode');
 const transcriptMod		= require('./serverSideModules/transcript');
 var CronJob 			= require('cron').CronJob;
 var mysql 				= require('mysql');
-var cors = require('cors');
+var cors 				= require('cors');
 //const job = CronJob('* * * * * *', encodeMod.encodeCron);
 const job = new CronJob('1-59/2 * * * * *', encodeMod.encodeCron);
 job.start();
 const transJob = new CronJob('0/2 * * * * *', transcriptMod.transcriptionCron);
 transJob.start();
+
 var passport 			= require('passport');
 var flash 				= require('connect-flash');
 var session 			= require('express-session');
@@ -59,12 +60,12 @@ require('./middleware/passport.js')(passport);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.enable("trust proxy");
-// app.use(function(req, res, next){
-// 		if (!req.secure) {
-// 			return res.redirect('https://' + req.get('host') + req.url);
-// 		}
-// 		next();
-// });
+app.use(function(req, res, next){
+		if (!req.secure) {
+			return res.redirect('https://' + req.get('host') + req.url);
+		}
+		next();
+});
 
 app.use('/secretLiaUploadToDisk112355335425', uploadAltRouter);
 app.use('/secretLiaSellUpload112355335425', sell2);
@@ -119,12 +120,12 @@ app.use(function(req,res,next){
 require('./routes/routes.js')(app, passport);
 //IMPORTANT LINE;
 //IMPORTANT everything under this function will be login dependent.
-app.use(function(req, res, next){
-	req.responseObj.isLoggedInFlag = true;
-	if(req.responseObj.isLoggedIn)
-		next();
-	else res.redirect('/login.html');
-});
+// app.use(function(req, res, next){
+// 	req.responseObj.isLoggedInFlag = true;
+// 	if(req.responseObj.isLoggedIn)
+// 		next();
+// 	else res.redirect('/login.html');
+// });
  
 require('./routes/routesLogIn.js')(app);
 
@@ -146,10 +147,10 @@ app.use(function(err, req, res, next) {
 
 
 
-http.createServer({
-		// key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
-		// cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
-		// ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
+https.createServer({
+		key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
+		cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
+		ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
 },app).listen(8888);
 
 module.exports = app;
