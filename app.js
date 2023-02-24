@@ -1,6 +1,6 @@
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '/home/fall/liaBIOGRAFO.json';
 // const https = require('https');
-const http = require('http');
+const https = require('https');
 const fs = require('fs');
 
 global.ISWORKING = false;
@@ -136,10 +136,10 @@ app.use(function(err, req, res, next) {
 
 
 
-http.createServer({
-		// key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
-		// cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
-		// ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
+https.createServer({
+		key:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/privkey.pem'),
+		cert:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/cert.pem'),
+		ca:fs.readFileSync('/etc/letsencrypt/live/biografoimaginario.com/chain.pem')
 },app).listen(8888);
 
 module.exports = app;
