@@ -20,8 +20,8 @@ router.post('/', function(req,res,next){
         let isAuction = req.body.isAuction;
         let description = req.body.description;
         let history = req.body.history;
-        let endDate = req.body.endDate;
-        let createdAt = req.body.createdAt;
+        let endDate = req.body.endDate+'T00:00:00.000Z';
+        let createdAt = req.body.createdAt+'T00:00:00.000Z';
         let offeringUserID = req.body.offeringUserID;
         let soldUserID = req.body.soldUserID;
         let soldVideoID = req.body.soldVideoID;

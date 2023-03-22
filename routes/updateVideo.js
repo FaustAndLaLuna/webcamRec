@@ -17,7 +17,7 @@ router.post('/', function(req,res,next){
         let description = req.body.description;
         let title = req.body.title;
         let tags = req.body.tags;
-        let timePublished = req.body.timePublished;
+        let timePublished = req.body.timePublished+'T00:00:00.000Z';
         let userID = req.body.userID;
         let objectID = req.body.objectID;
 
