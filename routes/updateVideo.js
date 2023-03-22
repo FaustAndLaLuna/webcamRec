@@ -9,16 +9,18 @@ const videosRepo = require('../conn/videosRepo')
 
 const vidTable = new videosRepo();
 
-router.get('/', function(req,res,next){
-    vidTable.getFromID(req.query.id).then(function(result){
+router.post('/', function(req,res,next){
+    vidTable.getFromID(req.params.videoID).then(function(result){
         res.end(JSON.stringify(result));
-        id = req.query.id;
-        desc = req.query.desc;
-        tit = req.query.tit;
-        tag = req.query.tag;
-        trans = req.query.trans;
-        obid = req.query.obid;
-        vidTable.update(id, desc, tit, tag, trans, obid);
+        videoID = req.params.videoID;
+        description = req.params.description;
+        title = req.params.title;
+        tags = req.params.tags;
+        timePublished = req.params.timePublished;
+        userID = req.params.userID;
+        objectID = req.params.objectID;
+
+        vidTable.update(videoID, description, title, tags, timePublished, userID, objectID);
     });
     res.end(JSON.stringify({'err':'err'}));
 });

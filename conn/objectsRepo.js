@@ -76,11 +76,11 @@ class objectsRepo{
 		return this.getObject(objectID);
 	}
 	
-	update(objectID, title, description, history){
-		let q = 'UPDATE objects SET title = ?, description = ?, history = ? WHERE objectID = ?';
+	update(objectID, title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID){
+		let q = 'UPDATE objects SET title = ?, isAuction = ?, description = ?, history = ?, endDate = ?, createdAt = ?, offeringUserID = ?, soldUserID = ?, soldVideoID = ? WHERE objectID = ?';
 		POOL.getConnection(function(err, conn){
 			if (err)	console.log(err);
-			conn.query(q, [title, description, history, objectID], function(err, result){
+			conn.query(q, [title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID, objectID], function(err, result){
 				if(err)	console.log(err);
 					conn.release();
 					return;

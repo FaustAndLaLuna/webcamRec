@@ -61,11 +61,11 @@ class videosRepo{
 		});
 	}
 	
-	update(videoID, description, title, tags, transcription, objectID){
-		let q = 'UPDATE videos SET description = ?, title = ?, tags = ?, transcription = ?, objectID = ? WHERE videoID = ?';
+	update(videoID, description, title, tags, timePublished, userID, objectID){
+		let q = 'UPDATE videos SET description = ?, title = ?, tags = ?, timePublished = ?, userID = ?, objectID = ? WHERE videoID = ?';
 		POOL.getConnection(function(err, conn){
 			if (err)	console.log(err);
-			conn.query(q, [description, title, tags, transcription, objectID, videoID], function(err, result){
+			conn.query(q, [description, title, tags, timePublished, userID, objectID, videoID], function(err, result){
 				if(err)	console.log(err);
 					conn.release();
 					return;
