@@ -10,7 +10,7 @@ const { title } = require('process');
 
 const vidTable = new videosRepo();
 
-router.get('/', function(req,res,next){
+router.post('/', function(req,res,next){
     vidTable.getObject(req.params.objectID).then(function(result){
         res.end(JSON.stringify(result));
         
