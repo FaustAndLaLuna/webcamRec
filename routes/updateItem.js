@@ -14,6 +14,7 @@ router.post('/', function(req,res,next){
     vidTable.getObject(req.body.objectID).then(function(result){
         res.end(JSON.stringify(result));
         
+        console.log(req.body);
         let objectID = req.body.objectID;
         let title = req.body.title;
         let isAuction = req.body.isAuction;

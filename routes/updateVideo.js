@@ -11,6 +11,7 @@ const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
     vidTable.getFromID(req.body.videoID).then(function(result){
+        console.log(req.body);
         res.end(JSON.stringify(result));
         let videoID = req.body.videoID;
         let description = req.body.description;
