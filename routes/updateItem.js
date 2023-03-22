@@ -15,7 +15,7 @@ router.post('/', function(req,res,next){
         res.end(JSON.stringify(result));
         
         console.log(req.body);
-        let objectID = req.body.objectID;
+        let id = req.body.id;
         let title = req.body.title;
         let isAuction = req.body.isAuction;
         let description = req.body.description;
@@ -26,7 +26,7 @@ router.post('/', function(req,res,next){
         let soldUserID = req.body.soldUserID;
         let soldVideoID = req.body.soldVideoID;
 
-        vidTable.update(objectID, title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID);
+        vidTable.update(id, title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID);
     });
     res.end(JSON.stringify({'err':'err'}));
 });

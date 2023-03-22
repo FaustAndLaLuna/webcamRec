@@ -10,10 +10,10 @@ const videosRepo = require('../conn/videosRepo')
 const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
-    vidTable.getFromID(req.body.videoID).then(function(result){
+    vidTable.getFromID(req.body.id).then(function(result){
         console.log(req.body);
         res.end(JSON.stringify(result));
-        let videoID = req.body.videoID;
+        let id = req.body.id;
         let description = req.body.description;
         let title = req.body.title;
         let tags = req.body.tags;
@@ -21,7 +21,7 @@ router.post('/', function(req,res,next){
         let userID = req.body.userID;
         let objectID = req.body.objectID;
 
-        vidTable.update(videoID, description, title, tags, timePublished, userID, objectID);
+        vidTable.update(id, description, title, tags, timePublished, userID, objectID);
     });
     res.end(JSON.stringify({'err':'err'}));
 });
