@@ -15,16 +15,16 @@ router.post('/', function(req,res,next){
     vidTable.getObject(req.params.objectID).then(function(result){
         res.end(JSON.stringify(result));
         
-        objectID = req.params.objectID;
-        title = req.params.title;
-        isAuction = req.params.isAuction;
-        description = req.params.description;
-        history = req.params.history;
-        endDate = req.params.endDate;
-        createdAt = req.params.createdAt;
-        offeringUserID = req.params.offeringUserID;
-        soldUserID = req.params.soldUserID;
-        soldVideoID = req.params.soldVideoID;
+        let objectID = req.params.objectID;
+        let title = req.params.title;
+        let isAuction = req.params.isAuction;
+        let description = req.params.description;
+        let history = req.params.history;
+        let endDate = req.params.endDate;
+        let createdAt = req.params.createdAt;
+        let offeringUserID = req.params.offeringUserID;
+        let soldUserID = req.params.soldUserID;
+        let soldVideoID = req.params.soldVideoID;
 
         vidTable.update(objectID, title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID);
     });

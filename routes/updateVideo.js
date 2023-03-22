@@ -12,13 +12,13 @@ const vidTable = new videosRepo();
 router.post('/', function(req,res,next){
     vidTable.getFromID(req.params.videoID).then(function(result){
         res.end(JSON.stringify(result));
-        videoID = req.params.videoID;
-        description = req.params.description;
-        title = req.params.title;
-        tags = req.params.tags;
-        timePublished = req.params.timePublished;
-        userID = req.params.userID;
-        objectID = req.params.objectID;
+        let videoID = req.params.videoID;
+        let description = req.params.description;
+        let title = req.params.title;
+        let tags = req.params.tags;
+        let timePublished = req.params.timePublished;
+        let userID = req.params.userID;
+        let objectID = req.params.objectID;
 
         vidTable.update(videoID, description, title, tags, timePublished, userID, objectID);
     });
