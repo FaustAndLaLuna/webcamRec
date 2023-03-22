@@ -11,6 +11,7 @@ const { title } = require('process');
 const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
+    console.log(req.params);
     vidTable.getObject(req.params.objectID).then(function(result){
         res.end(JSON.stringify(result));
         
