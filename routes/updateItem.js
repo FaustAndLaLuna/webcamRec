@@ -11,10 +11,10 @@ const { title } = require('process');
 const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
-    vidTable.getObject(req.body.objectID).then(function(result){
+    vidTable.getObject(req.body.id).then(function(result){
         res.end(JSON.stringify(result));
         
-        console.log(req.body);
+        console.log(result);
         let id = req.body.id;
         let title = req.body.title;
         let isAuction = req.body.isAuction;
