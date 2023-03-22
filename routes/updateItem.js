@@ -11,21 +11,19 @@ const { title } = require('process');
 const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
-    console.log(req.params);
-    console.log(req.body);
-    vidTable.getObject(req.params.objectID).then(function(result){
+    vidTable.getObject(req.body.objectID).then(function(result){
         res.end(JSON.stringify(result));
         
-        let objectID = req.params.objectID;
-        let title = req.params.title;
-        let isAuction = req.params.isAuction;
-        let description = req.params.description;
-        let history = req.params.history;
-        let endDate = req.params.endDate;
-        let createdAt = req.params.createdAt;
-        let offeringUserID = req.params.offeringUserID;
-        let soldUserID = req.params.soldUserID;
-        let soldVideoID = req.params.soldVideoID;
+        let objectID = req.body.objectID;
+        let title = req.body.title;
+        let isAuction = req.body.isAuction;
+        let description = req.body.description;
+        let history = req.body.history;
+        let endDate = req.body.endDate;
+        let createdAt = req.body.createdAt;
+        let offeringUserID = req.body.offeringUserID;
+        let soldUserID = req.body.soldUserID;
+        let soldVideoID = req.body.soldVideoID;
 
         vidTable.update(objectID, title, isAuction, description, history, endDate, createdAt, offeringUserID, soldUserID, soldVideoID);
     });
