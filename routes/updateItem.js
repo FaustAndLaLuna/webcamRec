@@ -16,7 +16,7 @@ router.post('/', function(req,res,next){
         res.end(JSON.stringify(result));
         let id = req.body.objectID;
         let title = req.body.title;
-        let isAuction = parseInt(req.body.isAuction) == 0;
+        let isAuction = parseInt(req.body.isAuction) != 0;
         let description = req.body.description;
         let history = req.body.history;
         let endDate = req.body.endDate+' 00:00:00';
