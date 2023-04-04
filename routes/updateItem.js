@@ -12,13 +12,11 @@ const vidTable = new videosRepo();
 
 router.post('/', function(req,res,next){
     console.log(req.body)
-    vidTable.getObject(req.body.id).then(function(result){
+    vidTable.getObject(req.body.objectID).then(function(result){
         res.end(JSON.stringify(result));
-        
-        console.log(result);
-        let id = req.body.id;
+        let id = req.body.objectID;
         let title = req.body.title;
-        let isAuction = req.body.isAuction;
+        let isAuction = parseInt(req.body.isAuction) == 0;
         let description = req.body.description;
         let history = req.body.history;
         let endDate = req.body.endDate+' 00:00:00';
