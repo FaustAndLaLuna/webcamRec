@@ -60,7 +60,6 @@ router.post('/', function(req, res, next){
 			//create(title, userID, isAuction, description, history, endDate, images){
 		console.log({name: fields.name, offeringUserID: fields.uid, isAuction: fields.isAuction, description: fields.description, story:fields.story, endDate:fields.endDate, imgArray:JSON.stringify(imgArray)});
 		objectsDB.create(fields.name, fields.uid, fields.isAuction == "true", fields.description, fields.story, fields.endDate, JSON.stringify(imgArray));
-		res.json({success: true})
 	});
 });
 

@@ -115,6 +115,8 @@ require('./routes/routes.js')(app, passport);
 // 		next();
 // 	else res.redirect('/login.html');
 // });
+
+req.responseObj.isLoggedIn = true;
  
 require('./routes/routesLogIn.js')(app);
 
